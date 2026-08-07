@@ -2,11 +2,13 @@
 
 ## Equipe
 
-Bernardo Amaral Lisboa - Database Administrator (DBA)
-Daniel Luiz da Rocha Cordeiro - Arquiteto de Software
-Isac Lehmkuhl dos Santos - DevOps/Infra
-Monica Cancellier - UI/UX Designer
-Victor Eduardo Peixer Munarim - Engenheiro de Qualidade (QA)
+| Nome | Função |
+|---|---|
+| Bernardo Amaral Lisboa | Database Administrator (DBA) |
+| Daniel Luiz da Rocha Cordeiro | Arquiteto de Software |
+| Isac Lehmkuhl dos Santos | DevOps/Infra |
+| Monica Cancellier | UI/UX Designer |
+| Victor Eduardo Peixer Munarim | Engenheiro de Qualidade (QA) |
 
 ## Tema
 
