@@ -68,15 +68,10 @@ estoque, conferência e carga/descarga.
 - Registro de divergências (falta, sobra, avaria) com observação;
 - Status de conferência por pedido (pendente, em andamento, concluído).
 
-**Carga e descarga**
-- Registro do processo de descarga (recebimento) vinculando itens ao estoque de entrada;
-- Registro do processo de carga (expedição) vinculando itens ao estoque de saída;
-- Associação do processo a um cliente/pedido e a uma doca/depósito;
-- Consulta do status do processo (aguardando, em andamento, finalizado).
-
 #### Fora do Escopo
 
-**Rastreamento de veículos** — localização em tempo real e histórico de trajeto de frota;
-**Rotas** — criação, edição e otimização de rotas de entrega;
-**Financeiro** — faturamento, contas a pagar/receber, emissão de nota fiscal;
-**Integrações externas** — conexão com GPS/telemetria e marketplaces;
+- **Rastreamento de veículos** — localização em tempo real e histórico de trajeto de frota;
+- **Rotas** — criação, edição e otimização de rotas de entrega;
+- **Financeiro** — faturamento, contas a pagar/receber, emissão de nota fiscal;
+- **Integrações externas** — conexão com GPS/telemetria e marketplaces;
+- **Carga e descarga** - registros de movimentação de entrada e saida de produtos por veículos.
