@@ -2,13 +2,13 @@
 
 ## Equipe
 
-| Nome | Função |
-|---|---|
-| Bernardo Amaral Lisboa | Database Administrator (DBA) |
-| Daniel Luiz da Rocha Cordeiro | Arquiteto de Software |
-| Isac Lehmkuhl dos Santos | DevOps/Infra |
-| Monica Cancellier | UI/UX Designer |
-| Victor Eduardo Peixer Munarim | Engenheiro de Qualidade (QA) |
+| Nome | Função | Matrícula | 
+|---|---| --- |
+| Bernardo Amaral Lisboa | Database Administrator (DBA) | 202510703703 |
+| Daniel Luiz da Rocha Cordeiro | Arquiteto de Software e Scrum Master| 202510703715 |
+| Isac Lehmkuhl dos Santos | DevOps/Infra | 202510703633 |
+| Monica Cancellier | UI/UX Designer | 202320003698 |
+| Victor Eduardo Peixer Munarim | Engenheiro de Qualidade (QA) | 202510703662 |
 
 ## Tema
 
