@@ -22,5 +22,9 @@ assignees: "seu-usuario-real"
 ## Resultados reais
 - O que acontece
 
+## Critérios de Aceitação
+- [ ] Critério 1
+- [ ] Critério 2
+
 ## Notas Adicionais
 - Qualquer informação extra que os desenvolvedores devam saber.
