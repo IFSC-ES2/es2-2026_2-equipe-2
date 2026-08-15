@@ -2,56 +2,68 @@
 
 ## Equipe
 
-| Nome | Função |
-|---|---|
-| Bernardo Amaral Lisboa | Database Administrator (DBA) |
-| Daniel Luiz da Rocha Cordeiro | Arquiteto de Software |
-| Isac Lehmkuhl dos Santos | DevOps/Infra |
-| Monica Cancellier | UI/UX Designer |
-| Victor Eduardo Peixer Munarim | Engenheiro de Qualidade (QA) |
+| Nome | Função | Matrícula |
+|---|---|---|
+| Bernardo Amaral Lisboa | Database Administrator (DBA) | 202510703703 |
+| Daniel Luiz da Rocha Cordeiro | Arquiteto de Software | 202510703715 |
+| Isac Lehmkuhl dos Santos | DevOps/Infra  e Scrum Master | 202510703633 |
+| Monica Cancellier | UI/UX Designer | 202320003698 |
+| Victor Eduardo Peixer Munarim | Engenheiro de Qualidade (QA) | 202510703662 |
 
 ## Tema
 
 **ERP para gestão de operações logísticas em distribuidoras**
 
-Sistema de apoio à gestão operacional de armazéns e centros de distribuição, voltado à
-digitalização e centralização de processos que hoje são conduzidos majoritariamente de forma
-manual ou em planilhas.
+Sistema de apoio à gestão operacional de armazéns e centros de distribuição, voltado à digitalização e centralização de processos que hoje são conduzidos majoritariamente de forma manual ou em planilhas.
 
-**(a) Qual problema o sistema pretende resolver?**
-Em muitas distribuidoras, o controle de estoque, conferência de mercadorias e cadastro de
-clientes ainda é feito manualmente ou por meio de planilhas desconectadas entre si. Isso gera
-retrabalho, diferenças entre o que está registrado e o que realmente existe em estoque e atrasos
-na conferência de pedidos.
+## Documentação e Referências
 
-**(b) Em qual área de aplicação o problema está situado?**
-O problema está situado na área de **gestão logística e operações de armazém**, especificamente
-nos processos de recebimento, armazenagem, conferência e expedição de mercadorias em empresas
-distribuidoras.
+- **Visão do produto:** seção [1. Visão do Produto](#1-visão-do-produto);
+- **Escopo do MVP:** seção [2. Definição do MVP](#2-definição-do-mvp);
+- **Board:** [board do projeto](https://github.com/orgs/IFSC-ES2/projects/33);
+- **Backlog:** [backlog/issues](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/issues);
+- **DoD (Definition of Done):** [DoD.md](./docs/DoD.md);
+- **ADRs:** [ADRs](./docs/adrs/);
+- **Uso de Inteligência Artificial:** [USO-IA.md](./docs/USO-IA.md);
 
-**(c) Quem são os usuários?**
-Operadores, responsáveis pelo registro de carga e descarga de mercadorias;
-Equipe de conferência, que valida pedidos recebidos e expedidos;
-Equipe administrativa/comercial, responsável pelo cadastro e gestão de clientes;
-Gestores/supervisores, que acompanham níveis de estoque e o andamento das operações.
+## 1. Visão do Produto
 
-**(d) Em qual local, organização, comunidade ou contexto o sistema poderia ser aplicado?**
-O sistema é pensado para o contexto de uma **distribuidora de médio porte, com múltiplos
-depósitos**, inspirado em uma empresa real do setor conhecida pela equipe.
+**(a) Problema que o sistema pretende resolver**  
+Em muitas distribuidoras, o controle de estoque, a conferência de mercadorias e o cadastro de clientes ainda são feitos manualmente ou em planilhas separadas. Isso causa retrabalho, diferenças entre o estoque real e o registrado, e atrasos na conferência dos pedidos.
 
-**(e) Por que o tema é relevante?**
-Erros de controle manual em operações logísticas geram custos diretos (perda de mercadoria,
-retrabalho, atrasos).Automatizar esse fluxo é um problema comum em empresas de médio porte
-que ainda não têm orçamento ou estrutura para soluções de ERP completas do mercado.
+**(b) Área de aplicação**  
+Gestão logística e operações de armazém, nos processos de recebimento, armazenagem, conferência e expedição de mercadorias em empresas distribuidoras.
 
-**(f) Qual é a proposta do sistema para resolver ou apoiar a solução do problema?**
-O sistema propõe substituir os controles manuais/planilhas por um fluxo único e rastreável,
-integrando os processos essenciais da operação em uma única aplicação: cadastro de clientes,
-estoque, conferência e carga/descarga.
+**(c) Usuários principais e demais interessados**  
+Operadores, responsáveis pelo registro de carga e descarga de mercadorias; Equipe de conferência, que valida pedidos recebidos e expedidos; Equipe administrativa/comercial, responsável pelo cadastro e gestão de clientes; Gestores/supervisores, que acompanham níveis de estoque e o andamento das operações.
 
-### Escopo Inicial do MVP
+**(d) Local, organização ou contexto de aplicação**  
+O sistema é pensado para uma distribuidora de médio porte, com múltiplos depósitos, baseada em uma empresa real do setor conhecida pela equipe.
 
-**Cadastros de clientes**
+**(e) Proposta de valor**  
+O sistema propõe trocar os controles manuais e as planilhas por um único sistema, com informação centralizada e rastreável, juntando cadastro de clientes, estoque e conferência. Isso diminui erros de digitação, evita divergências de estoque e dá mais visibilidade do andamento de cada operação.
+
+**(f) Objetivos do produto neste semestre**
+- Tirar do papel/planilha os processos de cadastro de clientes, estoque e conferência;
+- Ter um MVP funcionando começando pela base do sistema (clientes, estoque e conferência), evoluindo depois para carga/descarga;
+- Manter um histórico básico das movimentações de estoque;
+- Testar se esse recorte de funcionalidades já ajuda na operação real de uma distribuidora.
+
+**(g) Premissas, restrições e limitações conhecidas**
+- O prazo é de um semestre, então o escopo precisa ser enxuto;
+- A equipe tem só 5 pessoas, cada uma com um papel fixo (DBA, Arquitetura, DevOps/Infra, UI/UX, QA);
+- Não vai ter integrações externas (GPS, marketplaces) nem módulo financeiro nesta fase;
+- O sistema é baseado em uma empresa real conhecida pela equipe, mas sem acesso aos dados ou ao ambiente de produção dela;
+- O sistema é de uso interno da distribuidora, não é voltado para clientes finais.
+
+## 2. Definição do MVP
+
+**(a) Objetivo do MVP**
+Ter uma primeira versão funcionando que já mostre o começo do fluxo da operação, com cadastro de clientes e controle básico de estoque, para validar se o modelo de dados e a ideia do projeto fazem sentido antes de partir para a carga/descarga em versões seguintes.
+
+**(b) Funcionalidades essenciais (primeira versão do MVP)**
+
+**Cadastro de clientes**
 - Cadastro, edição, consulta e inativação de clientes;
 - Dados básicos (nome/razão social, documento, contato, endereço);
 - Histórico de pedidos vinculados ao cliente.
@@ -68,15 +80,22 @@ estoque, conferência e carga/descarga.
 - Registro de divergências (falta, sobra, avaria) com observação;
 - Status de conferência por pedido (pendente, em andamento, concluído).
 
-**Carga e descarga**
-- Registro do processo de descarga (recebimento) vinculando itens ao estoque de entrada;
-- Registro do processo de carga (expedição) vinculando itens ao estoque de saída;
-- Associação do processo a um cliente/pedido e a uma doca/depósito;
-- Consulta do status do processo (aguardando, em andamento, finalizado).
+**(c) Funcionalidades fora do escopo neste momento**
 
-#### Fora do Escopo
+- **Rastreamento de veículos** — localização em tempo real e histórico de trajeto de frota;
+- **Rotas** — criação, edição e otimização de rotas de entrega;
+- **Financeiro** — faturamento, contas a pagar/receber, emissão de nota fiscal;
+- **Integrações externas** — conexão com GPS/telemetria e marketplaces;
+- **Carga e descarga** - registros de movimentação de entrada e saida de produtos por veículos.
 
-**Rastreamento de veículos** — localização em tempo real e histórico de trajeto de frota;
-**Rotas** — criação, edição e otimização de rotas de entrega;
-**Financeiro** — faturamento, contas a pagar/receber, emissão de nota fiscal;
-**Integrações externas** — conexão com GPS/telemetria e marketplaces;
+**(d) Por que esse recorte é viável para o semestre**  
+- Clientes, estoque e conferência são a base para os outros módulos, então é o ponto de partida mais seguro;
+- Validar o básico primeiro evita retrabalho nos módulos seguintes;
+- O time é pequeno, então um recorte menor é mais fácil de entregar com qualidade;
+- Carga/descarga continua no plano, só entra depois da base pronta.
+
+**(e) Critérios usados para decidir o que entra e o que fica de fora**  
+- O que é base para os outros módulos entrou primeiro;
+- O que depende de módulos ainda não prontos ficou para depois;
+- O que depende de sistemas externos ficou de fora do semestre;
+- O que tem regras de negócio mais complexas, como financeiro, também ficou de fora por falta de tempo.
