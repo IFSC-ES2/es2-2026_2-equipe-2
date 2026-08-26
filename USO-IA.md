@@ -11,3 +11,9 @@
 - Uso: criação de templates para criação das ADRs
 - Artefato: adrs
 - Validação: verificação se o conteúdo gerado condizia com o que deve ser uma ADR
+
+- Data: 25/08/2026
+- Ferramenta: Claude
+- Uso: criação de template para BASELINE.md
+- Artefato: docs
+- Validação: verificado se o que foi criado é o especifico e solicitado dentro do documento da entrega
