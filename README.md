@@ -22,9 +22,12 @@ Sistema de apoio à gestão operacional de armazéns e centros de distribuição
 - **Escopo do MVP:** seção [2. Definição do MVP](#2-definição-do-mvp);
 - **Board:** [board do projeto](https://github.com/orgs/IFSC-ES2/projects/33);
 - **Backlog:** [backlog/issues](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/issues);
-- **DoD (Definition of Done):** [DoD.md](./docs/DoD.md);
+- **DoD (Definition of Done):** [dod.md](./docs/dod.md);
 - **ADRs:** [ADRs](./docs/adrs/);
-- **Uso de Inteligência Artificial:** [USO-IA.md](./docs/USO-IA.md);
+- **Uso de Inteligência Artificial:** [USO-IA.md](./USO-IA.md);
+- **Estimativas:** [ESTIMATIVAS.md](./docs/ESTIMATIVAS.md)
+- **BaseLine:** [BASELINE.md](./docs/BASELINE.md)
+- **Métricas:** [METRICAS.md;](./docs/METRICAS.md)
 
 ## 1. Visão do Produto
 
