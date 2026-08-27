@@ -17,14 +17,14 @@
 ## 3. Disponibilidade estimada até o próximo marco
 
 | Integrante                    | Disponibilidade (h/semana) | Período considerado | Total disponível até o marco |
-| ----------------------------- | -------------------------- | ------------------- | ---------------------------- |
+| ----------------------------- |----------------------------| ------------------- |------------------------------|
 | Bernardo Amaral Lisboa        | 40 h                       | 26/08 - 02/09       | 40 h                         |
 | Daniel Luiz da Rocha Cordeiro | 18 h                       | 26/08 - 02/09       | 18 h                         |
 | Isac Lehmkuhl dos Santos      | 20 h                       | 26/08 - 02/09       | 20 h                         |
-| Monica Cancellier             | ?? h                       | 26/08 - 02/09       | ?? h                         |
-| Victor Eduardo Peixer Munarim | 30 h                       | 26/08 - 02/09       | 30 h                         |
+| Monica Cancellier             | 20 h                       | 26/08 - 02/09       | 20 h                         |
+| Victor Eduardo Peixer Munarim | 20 h                       | 26/08 - 02/09       | 20 h                         |
 
-**Capacidade total da equipe:** 108 horas
+**Capacidade total da equipe:** 118 horas
 
 ## 4. Restrições conhecidas
 
