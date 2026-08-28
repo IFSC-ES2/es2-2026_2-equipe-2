@@ -2,13 +2,13 @@
 
 ## Equipe
 
-| Nome | Função | Matrícula |
-|---|---|---|
-| Bernardo Amaral Lisboa | Database Administrator (DBA) | 202510703703 |
-| Daniel Luiz da Rocha Cordeiro | Arquiteto de Software | 202510703715 |
-| Isac Lehmkuhl dos Santos | DevOps/Infra  e Scrum Master | 202510703633 |
-| Monica Cancellier | UI/UX Designer | 202320003698 |
-| Victor Eduardo Peixer Munarim | Engenheiro de Qualidade (QA) | 202510703662 |
+| Nome                          | Função                                      | Matrícula    |
+| ----------------------------- |---------------------------------------------| ------------ |
+| Bernardo Amaral Lisboa        | Database Administrator (DBA)                | 202510703703 |
+| Daniel Luiz da Rocha Cordeiro | Arquiteto de Software                       | 202510703715 |
+| Isac Lehmkuhl dos Santos      | DevOps/Infra                                | 202510703633 |
+| Monica Cancellier             | UI/UX Designer                              | 202320003698 |
+| Victor Eduardo Peixer Munarim | Engenheiro de Qualidade (QA) e Scrum Master | 202510703662 |
 
 ## Tema
 
@@ -22,9 +22,12 @@ Sistema de apoio à gestão operacional de armazéns e centros de distribuição
 - **Escopo do MVP:** seção [2. Definição do MVP](#2-definição-do-mvp);
 - **Board:** [board do projeto](https://github.com/orgs/IFSC-ES2/projects/33);
 - **Backlog:** [backlog/issues](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/issues);
-- **DoD (Definition of Done):** [DoD.md](./docs/DoD.md);
+- **DoD (Definition of Done):** [dod.md](./docs/dod.md);
 - **ADRs:** [ADRs](./docs/adrs/);
-- **Uso de Inteligência Artificial:** [USO-IA.md](./docs/USO-IA.md);
+- **Uso de Inteligência Artificial:** [USO-IA.md](./USO-IA.md);
+- **Estimativas:** [ESTIMATIVAS.md](./docs/ESTIMATIVAS.md)
+- **BaseLine:** [BASELINE.md](./docs/BASELINE.md)
+- **Métricas:** [METRICAS.md;](./docs/METRICAS.md)
 
 ## 1. Visão do Produto
 
@@ -44,12 +47,14 @@ O sistema é pensado para uma distribuidora de médio porte, com múltiplos dep�
 O sistema propõe trocar os controles manuais e as planilhas por um único sistema, com informação centralizada e rastreável, juntando cadastro de clientes, estoque e conferência. Isso diminui erros de digitação, evita divergências de estoque e dá mais visibilidade do andamento de cada operação.
 
 **(f) Objetivos do produto neste semestre**
+
 - Tirar do papel/planilha os processos de cadastro de clientes, estoque e conferência;
 - Ter um MVP funcionando começando pela base do sistema (clientes, estoque e conferência), evoluindo depois para carga/descarga;
 - Manter um histórico básico das movimentações de estoque;
 - Testar se esse recorte de funcionalidades já ajuda na operação real de uma distribuidora.
 
 **(g) Premissas, restrições e limitações conhecidas**
+
 - O prazo é de um semestre, então o escopo precisa ser enxuto;
 - A equipe tem só 5 pessoas, cada uma com um papel fixo (DBA, Arquitetura, DevOps/Infra, UI/UX, QA);
 - Não vai ter integrações externas (GPS, marketplaces) nem módulo financeiro nesta fase;
@@ -64,17 +69,20 @@ Ter uma primeira versão funcionando que já mostre o começo do fluxo da opera�
 **(b) Funcionalidades essenciais (primeira versão do MVP)**
 
 **Cadastro de clientes**
+
 - Cadastro, edição, consulta e inativação de clientes;
 - Dados básicos (nome/razão social, documento, contato, endereço);
 - Histórico de pedidos vinculados ao cliente.
 
 **Estoque**
+
 - Registro de entrada e saída de itens, com vínculo ao motivo (compra, venda, ajuste);
 - Consulta de saldo atual por produto e por depósito;
 - Alertas de nível mínimo, sinalizando itens a repor;
 - Histórico de movimentações por item, para auditoria básica.
 
 **Conferência**
+
 - Checagem de itens recebidos contra o pedido de compra/nota de entrada;
 - Checagem de itens expedidos contra o pedido de venda/saída;
 - Registro de divergências (falta, sobra, avaria) com observação;
@@ -88,13 +96,15 @@ Ter uma primeira versão funcionando que já mostre o começo do fluxo da opera�
 - **Integrações externas** — conexão com GPS/telemetria e marketplaces;
 - **Carga e descarga** - registros de movimentação de entrada e saida de produtos por veículos.
 
-**(d) Por que esse recorte é viável para o semestre**  
+**(d) Por que esse recorte é viável para o semestre**
+
 - Clientes, estoque e conferência são a base para os outros módulos, então é o ponto de partida mais seguro;
 - Validar o básico primeiro evita retrabalho nos módulos seguintes;
 - O time é pequeno, então um recorte menor é mais fácil de entregar com qualidade;
 - Carga/descarga continua no plano, só entra depois da base pronta.
 
-**(e) Critérios usados para decidir o que entra e o que fica de fora**  
+**(e) Critérios usados para decidir o que entra e o que fica de fora**
+
 - O que é base para os outros módulos entrou primeiro;
 - O que depende de módulos ainda não prontos ficou para depois;
 - O que depende de sistemas externos ficou de fora do semestre;
