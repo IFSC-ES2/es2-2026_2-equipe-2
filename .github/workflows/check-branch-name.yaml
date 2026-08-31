@@ -1,17 +1,17 @@
 name: check-branch-name
-run-name: ${{ github.actor }} is checking branch name
 on:
-  push:
-    branches:
-      - "*"
+  pull_request:
+    branches-ignore:
+      - "main"
 
 jobs:
   check-branch-name:
     runs-on: ubuntu-latest
     steps:
       - name: Check branch name
+        env:
+          BRANCH_NAME: ${{ github.head_ref }}
         run: |
-          BRANCH_NAME="${GITHUB_REF_NAME}"
           PATTERN="^(feat|fix|chore|ci|docs|style|refactor|perf|test|build|revert)/[a-z0-9]+(-[a-z0-9]+)*$"
           PROTECTED_BRANCHES="^(main)$"
 
