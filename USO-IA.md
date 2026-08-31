@@ -23,3 +23,9 @@
 - Uso: criação de template para ESTIMATIVAS.md
 - Artefato: docs
 - Validação: análise do que foi solicitado dentro do documento de entrega e se está coerente com o que foi criado
+
+- Data: 31/08/2026
+- Ferramenta: Claude
+- Uso: criação do regex para check do nome da branch
+- Artefato: .github/workflows
+- Validação: validado utilizando nomes válidos e inválidos de branches
