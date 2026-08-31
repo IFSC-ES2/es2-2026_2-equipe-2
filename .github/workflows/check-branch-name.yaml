@@ -8,7 +8,7 @@ jobs:
   check-branch-name:
     runs-on: ubuntu-latest
     steps:
-      - name: Check branch name
+      - name: Check branch name to merge to another
         env:
           BRANCH_NAME: ${{ github.head_ref }}
         run: |
