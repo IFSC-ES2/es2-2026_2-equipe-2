@@ -29,13 +29,11 @@ build-* ──▶ gera artefatos/imagens (se aplicável)
 test-* ──▶ roda testes
 ```
 
-| Estágio         | Workflow(s)                                            | Bloqueia o merge? | Observações                                             |
-| --------------- | ------------------------------------------------------ | ----------------- | ------------------------------------------------------- |
-| Validação de PR | `check-branch-name.yml`, `check-main-pull-request.yml` | Sim               | Roda em todo `pull_request`                             |
-| Testes          | `test-frontend.yml`, `test-backend.yml`                | Sim               | _(preencher: unit, integration, e2e?)_                  |
-| Build           | `build-frontend.yml`, `build-backend.yml`              | _(sim/não?)_      | _(preencher: gera imagem Docker? artefato pra deploy?)_ |
-
-> Atualize este diagrama e a tabela sempre que a ordem ou os estágios do pipeline mudarem.
+| Estágio         | Workflow(s)                                            | Bloqueia o merge? | Observações                            |
+| --------------- | ------------------------------------------------------ | ----------------- | -------------------------------------- |
+| Validação de PR | `check-branch-name.yml`, `check-main-pull-request.yml` | Sim               | Roda em todo `pull_request`            |
+| Testes          | `test-frontend.yml`, `test-backend.yml`                | Sim               | _(preencher: unit, integration, e2e?)_ |
+| Build           | `build-frontend.yml`, `build-backend.yml`              | Sim               | Sobe imagem docker                     |
 
 ## Convenção de nomes dos workflows
 
@@ -44,8 +42,8 @@ Os arquivos em `.github/workflows/` são organizados por prefixo, agrupando por 
 | Prefixo  | Uso                                                 | Exemplos                                      |
 | -------- | --------------------------------------------------- | --------------------------------------------- |
 | `check-` | Validações/gates que não alteram nada, só verificam | `check-branch-name.yml`, `check-pr-title.yml` |
-| `test-`  | Execução de testes                                  | `test-frontend.yml`, `test-backend.yml`       |
-| `build-` | Build de artefatos/imagens                          | `build-frontend.yml`, `build-backend.yml`     |
+| `test-`  | Execução de testes                                  | `test-*.yml`                                  |
+| `build-` | Build de artefatos/imagens                          | `build-*.yml`                                 |
 
 ## Testando os workflows localmente com `act`
 
