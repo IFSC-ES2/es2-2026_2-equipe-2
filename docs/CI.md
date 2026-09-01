@@ -29,11 +29,11 @@ build-* ──▶ gera artefatos/imagens (se aplicável)
 test-* ──▶ roda testes
 ```
 
-| Estágio         | Workflow(s)                                            | Bloqueia o merge? | Observações                            |
-| --------------- | ------------------------------------------------------ | ----------------- | -------------------------------------- |
-| Validação de PR | `check-branch-name.yml`, `check-main-pull-request.yml` | Sim               | Roda em todo `pull_request`            |
-| Testes          | `test-frontend.yml`, `test-backend.yml`                | Sim               | _(preencher: unit, integration, e2e?)_ |
-| Build           | `build-frontend.yml`, `build-backend.yml`              | Sim               | Sobe imagem docker                     |
+| Estágio         | Workflow(s)                                            | Bloqueia o merge? | Observações                 |
+| --------------- | ------------------------------------------------------ | ----------------- | --------------------------- |
+| Validação de PR | `check-branch-name.yml`, `check-main-pull-request.yml` | Sim               | Roda em todo `pull_request` |
+| Testes          | `test-*.yml`,                                          | Sim               | unit                        |
+| Build           | `build-*.yml`,                                         | Sim               | Sobe imagem docker          |
 
 ## Convenção de nomes dos workflows
 
