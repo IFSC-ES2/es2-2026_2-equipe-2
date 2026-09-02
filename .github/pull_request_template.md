@@ -21,6 +21,7 @@
 - [ ] O código segue o fluxo de trabalho definido em `docs/fluxo-de-trabalho.md`
 - [ ] A branch de origem está atualizada com a branch principal
 - [ ] O código foi revisado localmente pelo autor antes de abrir o PR
+- [ ] A tentativa de PR foi realizada localmente utilizando `act` para checkar nome de branch e a capacidade da realização do mesmo
 - [ ] Testes automatizados foram adicionados/atualizados (quando aplicável)
 - [ ] Todos os checks obrigatórios de CI estão passando
 - [ ] A documentação foi atualizada (quando aplicável)
