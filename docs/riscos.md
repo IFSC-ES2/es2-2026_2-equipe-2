@@ -92,3 +92,45 @@ Aqui será registrado os possíveis riscos iniciais do projeto, cobrindo as natu
 | **Ações caso o risco se concretize** | - Registrar uma issue de "dívida técnica" para cada funcionalidade entregue sem teste, para cobrir isso depois.<br>- Priorizar a escrita de testes para os módulos mais críticos primeiro, caso o tempo não permita cobrir tudo. |
 | **Acompanhamento da evolução** | Acompanhamento da métrica M-03 (bugs por ambiente) e da cobertura de testes a cada sprint; checagem, na revisão de cada PR, se há teste correspondente às mudanças. |
 | **Responsável** | Victor Eduardo Peixer Munarim(Engenheiro de Qualidade/QA) |
+
+## Análise e Priorização dos Riscos
+
+### Como classificamos probabilidade e impacto
+
+Usamos uma escala simples de três níveis para cada risco:
+
+| Nível | Probabilidade | Impacto                                |
+|---|---|---|
+| **Baixa** | Difícil de acontecer nesse semestre | Não atrapalha muito se acontecer       |
+| **Média** | Pode acontecer | Atrasa, mas dá pra resolver            |
+| **Alta** | Bem provável de acontecer | Compromete o prazo ou a entrega do MVP |
+
+A prioridade dos riscos é definida pelo cruzamento de impacto e probabilidade. Quanto maior os
+dois juntos, maior a prioridade.
+
+### Matriz de riscos
+
+| | Impacto Baixo | Impacto Médio | Impacto Alto |
+|---|---|---|---|
+| **Probabilidade Baixa** | — | — | R03 |
+| **Probabilidade Média** | — | R01, R04, R05 | R02 |
+| **Probabilidade Alta** | — | — | — |
+
+### Riscos mais críticos agora
+
+O risco que mais preocupa no momento é o **risco 02**. Como nunca fizemos 
+estimativa desse jeito antes, é bem provável haver um erro de cálculo, e isso
+pode afetar o cronograma do projeto inteiro.
+
+Logo depois vem o **risco 03**. Tem menos chances de
+acontecer, mas se acontecer o impacto é grande, já que a equipe é pequena
+e cada um possuir funções específicas.
+
+### Por que essa prioridade
+
+- O risco 02 ficou como alta pois, se a equipe errar as estimativas, isso atrasa tudo que vem
+  depois, não só um módulo
+- Os riscos 01, 04 e 05 ficaram como média porque incomodam, mas afetam uma parte do projeto
+  de cada vez
+- O risco 03 ficou como média, ela tem uma baixa probabilidade de acontecer,
+porém, causa um grande impacto
