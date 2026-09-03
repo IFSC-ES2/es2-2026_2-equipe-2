@@ -28,9 +28,17 @@
 | Risco 04 — Dificuldade para fazer Docker, Nginx e os microsserviços funcionarem juntos | Confiabilidade | Testar a integração de Docker e Nginx com um serviço simples antes de subir tudo de uma vez reduz o risco de falhas de comunicação entre os serviços em produção, protegendo a disponibilidade do sistema.                                                                    |
 | Risco 05 — Pouco ou nenhum teste automatizado | Confiabilidade, Manutenibilidade | Definir um mínimo de testes automatizados e rodá-los nos Pull Requests reduz a chance de bugs chegarem a produção e facilita futuras alterações com mais segurança sobre o que pode quebrar.                                               |         |
 
-## Métricas Futuras
+# Escopo inicial da avaliação de qualidade
 
-- Manutenibilidade: Cobertura de testes unitários (%) e número de módulos/componentes desacoplados.
-- Confiabilidade: Disponibilidade do sistema em média por dia (%).
-- Segurança: Número de vulnerabilidades críticas encontradas por análise estática e tempo médio de conserto.
-- Capacidade de Interação: Pontuação de usabilidade em testes de usuário (escala 1‑5) e taxa de erro de interação.
+## ISO/IEC 25010 – Sistema e Software Quality Model
+
+## Métricas preliminares
+
+| Atributo (ISO/IEC 25010)                                         | Métrica                                                                                                                                                                               | Comentário                                                         |
+|------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| Manutenibilidade (modularidade, testabilidade, analisabilidade)  | • Modularidade: número de módulos ou pacotes com baixa acoplamento (≤3 dependências internas). Complexidade ciclomática: média ≤10 por método (relatório de análise estática).        | Avalia quão fácil será alterar o código nas próximas sprints.      |
+| Confiabilidade (disponibilidade, ausência de falhas)             | • Disponibilidade: % de tempo de serviço esperado (≥99%). Taxa de falhas: número de defeitos críticos encontrados nos testes unitários (≤1 por sprint).                               | Baseia‑se nos primeiros testes automatizados e no CI.              |
+| Segurança (confidencialidade, integridade, autenticidade)        | • Cobertura de análise estática: % de regras de segurança cobertas (≥80%). Número de vulnerabilidades críticas identificadas na análise (deve ser 0).                                 | Métricas simples que podem ser coletadas já no pipeline de CI.     |
+| Usabilidade (operabilidade)                                      | • Taxa de erros de usuário: % de interações com mensagens de erro em protótipos (≤5%). Tempo de aprendizado: tempo médio (em minutos) para realizar a tarefa‑principal em um protótipo. | Pode ser medido em testes de usabilidade.                          |
+
+## Observação: Nas próximas fases as métricas poderão ser refinadas, automatizadas e complementadas.
