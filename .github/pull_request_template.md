@@ -1,16 +1,37 @@
-# Pull Request
-
 ## Descrição
-- Descreva brevemente o propósito deste PR e as alterações introduzidas.
 
-## Issue Relacionado
-- Issue que este PR resolve.
+<!-- Descreva de forma clara o que este PR faz e por quê. -->
 
-## Passos para reproduzir
-- Descreva cada ação necessária para reproduzir o bug ou testar a funcionalidade.
+## Tipo de Mudança
 
-## Solução Aplicada
-- Explique como a correção ou implementação resolve um problema.
+- [ ] Nova funcionalidade
+- [ ] Correção de bug
+- [ ] Atualização de documentação
+- [ ] Refatoração
+- [ ] Melhoria de performance
+- [ ] Adição ou modificação de testes
+- [ ] Alterações de build, CI ou infra
+
+## Como Testar
+
+<!-- Passos para reproduzir/testar a mudança localmente. -->
+
+## Checklist de Revisão
+
+- [ ] O código segue o fluxo de trabalho definido em `docs/fluxo-de-trabalho.md`
+- [ ] A branch de origem está atualizada com a branch principal
+- [ ] O código foi revisado localmente pelo autor antes de abrir o PR
+- [ ] A tentativa de PR foi realizada localmente utilizando `act` para checkar nome de branch e a capacidade da realização do mesmo
+- [ ] Testes automatizados foram adicionados/atualizados (quando aplicável)
+- [ ] Todos os checks obrigatórios de CI estão passando
+- [ ] A documentação foi atualizada (quando aplicável)
+- [ ] Não há conflitos com a branch principal
+- [ ] O PR tem pelo menos 1 aprovação antes do merge
+
+## Issues Relacionadas
+
+<!-- Ex: Closes #35 -->
 
 ## Notas Adicionais
-- Qualquer informação extra que os revisores devam saber.
+
+<!-- Qualquer contexto extra para quem for revisar. -->
