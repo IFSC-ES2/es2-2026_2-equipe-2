@@ -29,14 +29,14 @@ Sistema de apoio à gestão operacional de armazéns e centros de distribuição
 - **BaseLine:** [BASELINE.md](./docs/BASELINE.md)
 - **Métricas:** [METRICAS.md;](./docs/METRICAS.md)
 - **Registro de riscos:** [riscos.md](./docs/riscos.md)
-- **Fluxo de trabalho:** [FLUXO-DE-TRABALHO.md](./docs/fluxo-de-trabalho.md)
+- **Fluxo de trabalho:** [FLUXO-DE-TRABALHO.md](./docs/FLUXO-DE-TRABALHO.md)
 - **CI mínimo:** [CI.md](./docs/CI.md)
-- **Critérios de qualidade:** [qualidade.md](./docs/qualidade.md
+- **Critérios de qualidade:** [qualidade.md](./docs/qualidade.md)
 - **PRs desta etapa:**
   - [#40 - ci/configuração inicial ci ](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/40)
   - [#41 - Docs/fluxo trabalho](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/41)
   - [#42 - docs: atributos de qualidadedocs: foi inserido os atributos de qualidade, relacionamento com riscos](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/42)
- - [#43 - docs(riscos): Criação do arquivo riscos.md] (https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/43)
+  - [#43 - docs(riscos): Criação do arquivo riscos.md](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/43)
 
 ## 1. Visão do Produto
 
