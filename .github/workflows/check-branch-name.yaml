@@ -1,0 +1,30 @@
+name: check-branch-name
+on:
+  pull_request:
+    branches-ignore:
+      - "main"
+
+jobs:
+  check-branch-name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check branch name to merge to another
+        env:
+          BRANCH_NAME: ${{ github.head_ref }}
+        run: |
+          PATTERN="^(feat|fix|chore|ci|docs|style|refactor|perf|test|build|revert)/[a-z0-9]+(-[a-z0-9]+)*$"
+          PROTECTED_BRANCHES="^(main)$"
+
+          echo "Validando branch: $BRANCH_NAME"
+
+          if [[ "$BRANCH_NAME" =~ $PROTECTED_BRANCHES ]]; then
+            echo "Branch protegida/reservada, ignorando validação de padrão ✅"
+            exit 0
+          fi
+
+          if [[ ! "$BRANCH_NAME" =~ $PATTERN ]]; then
+            echo "::error::Nome de branch inválido: '$BRANCH_NAME'. Deve seguir o padrão tipo/nome-da-feature (ex: feat/nova-funcionalidade)."
+            exit 1
+          fi
+
+          echo "Branch válida ✅"

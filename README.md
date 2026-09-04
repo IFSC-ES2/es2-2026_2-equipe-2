@@ -3,12 +3,12 @@
 ## Equipe
 
 | Nome                          | Função                                      | Matrícula    |
-| ----------------------------- |---------------------------------------------| ------------ |
-| Bernardo Amaral Lisboa        | Database Administrator (DBA)                | 202510703703 |
+| ----------------------------- | ------------------------------------------- | ------------ |
+| Bernardo Amaral Lisboa        | Database Administrator (DBA) e Scrum Master | 202510703703 |
 | Daniel Luiz da Rocha Cordeiro | Arquiteto de Software                       | 202510703715 |
 | Isac Lehmkuhl dos Santos      | DevOps/Infra                                | 202510703633 |
 | Monica Cancellier             | UI/UX Designer                              | 202320003698 |
-| Victor Eduardo Peixer Munarim | Engenheiro de Qualidade (QA) e Scrum Master | 202510703662 |
+| Victor Eduardo Peixer Munarim | Engenheiro de Qualidade (QA)                | 202510703662 |
 
 ## Tema
 
@@ -28,6 +28,15 @@ Sistema de apoio à gestão operacional de armazéns e centros de distribuição
 - **Estimativas:** [ESTIMATIVAS.md](./docs/ESTIMATIVAS.md)
 - **BaseLine:** [BASELINE.md](./docs/BASELINE.md)
 - **Métricas:** [METRICAS.md;](./docs/METRICAS.md)
+- **Registro de riscos:** [riscos.md](./docs/riscos.md)
+- **Fluxo de trabalho:** [FLUXO-DE-TRABALHO.md](./docs/FLUXO-DE-TRABALHO.md)
+- **CI mínimo:** [CI.md](./docs/CI.md)
+- **Critérios de qualidade:** [qualidade.md](./docs/qualidade.md)
+- **PRs desta etapa:**
+  - [#40 - ci/configuração inicial ci ](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/40)
+  - [#41 - Docs/fluxo trabalho](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/41)
+  - [#42 - docs: atributos de qualidadedocs: foi inserido os atributos de qualidade, relacionamento com riscos](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/42)
+  - [#43 - docs(riscos): Criação do arquivo riscos.md](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/43)
 
 ## 1. Visão do Produto
 

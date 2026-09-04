@@ -1,0 +1,24 @@
+name: check-main-pull-request
+on:
+  pull_request_target:
+    branches:
+      - "main"
+
+jobs:
+  check-branch-name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check branch name to merge on main
+        env:
+          BRANCH_NAME: ${{ github.head_ref }}
+        run: |
+          PATTERN="^entrega-[0-9]+$"
+
+          echo "Validando branch: $BRANCH_NAME"
+
+          if [[ ! "$BRANCH_NAME" =~ $PATTERN ]]; then
+            echo "::error::Nome de branch inválido: '$BRANCH_NAME'. Deve seguir o padrão entrega-numero (ex: entrega-1)."
+            exit 1
+          fi
+
+          echo "Branch válida ✅"
