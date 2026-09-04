@@ -40,7 +40,7 @@ Aqui será registrado os possíveis riscos iniciais do projeto, cobrindo as natu
 | **Responsável** | Daniel Luiz da Rocha Cordeiro (Arquiteto de Software) |
 
 
-### Risco 03 - Algum integrante ficar sem conseguir participar
+### Risco 03 - Indisponibilidade de um integrante
 
 | Campo | Descrição |
 |---|---|
