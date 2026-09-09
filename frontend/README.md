@@ -17,9 +17,9 @@ If you are developing a production application, we recommend updating the config
 
 ```js
 export default defineConfig([
-  globalIgnores(["dist"]),
+  globalIgnores(['dist']),
   {
-    files: ["**/*.{ts,tsx}"],
+    files: ['**/*.{ts,tsx}'],
     extends: [
       // Other configs...
 
@@ -34,7 +34,7 @@ export default defineConfig([
     ],
     languageOptions: {
       parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
         tsconfigRootDir: import.meta.dirname,
       },
       // other options...
@@ -73,3 +73,7 @@ export default defineConfig([
 ])
 
 ```
+
+## Informações Dockerfile Frontend
+
+[How to dockerize react app](https://www.docker.com/blog/how-to-dockerize-react-app/)
