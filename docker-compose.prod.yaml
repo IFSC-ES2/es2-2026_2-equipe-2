@@ -1,0 +1,18 @@
+services:
+  web:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT_WEB_PROD}:${PORT_WEB_PROD}"
+    env_file:
+      - .env.production
+    restart: unless-stopped
+
+  api-estoque:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT_API_ESTOQUE_PROD}:${PORT_API_ESTOQUE_PROD}"
+    env_file:
+      - .env.production
+    restart: unless-stopped

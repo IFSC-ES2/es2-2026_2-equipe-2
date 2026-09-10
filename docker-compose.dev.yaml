@@ -1,0 +1,39 @@
+services:
+  web:
+    build:
+      dockerfile: Dockerfile.dev
+    ports:
+      - "${PORT_WEB_DEV}:${PORT_WEB_DEV}"
+    env_file:
+      - .env.development
+    develop:
+      watch:
+        - action: sync
+          path: ./frontend/src
+          target: /app/src
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: ./frontend/package.json
+          target: /app/package.json
+        - action: rebuild
+          path: ./frontend/vite.config.ts
+          target: /app/vite.config.ts
+
+  api-estoque:
+    build:
+      dockerfile: Dockerfile.dev
+    ports:
+      - "${PORT_API_ESTOQUE_DEV}:${PORT_API_ESTOQUE_DEV}"
+    env_file:
+      - .env.development
+    develop:
+      watch:
+        - action: sync
+          path: ./api-estoque/src
+          target: /app/src
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: ./api-estoque/package.json
+          target: /app/package.json
