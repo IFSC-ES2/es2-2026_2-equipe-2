@@ -40,7 +40,7 @@ export class SetupApplication {
   }
 
   public async start(): Promise<void> {
-    // await this.setupDatabase();
+    await this.setupDatabase();
     this.server = this.app.listen(this.port, () => {
       logger.info(
         `Server running on port ${this.port}, http://localhost:${this.port}`,

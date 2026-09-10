@@ -13,7 +13,7 @@ class Logger {
 
   constructor() {
     this.logLevel = process.env.LOG_LEVEL || "info";
-    this.logFilename = process.env.LOG_FILENAME || "logs/api.log";
+    this.logFilename = process.env.LOG_FILENAME || "./logs/api.log";
     this.logger = this.createLogger();
   }
 

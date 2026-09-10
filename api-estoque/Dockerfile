@@ -19,7 +19,8 @@ ENV NODE_ENV=production
 WORKDIR /app
 
 COPY package*.json ./
-RUN --mount=type=cache,target=/root/.npm npm ci --omit=dev
+RUN --mount=type=cache,target=/root/.npm npm ci --omit=dev && mkdir -p logs 
+
 
 COPY --from=build /app/dist ./dist
 
