@@ -118,3 +118,51 @@ Ter uma primeira versão funcionando que já mostre o começo do fluxo da opera�
 - O que depende de módulos ainda não prontos ficou para depois;
 - O que depende de sistemas externos ficou de fora do semestre;
 - O que tem regras de negócio mais complexas, como financeiro, também ficou de fora por falta de tempo.
+
+## Como Rodar o Projeto (Docker)
+
+O projeto possui dois ambientes configurados via Docker Compose: **desenvolvimento** (com hot-reload) e **produção** (build otimizado).
+
+### Ambiente de Desenvolvimento (`web-dev`)
+
+Sobe o servidor Vite com hot-reload, sincronizando alterações do código-fonte automaticamente com o container.
+
+```bash
+docker compose watch web-dev
+```
+
+> **Importante:** use `docker compose watch`, e não apenas `docker compose up`, para que as alterações em `src/` sejam refletidas automaticamente no container via hot-reload do Vite.
+
+Acesse em: [http://localhost:5173](http://localhost:5173)
+
+### Ambiente de Produção (`web-prod`)
+
+Gera o build de produção da aplicação e serve os arquivos estáticos.
+
+```bash
+docker compose up web-prod
+```
+
+Acesse em: [http://localhost:3000](http://localhost:3000)
+
+### Subindo os dois ambientes juntos
+
+```bash
+docker compose up
+```
+
+> Isso sobe `web-dev` e `web-prod` simultaneamente, cada um na sua respectiva porta (5173 e 3000). Para desenvolvimento com watch mode ativo, prefira `docker compose watch`.
+
+### Encerrando os containers
+
+```bash
+docker compose down
+```
+
+### Rebuild manual (sem cache)
+
+Caso precise forçar a reconstrução das imagens (ex: após alterar `Dockerfile` ou `package.json`):
+
+```bash
+docker compose build --no-cache
+```

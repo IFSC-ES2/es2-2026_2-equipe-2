@@ -1,2 +1,4 @@
 .idea
 event.json
+.env*
+!.env.example
