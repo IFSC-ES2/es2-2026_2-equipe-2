@@ -1,0 +1,46 @@
+{
+  "name": "api-estoque",
+  "version": "1.0.0",
+  "description": "API para controle de estoque",
+  "keywords": [
+    "estoque",
+    "api",
+    "crud"
+  ],
+  "homepage": "https://github.com/IFSC-ES2/es2-2026_2-equipe-2#readme",
+  "bugs": {
+    "url": "https://github.com/IFSC-ES2/es2-2026_2-equipe-2/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/IFSC-ES2/es2-2026_2-equipe-2.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "lint": "eslint .",
+    "test": "vitest",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "pg": "^8.23.0",
+    "winston": "^3.19.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.2.0",
+    "@types/pg": "^8.23.1",
+    "eslint": "^10.8.1",
+    "nodemon": "^3.1.14",
+    "prettier": "^3.9.6",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2"
+  }
+}
