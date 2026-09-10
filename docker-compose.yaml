@@ -1,4 +1,24 @@
 services:
+  nginx:
+    image: nginx:1.27-alpine
+    ports:
+      - 8080:80
+      - 4443:443
+    volumes:
+      - ./logs/nginx:/var/log/nginx
+      - ./conf/nginx.conf.template:/etc/nginx/templates/default.conf.template:ro
+    networks:
+      - frontend
+      - backend
+    depends_on:
+      - web
+      - api-estoque
+    healthcheck:
+      test: ["CMD", "nginx", "-t"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
   db:
     image: postgres:17-alpine
     environment:
@@ -6,7 +26,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
     volumes:
-      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./conf/init-db.sql:/docker-entrypoint-initdb.d/init.sql
       - db-data:/var/lib/postgresql/data
     expose:
       - ${DB_PORT}
@@ -22,6 +42,8 @@ services:
   web:
     build:
       context: ./frontend
+    networks:
+      - frontend
     depends_on:
       - api-estoque
 
@@ -30,6 +52,8 @@ services:
       context: ./api-estoque
     networks:
       - backend
+    volumes:
+      - ./logs/api-estoque:/app/logs
     depends_on:
       db:
         condition: service_healthy
@@ -39,7 +63,7 @@ services:
           "CMD",
           "node",
           "-e",
-          "fetch('http://localhost:${PORT_API_ESTOQUE_DEV}/ping').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))",
+          "fetch('http://localhost:${PORT_API_ESTOQUE}/ping').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))",
         ]
       interval: 10s
       timeout: 5s
@@ -47,6 +71,7 @@ services:
       start_period: 5s
 
 networks:
+  frontend:
   backend:
 
 volumes:

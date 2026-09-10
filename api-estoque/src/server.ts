@@ -4,8 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const PORT =
-  Number(process.env.PORT_API_ESTOQUE_DEV) ||
-  Number(process.env.PORT_API_ESTOQUE_PROD) ||
+  Number(process.env.PORT_API_ESTOQUE) ||
   3000;
 
 class Server {

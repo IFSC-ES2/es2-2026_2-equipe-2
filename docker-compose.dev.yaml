@@ -1,9 +1,11 @@
 services:
+  nginx:
+    env_file:
+      - .env.development
+      
   web:
     build:
       dockerfile: Dockerfile.dev
-    ports:
-      - "${PORT_WEB_DEV}:${PORT_WEB_DEV}"
     env_file:
       - .env.development
     develop:
@@ -23,8 +25,6 @@ services:
   api-estoque:
     build:
       dockerfile: Dockerfile.dev
-    ports:
-      - "${PORT_API_ESTOQUE_DEV}:${PORT_API_ESTOQUE_DEV}"
     env_file:
       - .env.development
     develop:

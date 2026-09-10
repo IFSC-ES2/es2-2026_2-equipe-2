@@ -9,4 +9,8 @@ export default defineConfig({
     globals: true,
     setupFiles: "./src/setupTests.ts",
   },
+  server: {
+    host: '0.0.0.0',
+    port: Number(process.env.PORT_WEB) || 5173,
+  },
 });

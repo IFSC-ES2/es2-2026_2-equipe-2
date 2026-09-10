@@ -2,3 +2,4 @@
 event.json
 .env*
 !.env.example
+logs
