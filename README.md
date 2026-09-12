@@ -121,48 +121,90 @@ Ter uma primeira versão funcionando que já mostre o começo do fluxo da opera�
 
 ## Como Rodar o Projeto (Docker)
 
-O projeto possui dois ambientes configurados via Docker Compose: **desenvolvimento** (com hot-reload) e **produção** (build otimizado).
+O projeto possui dois ambientes configurados via Docker Compose: **desenvolvimento** (com hot-reload) e **produção** (build otimizado). A configuração é dividida em três arquivos:
 
-### Ambiente de Desenvolvimento (`web-dev`)
+- `docker-compose.yml` — base, com o que é comum a qualquer ambiente (**Banco de dados**)
+- `docker-compose.dev.yml` — overrides de desenvolvimento (hot-reload, portas de dev)
+- `docker-compose.prod.yml` — overrides de produção (build otimizado, portas de prod)
 
-Sobe o servidor Vite com hot-reload, sincronizando alterações do código-fonte automaticamente com o container.
+O banco de dados é o mesmo independente do ambiente; o que muda entre dev e prod são apenas os serviços `web` e `api-estoque` (Dockerfile, portas e variáveis de ambiente).
 
-```bash
-docker compose watch web-dev
-```
+Para simplificar os comandos, o projeto possui um `Makefile` na raiz com os atalhos mais usados. Todos os exemplos abaixo usam `make`; se preferir, o comando `docker compose` equivalente está descrito em cada seção.
 
-> **Importante:** use `docker compose watch`, e não apenas `docker compose up`, para que as alterações em `src/` sejam refletidas automaticamente no container via hot-reload do Vite.
+### Ambiente de Desenvolvimento
 
-Acesse em: [http://localhost:5173](http://localhost:5173)
-
-### Ambiente de Produção (`web-prod`)
-
-Gera o build de produção da aplicação e serve os arquivos estáticos.
+Sobe `web` e `api-estoque` com hot-reload (Vite e tsx watch, respectivamente), sincronizando alterações do código-fonte automaticamente com o container, além do Nginx e do banco.
 
 ```bash
-docker compose up web-prod
+make dev
 ```
 
-Acesse em: [http://localhost:3000](http://localhost:3000)
+> **Importante:** o alvo `dev` usa `docker compose watch` internamente, e não `up`, para que as alterações em `src/` sejam refletidas automaticamente nos containers via hot-reload.
 
-### Subindo os dois ambientes juntos
+Acesse em: [http://localhost:5173](http://localhost:5173) (frontend) e [http://localhost:3000](http://localhost:3000) (API — ajuste conforme as portas definidas em `.env.development`)
+
+### Ambiente de Produção
+
+Gera o build de produção de ambos os serviços e sobe tudo já otimizado, junto com Nginx e banco, em background.
 
 ```bash
-docker compose up
+make prod
 ```
 
-> Isso sobe `web-dev` e `web-prod` simultaneamente, cada um na sua respectiva porta (5173 e 3000). Para desenvolvimento com watch mode ativo, prefira `docker compose watch`.
+Acesse pela porta configurada em `.env.production`.
+
+### Logs
+
+```bash
+make logs-dev   # logs em tempo real do ambiente de desenvolvimento
+make logs-prod  # logs em tempo real do ambiente de produção
+```
+
+### Status dos containers
+
+```bash
+make ps-dev
+make ps-prod
+```
 
 ### Encerrando os containers
 
 ```bash
-docker compose down
+make down-dev   # ambiente de desenvolvimento
+make down-prod  # ambiente de produção
+```
+
+### Reiniciando os containers
+
+```bash
+make restart-dev
+make restart-prod
 ```
 
 ### Rebuild manual (sem cache)
 
-Caso precise forçar a reconstrução das imagens (ex: após alterar `Dockerfile` ou `package.json`):
+Caso precise forçar a reconstrução das imagens (ex: após alterar um `Dockerfile` ou `package.json`):
 
 ```bash
-docker compose build --no-cache
+make build       # imagens de desenvolvimento
+make build-prod  # imagens de produção
 ```
+
+### Todos os comandos disponíveis
+
+| Comando             | Descrição                             |
+| ------------------- | ------------------------------------- |
+| `make dev`          | Sobe o ambiente de dev com hot-reload |
+| `make prod`         | Sobe o ambiente de prod em background |
+| `make down-dev`     | Encerra os containers de dev          |
+| `make down-prod`    | Encerra os containers de prod         |
+| `make build`        | Rebuild sem cache (dev)               |
+| `make build-prod`   | Rebuild sem cache (prod)              |
+| `make logs-dev`     | Logs em tempo real (dev)              |
+| `make logs-prod`    | Logs em tempo real (prod)             |
+| `make ps-dev`       | Lista containers em execução (dev)    |
+| `make ps-prod`      | Lista containers em execução (prod)   |
+| `make restart-dev`  | Reinicia o ambiente de dev            |
+| `make restart-prod` | Reinicia o ambiente de prod           |
+
+> **Nota (Windows):** o `make` não vem instalado por padrão. Use o WSL, Git Bash, ou instale via Chocolatey (`choco install make`). Alternativamente, rode os comandos `docker compose` equivalentes listados em cada seção.

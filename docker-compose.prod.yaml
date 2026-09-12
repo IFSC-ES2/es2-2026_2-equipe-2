@@ -1,0 +1,18 @@
+services:
+  nginx:
+    env_file:
+      - .env.production
+
+  web:
+    build:
+      dockerfile: Dockerfile
+    env_file:
+      - .env.production
+    restart: unless-stopped
+
+  api-estoque:
+    build:
+      dockerfile: Dockerfile
+    env_file:
+      - .env.production
+    restart: unless-stopped
