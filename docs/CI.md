@@ -2,10 +2,11 @@
 
 ## Workflows atuais
 
-| Arquivo                       | Evento(s)             | O que faz                                          |
-| ----------------------------- | --------------------- | -------------------------------------------------- |
-| `check-branch-name.yml`       | `pull_request`        | Valida se o nome da branch segue o padrão esperado |
-| `check-main-pull-request.yml` | `pull_request_target` | _(descreva aqui o que esse workflow valida)_       |
+| Arquivo                       | Evento(s)             | O que faz                                                                                                                                    |
+| ----------------------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `check-branch-name.yml`       | `pull_request`        | Valida se o nome da branch segue o padrão esperado                                                                                           |
+| `check-main-pull-request.yml` | `pull_request_target` | _(descreva aqui o que esse workflow valida)_                                                                                                 |
+| `build-check.yaml`            | `pull_request`        | Detecta quais pastas (`api-estoque`, `frontend`) mudaram e builda as imagens Docker correspondentes, validando se o código compila sem erros |
 
 > Mantenha essa tabela atualizada ao adicionar ou remover workflows.
 
@@ -14,7 +15,8 @@
 O pipeline de CI é disparado a cada `pull_request` aberto/atualizado contra `main`, seguindo (em geral) esta ordem:
 
 ```
-pull_request aberto/atualizado
+
+pull*request aberto/atualizado
 │
 ▼
 check-branch-name ──▶ valida nome da branch
@@ -23,17 +25,22 @@ check-branch-name ──▶ valida nome da branch
 check-main-pull-request ──▶ valida o nome da branch se o merge for na main
 │
 ▼
+build-check ──▶ detecta pastas alteradas e builda as imagens (api-estoque, frontend)
+│
+▼
 build-* ──▶ gera artefatos/imagens (se aplicável)
 │
 ▼
-test-* ──▶ roda testes
+test-\_ ──▶ roda testes
+
 ```
 
-| Estágio         | Workflow(s)                                            | Bloqueia o merge? | Observações                 |
-| --------------- | ------------------------------------------------------ | ----------------- | --------------------------- |
-| Validação de PR | `check-branch-name.yml`, `check-main-pull-request.yml` | Sim               | Roda em todo `pull_request` |
-| Testes          | `test-*.yml`,                                          | Sim               | unit                        |
-| Build           | `build-*.yml`,                                         | Sim               | Sobe imagem docker          |
+| Estágio         | Workflow(s)                                            | Bloqueia o merge? | Observações                                    |
+| --------------- | ------------------------------------------------------ | ----------------- | ---------------------------------------------- |
+| Validação de PR | `check-branch-name.yml`, `check-main-pull-request.yml` | Sim               | Roda em todo `pull_request`                    |
+| Build (check)   | `build-check.yaml`                                     | Sim               | Builda só as pastas alteradas (`paths-filter`) |
+| Testes          | `test-*.yml`                                           | Sim               | unit                                           |
+| Build           | `build-*.yml`                                          | Sim               | Sobe imagem docker                             |
 
 ## Convenção de nomes dos workflows
 
@@ -43,7 +50,7 @@ Os arquivos em `.github/workflows/` são organizados por prefixo, agrupando por 
 | -------- | --------------------------------------------------- | --------------------------------------------- |
 | `check-` | Validações/gates que não alteram nada, só verificam | `check-branch-name.yml`, `check-pr-title.yml` |
 | `test-`  | Execução de testes                                  | `test-*.yml`                                  |
-| `build-` | Build de artefatos/imagens                          | `build-*.yml`                                 |
+| `build-` | Build de artefatos/imagens                          | `build-*.yml`, `build-check.yaml`             |
 
 ## Testando os workflows localmente com `act`
 
