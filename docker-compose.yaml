@@ -44,8 +44,6 @@ services:
       context: ./frontend
     networks:
       - frontend
-    depends_on:
-      - api-estoque
 
   api-estoque:
     build:
