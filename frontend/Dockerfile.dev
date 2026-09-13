@@ -1,0 +1,22 @@
+# Development (Vite React.js App)
+ARG NODE_VERSION=24.14.0-alpine
+ 
+FROM node:${NODE_VERSION} AS dev
+ 
+WORKDIR /app
+ 
+COPY package*.json ./
+ 
+RUN npm install
+ 
+COPY . .
+
+# Garante as permissões do usuário node
+RUN chown -R node:node /app 
+ 
+USER node
+ 
+# Expõe a porta do vite dev
+EXPOSE 5173
+ 
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
