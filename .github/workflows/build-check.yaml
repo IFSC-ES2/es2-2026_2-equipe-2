@@ -35,6 +35,7 @@ jobs:
           DB_PASSWORD=postgres
           DB_NAME=estoque
           PORT_API_ESTOQUE=5000
+          PORT_WEB=3000
           EOF
 
       - name: Build containers api-estoque
@@ -50,6 +51,12 @@ jobs:
       - name: Criar .env
         run: |
           cat << EOF > .env
+          DB_HOST=db
+          DB_PORT=5432
+          DB_USER=postgres
+          DB_PASSWORD=postgres
+          DB_NAME=estoque
+          PORT_API_ESTOQUE=5000
           PORT_WEB=3000
           EOF
 
