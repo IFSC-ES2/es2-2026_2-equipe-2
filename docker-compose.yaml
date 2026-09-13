@@ -42,14 +42,16 @@ services:
   web:
     build:
       context: ./frontend
-    networks:
-      - frontend
+    ports:
+      - "${PORT_WEB}:${PORT_WEB}"
 
   api-estoque:
     build:
       context: ./api-estoque
     networks:
       - backend
+    ports:
+      - "${PORT_API_ESTOQUE}:${PORT_API_ESTOQUE}"
     volumes:
       - ./logs/api-estoque:/app/logs
     depends_on:

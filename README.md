@@ -141,7 +141,7 @@ make dev
 
 > **Importante:** o alvo `dev` usa `docker compose watch` internamente, e não `up`, para que as alterações em `src/` sejam refletidas automaticamente nos containers via hot-reload.
 
-Acesse em: [http://localhost:5173](http://localhost:5173) (frontend) e [http://localhost:3000](http://localhost:3000) (API — ajuste conforme as portas definidas em `.env.development`)
+Acesse em: [http://localhost:3000](http://localhost:3000) (frontend) e [http://localhost:5000/ping](http://localhost:5000/ping) (API — ajuste conforme as portas definidas em `.env.development`)
 
 ### Ambiente de Produção
 
