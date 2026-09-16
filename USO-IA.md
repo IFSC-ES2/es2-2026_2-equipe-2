@@ -35,3 +35,9 @@
 - Uso: criação do regex para check do nome da branch
 - Artefato: .github/workflows
 - Validação: validado utilizando nomes válidos e inválidos de branches
+
+- Data: 16/09/2026
+- Ferramenta: Claude
+- Uso: criação dos testes unitarios para componentes menores
+- Artefato: `frontend/src/components/*/*.test.tsx`
+- Validação: validado rodando os testes e verificando se eles não estão chumbados para o resultado que deveria dar correto e sim para algo mais geral
