@@ -1,6 +1,6 @@
 import React from 'react';
-import TableHeaderCell from '../atoms/TableHeaderCell';
-import { type Column } from './TableRow';
+import TableHeaderCell from '../../../atoms/Table/TableHeaderCell';
+import { type Column } from '../TableRow/';
 
 interface TableHeaderProps {
   columns: Column[];

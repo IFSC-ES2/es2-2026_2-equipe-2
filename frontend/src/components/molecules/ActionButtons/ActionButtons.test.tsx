@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import ActionButtons from './ActionButtons';
+import ActionButtons from '.';
 
 interface MockButtonProps {
   children: React.ReactNode;

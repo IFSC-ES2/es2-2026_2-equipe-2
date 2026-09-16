@@ -1,10 +1,10 @@
 import React from 'react';
-import TableHeader from '../molecules/TableHeader';
+import TableHeader from '../../molecules/Table/TableHeader';
 import TableRow, {
   type Column,
   type TableDataRow,
-} from '../molecules/TableRow';
-import TableCell from '../atoms/TableCell';
+} from '../../molecules/Table/TableRow';
+import TableCell from '../../atoms/Table/TableCell';
 
 // Exportando os tipos para uso externo (ex: GenericList)
 export type { Column, TableDataRow };

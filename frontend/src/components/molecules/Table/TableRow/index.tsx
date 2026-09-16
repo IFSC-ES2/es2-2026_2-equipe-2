@@ -1,6 +1,6 @@
 import React from 'react';
-import TableCell from '../atoms/TableCell';
-import ActionButtons from './ActionButtons';
+import TableCell from '../../../atoms/Table/TableCell';
+import ActionButtons from '../../ActionButtons';
 
 export interface Column {
   key: string;
