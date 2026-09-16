@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import GenericTable, {
   type Column,
   type TableDataRow,
-} from '../organisms/GenericTable';
-import Button from '../atoms/Button';
+} from '../../organisms/GenericTable';
+import Button from '../../atoms/Button';
+import { fetchGenericList } from '../../../services/genericList.service';
 
 interface GenericListProps {
   apiUrl: string;
@@ -17,36 +18,21 @@ const GenericList: React.FC<GenericListProps> = ({ apiUrl, title }) => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const loadData = async () => {
       try {
         setLoading(true);
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-          throw new Error('Falha ao buscar os dados.');
-        }
-
-        const result = await response.json();
-
-        if (result.columns && result.data) {
-          setColumns(result.columns);
-          setData(result.data);
-        } else {
-          throw new Error(
-            'Formato de dados inválido da API. Esperado { columns, data }',
-          );
-        }
+        setError(null);
+        const result = await fetchGenericList(apiUrl);
+        setColumns(result.columns);
+        setData(result.data);
       } catch (err: unknown) {
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError('Erro desconhecido');
-        }
+        setError(err instanceof Error ? err.message : 'Erro desconhecido');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchData();
+    loadData();
   }, [apiUrl]);
 
   return (
