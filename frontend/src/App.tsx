@@ -11,7 +11,6 @@ function App() {
       </header>
 
       <main>
-        {/* Usando a porta 5000, que é a definida no .env (PORT_API_ESTOQUE=5000) */}
         <GenericList
           title="Listagem de Estoque (Genérica)"
           apiUrl="http://localhost:5000/api/estoque-list"
