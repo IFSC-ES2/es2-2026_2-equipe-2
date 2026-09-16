@@ -1,7 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import GenericTable, { type Column, type TableDataRow } from '.';
-
 interface MockTableHeaderProps {
   columns: Column[];
 }
@@ -10,7 +9,7 @@ interface MockTableRowProps {
   row: TableDataRow;
 }
 
-vi.mock('../molecules/TableHeader', () => ({
+vi.mock('../../molecules/Table/TableHeader', () => ({
   default: ({ columns }: MockTableHeaderProps) => (
     <thead data-testid="mock-table-header">
       <tr>
@@ -20,7 +19,7 @@ vi.mock('../molecules/TableHeader', () => ({
   ),
 }));
 
-vi.mock('../molecules/TableRow', () => ({
+vi.mock('../../molecules/Table/TableRow', () => ({
   default: ({ row }: MockTableRowProps) => (
     <tr data-testid="mock-table-row">
       <td>{row.name as string}</td>
