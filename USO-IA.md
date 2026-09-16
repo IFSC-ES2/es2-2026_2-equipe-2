@@ -41,3 +41,9 @@
 - Uso: criação dos testes unitarios para componentes menores
 - Artefato: `frontend/src/components/*/*.test.tsx`
 - Validação: validado rodando os testes e verificando se eles não estão chumbados para o resultado que deveria dar correto e sim para algo mais geral
+
+- Data: 16/09/2026
+- Ferramenta: Claude
+- Uso: criação dos métodos especificos do repository que realizam join
+- Artefato: `api-estoque/src/repositories/Produto.repository.ts`
+- Validação: validado rodando o join internamente dentro do container do banco

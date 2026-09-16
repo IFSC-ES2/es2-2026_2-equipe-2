@@ -6,13 +6,13 @@ export interface Produto {
   sku: string;
   nome: string;
   descricao: string | null;
-  categoriaId: number | null;
-  fornecedorId: number | null;
+  categoria_id: number | null;
+  fornecedor_id: number | null;
   preco: number;
   quantidade: number;
-  estoqueMinimo: number;
-  criadoEm: Date;
-  atualizadoEm: Date;
+  estoque_minimo: number;
+  criado_em: Date;
+  atualizado_em: Date;
 }
 
 export interface ProdutoComRelacionamentos extends Produto {
@@ -22,10 +22,10 @@ export interface ProdutoComRelacionamentos extends Produto {
 
 export type ProdutoCreate = Omit<
   Produto,
-  "id" | "criadoEm" | "atualizadoEm" | "quantidade" | "estoqueMinimo"
+  "id" | "criado_em" | "atualizado_em" | "quantidade" | "estoque_minimo"
 > & {
   quantidade?: number;
-  estoqueMinimo?: number;
+  estoque_minimo?: number;
 };
 
 export type ProdutoUpdate = Partial<ProdutoCreate>;
