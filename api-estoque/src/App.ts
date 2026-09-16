@@ -4,6 +4,7 @@ import { Pool } from "pg";
 import database from "./config/database";
 import router from "./routes/Routes";
 import logger from "./config/logger";
+import cors from "cors";
 
 export class SetupApplication {
   private server?: Server;
@@ -24,6 +25,7 @@ export class SetupApplication {
   }
 
   private setupExpress(): void {
+    this.app.use(cors());
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
   }
