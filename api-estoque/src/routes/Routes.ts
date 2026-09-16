@@ -7,7 +7,7 @@ class Routes {
       res.status(200).json({ pong: true });
     });
 
-    router.get("/api/estoque-list", EstoqueListController.getList);
+    router.get("/api/estoque", EstoqueListController.getList);
 
     return router;
   }
