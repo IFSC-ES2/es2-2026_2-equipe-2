@@ -35,3 +35,15 @@
 - Uso: criação do regex para check do nome da branch
 - Artefato: .github/workflows
 - Validação: validado utilizando nomes válidos e inválidos de branches
+
+- Data: 15/09/2026
+- Ferramenta: Gemini
+- Uso: criação de todos os testes do frontend
+- Artefato: frontend/src/components/
+- Validação: todo o valor de input e output foi validado para estar de acordo com o que era esperado quando o código foi feito
+
+- Data: 16/09/2026
+- Ferramenta: Gemini
+- Uso: consulta para criação dos componentes do frontend
+- Artefato: frontend/src/components/
+- Validação: a tipagem foi bastante pesquisada para ser adequada com o código e evitar erros
