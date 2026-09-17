@@ -47,3 +47,9 @@
 - Uso: criação dos métodos especificos do repository que realizam join
 - Artefato: `api-estoque/src/repositories/Produto.repository.ts`
 - Validação: validado rodando o join internamente dentro do container do banco
+
+- Data: 16/09/2026
+- Ferramenta: Claude
+- Uso: criação dos testes para Categoria.service
+- Artefato: `api-estoque/test/services/categoria.service.test.ts`
+- Validação: validado rodando os testes e verificando se os valores não estão chumbados e não realizado conforme deveria

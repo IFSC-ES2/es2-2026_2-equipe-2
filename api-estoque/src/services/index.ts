@@ -1,1 +1,1 @@
-// Exporta todos os controllers aqui dentro
+export * from "./Categoria.service";

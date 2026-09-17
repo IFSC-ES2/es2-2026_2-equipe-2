@@ -3,9 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const PORT =
-  Number(process.env.PORT_API_ESTOQUE) ||
-  3000;
+const PORT = Number(process.env.PORT_API_ESTOQUE) || 3000;
 
 class Server {
   static start(): void {
