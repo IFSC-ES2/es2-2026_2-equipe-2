@@ -9,9 +9,16 @@ import { fetchGenericList } from '../../../services/genericList.service';
 interface GenericListProps {
   apiUrl: string;
   title: string;
+  onCreate?: () => void;
+  onEdit?: (row: TableDataRow) => void;
 }
 
-const GenericList: React.FC<GenericListProps> = ({ apiUrl, title }) => {
+const GenericList: React.FC<GenericListProps> = ({
+  apiUrl,
+  title,
+  onCreate,
+  onEdit,
+}) => {
   const [columns, setColumns] = useState<Column[]>([]);
   const [data, setData] = useState<TableDataRow[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -39,7 +46,9 @@ const GenericList: React.FC<GenericListProps> = ({ apiUrl, title }) => {
     <div className="container mt-4">
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h2>{title}</h2>
-        <Button variant="success">Novo Registro</Button>
+        <Button variant="success" onClick={onCreate}>
+          Novo Registro
+        </Button>
       </div>
 
       {loading && (
@@ -56,7 +65,9 @@ const GenericList: React.FC<GenericListProps> = ({ apiUrl, title }) => {
         </div>
       )}
 
-      {!loading && !error && <GenericTable columns={columns} data={data} />}
+      {!loading && !error && (
+        <GenericTable columns={columns} data={data} onEdit={onEdit} />
+      )}
     </div>
   );
 };
