@@ -1,4 +1,7 @@
 -- AQUI VÃO OS ARQUIVOS PARA GERAR AS TABELAS DO BANCO
+--Tipos
+CREATE TYPE status_pedido AS ENUM ('PENDENTE', 'CONCLUIDO', 'CANCELADO');
+CREATE TYPE tipo_movimentacao AS ENUM ('ENTRADA', 'SAIDA');
 -- Clientes
 CREATE TABLE clientes (
                           id              SERIAL PRIMARY KEY,
@@ -62,9 +65,7 @@ CREATE TABLE movimentacoes_estoque (
                                        referencia      VARCHAR(150),   -- ex: "Pedido #123" ou "Compra fornecedor X"
                                        criado_em       TIMESTAMP NOT NULL DEFAULT NOW()
 );
---Tipos
-CREATE TYPE status_pedido AS ENUM ('PENDENTE', 'CONCLUIDO', 'CANCELADO');
-CREATE TYPE tipo_movimentacao AS ENUM ('ENTRADA', 'SAIDA');
+
 -- =========================================================
 -- DADOS INICIAIS (SEED)
 -- =========================================================
