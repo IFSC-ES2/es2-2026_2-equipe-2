@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: api-estoque
+        working-directory: frontend
     steps:
       - uses: actions/checkout@v4
 
