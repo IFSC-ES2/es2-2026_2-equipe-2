@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import ActionButtons from '.';
+import React from 'react';
 
 interface MockButtonProps {
   children: React.ReactNode;
@@ -8,7 +9,6 @@ interface MockButtonProps {
   'data-testid'?: string;
 }
 
-// Mock puro e estrito do filho (Átomo Button) garantindo que este seja um teste *Puramente Unitário* da Molécula
 vi.mock('../atoms/Button', () => {
   return {
     default: ({
