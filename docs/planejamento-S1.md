@@ -1,12 +1,12 @@
 # Planejamento Inicial — Sprint 1
  
-## (a) Meta da Sprint 1
+## Meta da Sprint 1
  
 Entregar o primeiro incremento funcional do MVP: um vertical slice completo de cadastro e
 listagem de itens de estoque, passando por interface, API e banco de dados, com testes de
 unidade automatizados.
  
-## (b) Itens do backlog selecionados
+## Itens do backlog selecionados
  
 - Cadastro de item de estoque (formulário + criação);
 - Listagem de itens de estoque;
@@ -15,7 +15,7 @@ unidade automatizados.
 - Estrutura de infraestrutura: Docker Compose (dev/prod), Nginx como reverse proxy e banco
   PostgreSQL;
 - Estrutura base do frontend em componentes reutilizáveis (Atomic Design).
-## (c) Justificativa da escolha
+## Justificativa da escolha
  
 - Estoque é uma das funcionalidades essenciais definidas na Definição do MVP, junto com
   clientes;
@@ -24,7 +24,7 @@ unidade automatizados.
   para módulos mais dependentes, como conferência;
 - A capacidade da equipe nesta sprint permite cobrir infraestrutura (Docker/Nginx/banco) e um
   primeiro CRUD completo, mas não todos os módulos do MVP ao mesmo tempo.
-## (d) Decisões tomadas e ajustes de escopo
+## Decisões tomadas e ajustes de escopo
  
 - Optou-se por construir os componentes de frontend de forma genérica (`GenericList`,
   `GenericSave`), reaproveitáveis por qualquer entidade, em vez de telas específicas por
