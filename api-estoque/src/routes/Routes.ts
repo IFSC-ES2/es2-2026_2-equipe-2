@@ -1,5 +1,6 @@
 import { Router } from "express";
 import EstoqueListController from "../controllers/EstoqueListController";
+import routerCategoria from "./categorias.routes";
 import { HttpStatus } from "../config/status";
 
 class Routes {
@@ -9,6 +10,8 @@ class Routes {
     });
 
     router.get("/api/estoque", EstoqueListController.getList);
+
+    router.use("/categorias", routerCategoria);
 
     router.use((_req, res) => {
       res.status(HttpStatus.NOT_FOUND).send("<h1>Route not found<h1>");
