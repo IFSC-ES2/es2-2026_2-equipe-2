@@ -111,7 +111,7 @@ const GenericCreate: React.FC<GenericCreateProps> = ({
     <div className="container mt-4">
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h2>{title}</h2>
-
+        
         {onBack && (
           <Button variant="secondary" onClick={onBack}>
             Voltar para Listagem
@@ -128,13 +128,13 @@ const GenericCreate: React.FC<GenericCreateProps> = ({
       )}
 
       {error && (
-        <div className="alert alert-danger" role="alert">
+        <div className="alert alert-danger rounded-4" role="alert">
           {error}
         </div>
       )}
 
       {successMessage && (
-        <div className="alert alert-success" role="alert">
+        <div className="alert alert-success rounded-4" role="alert">
           {successMessage}
         </div>
       )}
@@ -142,11 +142,11 @@ const GenericCreate: React.FC<GenericCreateProps> = ({
       {!loading && !error && (
         <>
           {saving && (
-            <div className="alert alert-info" role="alert">
+            <div className="alert alert-info rounded-4" role="alert">
               Salvando cadastro...
             </div>
           )}
-
+          
           <GenericForm
             fields={fields}
             values={values}

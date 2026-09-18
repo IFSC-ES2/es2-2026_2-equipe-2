@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.css';
 
 type ButtonVariant = 'primary' | 'danger' | 'success' | 'secondary' | 'warning';
 
@@ -15,11 +16,12 @@ const Button: React.FC<ButtonProps> = ({
   className = '',
   ...props
 }) => {
-  const baseClass = 'btn';
-  const variantClass = `btn-${variant}`;
-  const sizeClass = size !== 'md' ? `btn-${size}` : '';
-
-  const classes = [baseClass, variantClass, sizeClass, className]
+  const classes = [
+    'btn app-btn rounded-pill fw-semibold',
+    `btn-${variant}`,
+    size !== 'md' ? `btn-${size}` : '',
+    className,
+  ]
     .filter(Boolean)
     .join(' ');
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import TableCell from '../../../atoms/Table/TableCell';
 import ActionButtons from '../../ActionButtons';
+import './index.css';
 
 export interface Column {
   key: string;
@@ -17,7 +18,7 @@ interface TableRowProps {
 
 const TableRow: React.FC<TableRowProps> = ({ columns, row, onEdit }) => {
   return (
-    <tr>
+    <tr className="app-table-row">
       {columns.map((column, index) => (
         <TableCell key={`${index}-${column.key}`}>{row[column.key]}</TableCell>
       ))}

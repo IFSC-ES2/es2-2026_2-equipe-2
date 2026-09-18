@@ -5,6 +5,7 @@ import TableRow, {
   type TableDataRow,
 } from '../../molecules/Table/TableRow';
 import TableCell from '../../atoms/Table/TableCell';
+import './index.css';
 
 export type { Column, TableDataRow };
 
@@ -14,28 +15,19 @@ interface GenericTableProps {
   onEdit?: (row: TableDataRow) => void;
 }
 
-const GenericTable: React.FC<GenericTableProps> = ({
-  columns,
-  data,
-  onEdit,
-}) => {
+const GenericTable: React.FC<GenericTableProps> = ({ columns, data, onEdit }) => {
   if (!columns || columns.length === 0) {
     return <p>Nenhuma coluna disponível para exibição.</p>;
   }
 
   return (
     <div className="table-responsive">
-      <table className="table table-striped table-hover table-bordered">
+      <table className="table table-hover app-table">
         <TableHeader columns={columns} />
         <tbody>
           {data && data.length > 0 ? (
             data.map((row, rowIndex) => (
-              <TableRow
-                key={rowIndex}
-                columns={columns}
-                row={row}
-                onEdit={onEdit}
-              />
+              <TableRow key={rowIndex} columns={columns} row={row} onEdit={onEdit} />
             ))
           ) : (
             <tr>
