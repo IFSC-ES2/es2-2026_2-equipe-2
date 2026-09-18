@@ -1,0 +1,94 @@
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    ports:
+      - 8080:80
+      - 4443:443
+    volumes:
+      - ./logs/nginx:/var/log/nginx
+      - ./conf/nginx.conf.template:/etc/nginx/templates/default.conf.template:ro
+    networks:
+      - frontend
+      - backend
+    depends_on:
+      web:
+        condition: service_healthy
+      api-estoque:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "nginx", "-t"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - ./conf/init-db.sql:/docker-entrypoint-initdb.d/init.sql
+      - db-data:/var/lib/postgresql/data
+    expose:
+      - ${DB_PORT}
+    restart: unless-stopped
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build:
+      context: ./frontend
+    ports:
+      - "${PORT_WEB}:${PORT_WEB}"
+    networks:
+      - frontend
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://localhost:${PORT_WEB}').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  api-estoque:
+    build:
+      context: ./api-estoque
+    networks:
+      - backend
+    ports:
+      - "${PORT_API_ESTOQUE}:${PORT_API_ESTOQUE}"
+    volumes:
+      - ./logs/api-estoque:/app/logs
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://localhost:${PORT_API_ESTOQUE}/ping').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+networks:
+  frontend:
+  backend:
+
+volumes:
+  db-data:

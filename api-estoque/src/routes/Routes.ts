@@ -1,0 +1,23 @@
+import { Router } from "express";
+import routerCategoria from "./categorias.routes";
+import routerProduto from "./produtos.routes";
+import { HttpStatus } from "../config/status";
+
+class Routes {
+  static define(router: Router): Router {
+    router.get("/ping", (_req, res) => {
+      res.status(200).json({ pong: true });
+    });
+
+    router.use("/categorias", routerCategoria);
+    router.use("/produtos", routerProduto);
+
+    router.use((_req, res) => {
+      res.status(HttpStatus.NOT_FOUND).send("<h1>Route not found<h1>");
+    });
+
+    return router;
+  }
+}
+
+export default Routes.define(Router());

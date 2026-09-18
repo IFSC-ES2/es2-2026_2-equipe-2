@@ -1,0 +1,64 @@
+name: check-build
+on:
+  pull_request:
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      api-estoque: ${{ steps.filter.outputs.api-estoque }}
+      frontend: ${{ steps.filter.outputs.frontend }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            api-estoque:                     
+              - 'api-estoque/**'              
+            frontend:
+              - 'frontend/**'
+
+  build-api-estoque:
+    needs: changes
+    if: needs.changes.outputs.api-estoque == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Criar .env
+        run: |
+          cat << EOF > .env
+          DB_HOST=db
+          DB_PORT=5432
+          DB_USER=postgres
+          DB_PASSWORD=postgres
+          DB_NAME=estoque
+          PORT_API_ESTOQUE=5000
+          PORT_WEB=3000
+          EOF
+
+      - name: Build containers api-estoque
+        run: docker compose --env-file .env -f docker-compose.yaml -f docker-compose.prod.yaml build db api-estoque
+
+  build-frontend:
+    needs: changes
+    if: needs.changes.outputs.frontend == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Criar .env
+        run: |
+          cat << EOF > .env
+          DB_HOST=db
+          DB_PORT=5432
+          DB_USER=postgres
+          DB_PASSWORD=postgres
+          DB_NAME=estoque
+          PORT_API_ESTOQUE=5000
+          PORT_WEB=3000
+          EOF
+
+      - name: Build containers frontend
+        run: docker compose --env-file .env -f docker-compose.yaml -f docker-compose.prod.yaml build web

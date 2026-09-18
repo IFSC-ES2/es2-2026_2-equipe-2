@@ -1,0 +1,24 @@
+services:
+  nginx:
+    env_file:
+      - .env.production
+
+  web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    env_file:
+      - .env.production
+    ports:
+      - "${PORT_WEB}:${PORT_WEB}"
+    restart: unless-stopped
+
+  api-estoque:
+    build:
+      context: ./api-estoque
+      dockerfile: Dockerfile
+    env_file:
+      - .env.production
+    ports:
+      - "${PORT_API_ESTOQUE}:${PORT_API_ESTOQUE}"
+    restart: unless-stopped
