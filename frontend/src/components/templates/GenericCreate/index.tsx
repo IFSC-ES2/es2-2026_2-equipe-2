@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import type { FieldValue, GenericField } from '../../molecules/Form';
 import GenericForm, { type GenericFormData } from '../../organisms/Form';
 import Button from '../../atoms/Button';
