@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import GenericCreate from '.';
 import type { FieldValue, GenericField } from '../../molecules/Form';
@@ -39,109 +39,58 @@ vi.mock('../../organisms/Form', () => ({
   ),
 }));
 
-describe('Template GenericSave', () => {
-  const apiUrl = '/api/estoque/cadastro';
+describe('Template GenericCreate', () => {
+  const mockFields: GenericField[] = [
+    { name: 'name', label: 'Nome', value: '', type: 'text' },
+  ];
 
   beforeEach(() => {
-    vi.stubGlobal('fetch', vi.fn());
-  });
-
-  afterEach(() => {
-    vi.unstubAllGlobals();
     vi.clearAllMocks();
   });
 
-  it('deve renderizar o estado de carregamento inicialmente', () => {
-    vi.mocked(fetch).mockImplementationOnce(
-      () => new Promise<Response>(() => {}),
-    );
-
-    render(<GenericCreate title="Cadastro de Item" apiUrl={apiUrl} />);
-
-    expect(screen.getByText('Cadastro de Item')).toBeDefined();
-    expect(screen.getByText('Carregando...')).toBeDefined();
-  });
-
-  it('deve renderizar o formulário quando buscar os campos com sucesso', async () => {
-    vi.mocked(fetch).mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({
-        fields: [
-          {
-            name: 'name',
-            label: 'Nome',
-            value: 'Palete',
-            type: 'text',
-          },
-          {
-            name: 'quantity',
-            label: 'Quantidade',
-            value: 10,
-            type: 'number',
-          },
-        ],
-      }),
-    } as Response);
-
-    render(<GenericCreate title="Cadastro de Item" apiUrl={apiUrl} />);
-
-    await waitFor(() => {
-      expect(screen.getByTestId('mock-generic-form')).toBeDefined();
-    });
-
-    expect(screen.getByText('Cadastrar Item')).toBeDefined();
-    expect(screen.getByLabelText('Nome')).toBeDefined();
-    expect(screen.getByLabelText('Quantidade')).toBeDefined();
-  });
-
-  it('deve renderizar mensagem de erro quando a busca dos campos falhar', async () => {
-    vi.mocked(fetch).mockResolvedValueOnce({
-      ok: false,
-      json: async () => ({}),
-    } as Response);
-
-    render(<GenericCreate title="Cadastro de Item" apiUrl={apiUrl} />);
-
-    await waitFor(() => {
-      expect(
-        screen.getByText('Falha ao buscar os campos do formulário.'),
-      ).toBeDefined();
-    });
-  });
-
-  it('deve renderizar mensagem de erro quando o formato da API for inválido', async () => {
-    vi.mocked(fetch).mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({
-        data: [],
-      }),
-    } as Response);
-
-    render(<GenericCreate title="Cadastro de Item" apiUrl={apiUrl} />);
-
-    await waitFor(() => {
-      expect(
-        screen.getByText(
-          'Formato de dados inválido da API. Esperado { fields }',
-        ),
-      ).toBeDefined();
-    });
-  });
-
-  it('deve chamar onBack ao clicar em Voltar para Listagem', async () => {
-    const onBack = vi.fn();
-
-    vi.mocked(fetch).mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({
-        fields: [],
-      }),
-    } as Response);
+  it('deve renderizar o formulário com os campos informados', () => {
+    const onCreate = vi.fn();
 
     render(
       <GenericCreate
         title="Cadastro de Item"
-        apiUrl={apiUrl}
+        fields={mockFields}
+        onCreate={onCreate}
+      />,
+    );
+
+    expect(screen.getByText('Cadastro de Item')).toBeDefined();
+    expect(screen.getByTestId('mock-generic-form')).toBeDefined();
+    expect(screen.getByText('Cadastrar Item')).toBeDefined();
+    expect(screen.getByLabelText('Nome')).toBeDefined();
+  });
+
+  it('deve usar os valores iniciais definidos nos fields', () => {
+    const fieldsComValor: GenericField[] = [
+      { name: 'name', label: 'Nome', value: 'Palete', type: 'text' },
+      { name: 'quantity', label: 'Quantidade', value: 10, type: 'number' },
+    ];
+
+    render(
+      <GenericCreate
+        title="Cadastro de Item"
+        fields={fieldsComValor}
+        onCreate={vi.fn()}
+      />,
+    );
+
+    expect(screen.getByLabelText('Nome')).toHaveProperty('value', 'Palete');
+    expect(screen.getByLabelText('Quantidade')).toHaveProperty('value', '10');
+  });
+
+  it('deve chamar onBack ao clicar em Voltar para Listagem', () => {
+    const onBack = vi.fn();
+
+    render(
+      <GenericCreate
+        title="Cadastro de Item"
+        fields={mockFields}
+        onCreate={vi.fn()}
         onBack={onBack}
       />,
     );
@@ -151,87 +100,110 @@ describe('Template GenericSave', () => {
     expect(onBack).toHaveBeenCalledTimes(1);
   });
 
+  it('não deve renderizar o botão Voltar quando onBack não for informado', () => {
+    render(
+      <GenericCreate
+        title="Cadastro de Item"
+        fields={mockFields}
+        onCreate={vi.fn()}
+      />,
+    );
+
+    expect(screen.queryByText('Voltar para Listagem')).toBeNull();
+  });
+
   it('deve enviar os dados preenchidos no cadastro', async () => {
-    vi.mocked(fetch)
-      .mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({
-          fields: [
-            {
-              name: 'name',
-              label: 'Nome',
-              value: '',
-              type: 'text',
-            },
-          ],
-        }),
-      } as Response)
-      .mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({
-          message: 'Item cadastrado com sucesso.',
-        }),
-      } as Response);
+    const onCreate = vi.fn().mockResolvedValueOnce({ id: 1 });
+    const onSuccess = vi.fn();
 
-    render(<GenericCreate title="Cadastro de Item" apiUrl={apiUrl} />);
-
-    await waitFor(() => {
-      expect(screen.getByLabelText('Nome')).toBeDefined();
-    });
+    render(
+      <GenericCreate
+        title="Cadastro de Item"
+        fields={mockFields}
+        onCreate={onCreate}
+        onSuccess={onSuccess}
+      />,
+    );
 
     fireEvent.change(screen.getByLabelText('Nome'), {
-      target: {
-        value: 'Palete de Madeira',
-      },
+      target: { value: 'Palete de Madeira' },
     });
 
     fireEvent.click(screen.getByText('Enviar Mock'));
 
     await waitFor(() => {
-      expect(screen.getByText('Item cadastrado com sucesso.')).toBeDefined();
+      expect(screen.getByText('Registro salvo com sucesso.')).toBeDefined();
     });
 
-    expect(fetch).toHaveBeenCalledWith(apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: 'Palete de Madeira',
-      }),
-    });
+    expect(onCreate).toHaveBeenCalledWith({ name: 'Palete de Madeira' });
+    expect(onSuccess).toHaveBeenCalledWith({ id: 1 });
   });
 
   it('deve renderizar mensagem de erro quando o cadastro falhar', async () => {
-    vi.mocked(fetch)
-      .mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({
-          fields: [
-            {
-              name: 'name',
-              label: 'Nome',
-              value: '',
-              type: 'text',
-            },
-          ],
-        }),
-      } as Response)
-      .mockResolvedValueOnce({
-        ok: false,
-        json: async () => ({}),
-      } as Response);
+    const onCreate = vi
+      .fn()
+      .mockRejectedValueOnce(new Error('Falha ao salvar o cadastro.'));
 
-    render(<GenericCreate title="Cadastro de Item" apiUrl={apiUrl} />);
-
-    await waitFor(() => {
-      expect(screen.getByTestId('mock-generic-form')).toBeDefined();
-    });
+    render(
+      <GenericCreate
+        title="Cadastro de Item"
+        fields={mockFields}
+        onCreate={onCreate}
+      />,
+    );
 
     fireEvent.click(screen.getByText('Enviar Mock'));
 
     await waitFor(() => {
       expect(screen.getByText('Falha ao salvar o cadastro.')).toBeDefined();
+    });
+  });
+
+  it('deve renderizar mensagem de erro genérica quando o erro não for uma instância de Error', async () => {
+    const onCreate = vi.fn().mockRejectedValueOnce('erro qualquer');
+
+    render(
+      <GenericCreate
+        title="Cadastro de Item"
+        fields={mockFields}
+        onCreate={onCreate}
+      />,
+    );
+
+    fireEvent.click(screen.getByText('Enviar Mock'));
+
+    await waitFor(() => {
+      expect(screen.getByText('Erro desconhecido')).toBeDefined();
+    });
+  });
+
+  it('deve exibir "Salvando cadastro..." enquanto o onCreate está em andamento', async () => {
+    let resolvePromise: (value: unknown) => void = () => {};
+    const onCreate = vi.fn(
+      () =>
+        new Promise((resolve) => {
+          resolvePromise = resolve;
+        }),
+    );
+
+    render(
+      <GenericCreate
+        title="Cadastro de Item"
+        fields={mockFields}
+        onCreate={onCreate}
+      />,
+    );
+
+    fireEvent.click(screen.getByText('Enviar Mock'));
+
+    await waitFor(() => {
+      expect(screen.getByText('Salvando cadastro...')).toBeDefined();
+    });
+
+    resolvePromise({ id: 1 });
+
+    await waitFor(() => {
+      expect(screen.queryByText('Salvando cadastro...')).toBeNull();
     });
   });
 });
