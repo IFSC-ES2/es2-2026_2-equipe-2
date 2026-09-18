@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import GenericList from './components/templates/GenericList';
+import { getProdutos } from './services/produto.service';
 
 function App() {
   return (
@@ -11,10 +12,7 @@ function App() {
       </header>
 
       <main>
-        <GenericList
-          title="Listagem de Estoque (Genérica)"
-          apiUrl="http://localhost:5000/api/estoque-list"
-        />
+        <GenericList title="Listagem dos Produtos" fetchData={getProdutos} />
       </main>
     </div>
   );

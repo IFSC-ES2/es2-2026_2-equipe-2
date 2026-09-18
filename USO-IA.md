@@ -53,3 +53,9 @@
 - Uso: criação dos testes para Categoria.service
 - Artefato: `api-estoque/test/services/categoria.service.test.ts`
 - Validação: validado rodando os testes e verificando se os valores não estão chumbados e não realizado conforme deveria
+
+- Data: 17/09/2026
+- Ferramenta: Gemini
+- Uso: Ligação do banco de dados para Categoria.service
+- Artefato: `frontend/src/services/produto.service.ts`
+- Validação: validado pontos de interação do banco com e validação dos dados retornados

@@ -4,14 +4,14 @@ import GenericTable, {
   type TableDataRow,
 } from '../../organisms/GenericTable';
 import Button from '../../atoms/Button';
-import { fetchGenericList } from '../../../services/genericList.service';
+import type { GenericListResponse } from '../../../services/genericList.service';
 
 interface GenericListProps {
-  apiUrl: string;
   title: string;
+  fetchData: () => Promise<GenericListResponse>;
 }
 
-const GenericList: React.FC<GenericListProps> = ({ apiUrl, title }) => {
+const GenericList: React.FC<GenericListProps> = ({ title, fetchData }) => {
   const [columns, setColumns] = useState<Column[]>([]);
   const [data, setData] = useState<TableDataRow[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -22,7 +22,7 @@ const GenericList: React.FC<GenericListProps> = ({ apiUrl, title }) => {
       try {
         setLoading(true);
         setError(null);
-        const result = await fetchGenericList(apiUrl);
+        const result = await fetchData();
         setColumns(result.columns);
         setData(result.data);
       } catch (err: unknown) {
@@ -33,7 +33,7 @@ const GenericList: React.FC<GenericListProps> = ({ apiUrl, title }) => {
     };
 
     loadData();
-  }, [apiUrl]);
+  }, [fetchData]);
 
   return (
     <div className="container mt-4">
