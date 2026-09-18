@@ -1,18 +1,20 @@
 import { Router } from "express";
-import EstoqueListController from "../controllers/EstoqueListController";
-import EstoqueCadastroController from "../controllers/EstoqueCadastroController";
+import routerCategoria from "./categorias.routes";
+import routerProduto from "./produtos.routes";
+import { HttpStatus } from "../config/status";
 
 class Routes {
   static define(router: Router): Router {
-    router.use("/ping", (_req, res) => {
+    router.get("/ping", (_req, res) => {
       res.status(200).json({ pong: true });
     });
 
-    router.get("/api/estoque", EstoqueListController.getList);
-    router.get("/api/estoque/cadastro", EstoqueCadastroController.getForm);
-    router.post("/api/estoque/cadastro", EstoqueCadastroController.create);
-    router.get("/api/estoque/:id/edicao", EstoqueCadastroController.getEditForm);
-    router.put("/api/estoque/:id", EstoqueCadastroController.update);
+    router.use("/categorias", routerCategoria);
+    router.use("/produtos", routerProduto);
+
+    router.use((_req, res) => {
+      res.status(HttpStatus.NOT_FOUND).send("<h1>Route not found<h1>");
+    });
 
     return router;
   }

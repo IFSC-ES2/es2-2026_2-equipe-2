@@ -1,1 +1,2 @@
-// Exporta todos os controllers aqui dentro
+export * from "./CategoriaController";
+export * from "./ProdutoController"

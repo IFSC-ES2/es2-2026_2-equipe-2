@@ -1,0 +1,64 @@
+name: test-check
+on:
+  pull_request:
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      api-estoque: ${{ steps.filter.outputs.api-estoque }}
+      frontend: ${{ steps.filter.outputs.frontend }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            api-estoque:                     
+              - 'api-estoque/**'              
+            frontend:
+              - 'frontend/**'
+
+  test-api-estoque:
+    needs: changes
+    if: needs.changes.outputs.api-estoque == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: api-estoque
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24.14.0"
+          cache: "npm"
+          cache-dependency-path: api-estoque/package-lock.json
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run vitest tests
+        run: npx vitest run
+
+  test-frontend:
+    needs: changes
+    if: needs.changes.outputs.frontend == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24.14.0"
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run vitest tests
+        run: npx vitest run
