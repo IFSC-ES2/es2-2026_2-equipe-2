@@ -6,15 +6,19 @@ import TableRow, {
 } from '../../molecules/Table/TableRow';
 import TableCell from '../../atoms/Table/TableCell';
 
-// Exportando os tipos para uso externo (ex: GenericList)
 export type { Column, TableDataRow };
 
 interface GenericTableProps {
   columns: Column[];
   data: TableDataRow[];
+  onEdit?: (row: TableDataRow) => void;
 }
 
-const GenericTable: React.FC<GenericTableProps> = ({ columns, data }) => {
+const GenericTable: React.FC<GenericTableProps> = ({
+  columns,
+  data,
+  onEdit,
+}) => {
   if (!columns || columns.length === 0) {
     return <p>Nenhuma coluna disponível para exibição.</p>;
   }
@@ -26,7 +30,12 @@ const GenericTable: React.FC<GenericTableProps> = ({ columns, data }) => {
         <tbody>
           {data && data.length > 0 ? (
             data.map((row, rowIndex) => (
-              <TableRow key={rowIndex} columns={columns} row={row} />
+              <TableRow
+                key={rowIndex}
+                columns={columns}
+                row={row}
+                onEdit={onEdit}
+              />
             ))
           ) : (
             <tr>

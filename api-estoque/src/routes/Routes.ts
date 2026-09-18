@@ -3,6 +3,7 @@ import EstoqueListController from "../controllers/EstoqueListController";
 import routerCategoria from "./categorias.routes";
 import routerProduto from "./produtos.routes";
 import { HttpStatus } from "../config/status";
+import EstoqueCadastroController from "../controllers/EstoqueCadastroController";
 
 class Routes {
   static define(router: Router): Router {
@@ -11,6 +12,13 @@ class Routes {
     });
 
     router.get("/api/estoque", EstoqueListController.getList);
+    router.get("/api/estoque/cadastro", EstoqueCadastroController.getForm);
+    router.post("/api/estoque/cadastro", EstoqueCadastroController.create);
+    router.get(
+      "/api/estoque/:id/edicao",
+      EstoqueCadastroController.getEditForm,
+    );
+    router.put("/api/estoque/:id", EstoqueCadastroController.update);
 
     router.use("/categorias", routerCategoria);
     router.use("/produtos", routerProduto);
