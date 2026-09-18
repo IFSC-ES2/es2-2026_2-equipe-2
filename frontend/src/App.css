@@ -1,0 +1,7 @@
+.app-header {
+  background-color: #ffffff;
+}
+
+.app-header-title {
+  color: var(--bs-primary);
+}
