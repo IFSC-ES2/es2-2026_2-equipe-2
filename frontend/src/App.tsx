@@ -1,13 +1,15 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './style/theme.css';
+import './App.css';
 import GenericList from './components/templates/GenericList';
 import { getProdutos } from './services/produto.service';
 
 function App() {
   return (
     <div className="App">
-      <header className="bg-dark text-white p-3 mb-4">
+      <header className="app-header p-3 mb-4 border-bottom">
         <div className="container">
-          <h1 className="h3 mb-0">Sistema de Gestão</h1>
+          <h1 className="h4 mb-0 fw-bold app-header-title">Sistema de Gestão</h1>
         </div>
       </header>
 

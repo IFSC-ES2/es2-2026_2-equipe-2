@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.css';
 
 interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
@@ -19,7 +20,7 @@ const FormInput: React.FC<FormInputProps> = ({
       <input
         id={name}
         name={name}
-        className={`form-control ${className}`}
+        className={`form-control app-input ${className}`}
         {...props}
       />
     </div>

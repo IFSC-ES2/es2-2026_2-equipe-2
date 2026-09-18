@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.css';
 
 export interface SelectOption {
   label: string;
@@ -26,7 +27,7 @@ const FormSelect: React.FC<FormSelectProps> = ({
       <select
         id={name}
         name={name}
-        className={`form-select ${className}`}
+        className={`form-select app-input ${className}`}
         {...props}
       >
         {options.map((option) => (

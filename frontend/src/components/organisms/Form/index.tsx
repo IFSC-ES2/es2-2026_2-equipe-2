@@ -4,6 +4,7 @@ import Index, {
   type FieldValue,
   type GenericField,
 } from '../../molecules/Form';
+import './index.css';
 
 export type GenericFormData = Record<string, FieldValue>;
 
@@ -24,7 +25,7 @@ const GenericForm: React.FC<GenericFormProps> = ({
 }) => {
   return (
     <form
-      className="card shadow-sm"
+      className="app-form card shadow-sm rounded-4"
       onSubmit={(event) => {
         event.preventDefault();
         onSubmit();
@@ -48,7 +49,7 @@ const GenericForm: React.FC<GenericFormProps> = ({
             Limpar
           </Button>
 
-          <Button type="submit" variant="success">
+          <Button type="submit" variant="primary">
             {submitLabel}
           </Button>
         </div>
