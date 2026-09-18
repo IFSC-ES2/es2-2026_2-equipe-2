@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import GenericList from './components/templates/GenericList';
-import GenericCreate from './components/templates/GenericSave';
+import GenericCreate from './components/templates/GenericCreate';
 import type { TableDataRow } from './components/organisms/GenericTable';
 import { getProdutos } from './services/produto.service';
 
