@@ -4,7 +4,13 @@ import {
   type GenericListResponse,
 } from './genericList.service';
 
-const PRODUTOS_API_URL = 'http://localhost:5000/produtos';
+import {
+  type Produto,
+  type ProdutoUpdate,
+  type ProdutoCreate,
+} from '../interfaces/produto.interface';
+
+const PRODUTOS_API_URL = 'http://localhost:8080/api/produtos';
 
 const produtoLabels: Record<string, string> = {
   id: 'ID',
@@ -34,4 +40,48 @@ export async function getProdutos(): Promise<GenericListResponse> {
     columns: mapProdutoColumns(result.columns),
     data: result.data,
   };
+}
+
+export async function updateProdutos(
+  id: string,
+  data: ProdutoUpdate,
+): Promise<Produto> {
+  const response = await fetch(`${PRODUTOS_API_URL}/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    const errorBody = await response.json().catch(() => null);
+    throw new Error(
+      errorBody?.message ??
+        `Erro ao atualizar produto (status ${response.status})`,
+    );
+  }
+
+  const result: Produto = await response.json();
+  return result;
+}
+
+export async function createProduto(data: ProdutoCreate) {
+  const response = await fetch(`${PRODUTOS_API_URL}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    const errorBody = await response.json().catch(() => null);
+    throw new Error(
+      errorBody?.message ?? `Erro ao criar produto (status ${response.status})`,
+    );
+  }
+
+  const result: Produto = await response.json();
+  return result;
 }

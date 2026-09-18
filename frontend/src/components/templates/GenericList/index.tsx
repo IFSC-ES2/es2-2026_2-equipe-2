@@ -5,6 +5,7 @@ import GenericTable, {
 } from '../../organisms/GenericTable';
 import Button from '../../atoms/Button';
 import type { GenericListResponse } from '../../../services/genericList.service';
+import { createProduto } from '../../../services/produto.service';
 
 interface GenericListProps {
   title: string;
@@ -39,7 +40,9 @@ const GenericList: React.FC<GenericListProps> = ({ title, fetchData }) => {
     <div className="container mt-4">
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h2>{title}</h2>
-        <Button variant="success">Novo Registro</Button>
+        <Button onClick={() => createProduto} variant="success">
+          Novo Registro
+        </Button>
       </div>
 
       {loading && (
