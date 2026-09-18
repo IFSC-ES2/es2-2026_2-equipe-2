@@ -59,3 +59,15 @@
 - Uso: Ligação do banco de dados para Categoria.service
 - Artefato: `frontend/src/services/produto.service.ts`
 - Validação: validado pontos de interação do banco com e validação dos dados retornados
+
+- Data: 15/09/2026
+- Ferramenta: Gemini
+- Uso: criação de todos os testes do frontend
+- Artefato: frontend/src/components/
+- Validação: todo o valor de input e output foi validado para estar de acordo com o que era esperado quando o código foi feito
+
+- Data: 16/09/2026
+- Ferramenta: Gemini
+- Uso: consulta para criação dos componentes do frontend
+- Artefato: frontend/src/components/
+- Validação: a tipagem foi bastante pesquisada para ser adequada com o código e evitar erros
