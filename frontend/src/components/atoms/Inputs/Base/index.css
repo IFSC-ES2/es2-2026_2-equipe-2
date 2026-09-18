@@ -1,0 +1,10 @@
+.app-input {
+  background-color: #ffffff;
+  border-color: #dce7f0;
+}
+
+.app-input:focus {
+  background-color: #ffffff;
+  border-color: var(--bs-primary);
+  box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.15);
+}
