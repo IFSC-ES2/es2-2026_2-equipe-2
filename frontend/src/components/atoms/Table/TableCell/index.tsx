@@ -7,7 +7,7 @@ interface TableCellProps extends React.TdHTMLAttributes<HTMLTableCellElement> {
 
 const TableCell: React.FC<TableCellProps> = ({ children, className = '', ...props }) => {
   return (
-    <td className={`app-table-cell ${className}`} {...props}>
+    <td className={className} {...props}>
       {children}
     </td>
   );

@@ -11,7 +11,7 @@ const TableHeaderCell: React.FC<TableHeaderCellProps> = ({
   ...props
 }) => {
   return (
-    <th className={`app-table-header-cell ${className}`} {...props}>
+    <th className={className} {...props}>
       {children}
     </th>
   );
