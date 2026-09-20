@@ -1,0 +1,9 @@
+.app-input {
+  border-radius: var(--bs-border-radius-sm);
+  border-color: #d1dce5;
+}
+
+.app-input:focus {
+  border-color: var(--bs-primary);
+  box-shadow: 0 0 0 0.2rem rgba(47, 155, 214, 0.25);
+}
