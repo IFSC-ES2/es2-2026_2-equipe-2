@@ -1,0 +1,11 @@
+.app-modal {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #ffffff;
+}
+
+.modal-header .modal-title {
+  color: var(--bs-secondary, #12315c);
+}

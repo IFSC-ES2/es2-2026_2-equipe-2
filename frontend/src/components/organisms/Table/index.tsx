@@ -9,13 +9,13 @@ import './index.css';
 
 export type { Column, TableDataRow };
 
-interface GenericTableProps {
+interface TableProps {
   columns: Column[];
   data: TableDataRow[];
   onEdit?: (row: TableDataRow) => void;
 }
 
-const GenericTable: React.FC<GenericTableProps> = ({ columns, data, onEdit }) => {
+const Table: React.FC<TableProps> = ({ columns, data, onEdit }) => {
   if (!columns || columns.length === 0) {
     return <p>Nenhuma coluna disponível para exibição.</p>;
   }
@@ -42,4 +42,4 @@ const GenericTable: React.FC<GenericTableProps> = ({ columns, data, onEdit }) =>
   );
 };
 
-export default GenericTable;
+export default Table;
