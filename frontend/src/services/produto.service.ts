@@ -1,4 +1,4 @@
-import type { Column } from '../components/organisms/GenericTable';
+import type { Column } from '../components/organisms/Table';
 import {
   fetchGenericList,
   type GenericListResponse,

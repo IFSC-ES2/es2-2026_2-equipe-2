@@ -71,3 +71,9 @@
 - Uso: consulta para criação dos componentes do frontend
 - Artefato: frontend/src/components/
 - Validação: a tipagem foi bastante pesquisada para ser adequada com o código e evitar erros
+
+- Data: 20/09/2026
+- Ferramenta: Antigravity
+- Uso: utilização para consultar o que é utilizado dentro do frontend e o seu motivo
+- Artefato: frontend/src/components/\*
+- Validação: checkando componentes que chamam aqueles componentes validados
