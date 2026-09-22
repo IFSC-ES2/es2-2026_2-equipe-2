@@ -1,0 +1,8 @@
+.app-table-header-cell {
+  color: var(--app-text-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  border: none !important;
+}

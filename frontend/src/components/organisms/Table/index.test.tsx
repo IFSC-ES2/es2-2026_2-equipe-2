@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import GenericTable, { type Column, type TableDataRow } from '.';
+import Table, { type Column, type TableDataRow } from '.';
+
 interface MockTableHeaderProps {
   columns: Column[];
 }
@@ -27,7 +28,7 @@ vi.mock('../../molecules/Table/TableRow', () => ({
   ),
 }));
 
-describe('Organismo GenericTable', () => {
+describe('Organismo Table', () => {
   const mockColumns = [
     { key: 'id', label: 'Código' },
     { key: 'name', label: 'Nome' },
@@ -39,19 +40,19 @@ describe('Organismo GenericTable', () => {
   ];
 
   it('deve exibir uma mensagem de aviso quando nenhuma coluna for fornecida', () => {
-    render(<GenericTable columns={[]} data={[]} />);
+    render(<Table columns={[]} data={[]} />);
     expect(
       screen.getByText('Nenhuma coluna disponível para exibição.'),
     ).toBeDefined();
   });
 
   it('deve exibir uma linha de aviso quando não houver dados registrados', () => {
-    render(<GenericTable columns={mockColumns} data={[]} />);
+    render(<Table columns={mockColumns} data={[]} />);
     expect(screen.getByText('Nenhum registro encontrado.')).toBeDefined();
   });
 
   it('deve renderizar os cabeçalhos e as linhas da tabela repassando as props perfeitamente para os filhos', () => {
-    render(<GenericTable columns={mockColumns} data={mockData} />);
+    render(<Table columns={mockColumns} data={mockData} />);
 
     expect(screen.getByTestId('mock-table-header')).toBeDefined();
 

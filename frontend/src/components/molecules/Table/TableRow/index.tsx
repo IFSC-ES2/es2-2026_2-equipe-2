@@ -1,6 +1,7 @@
 import React from 'react';
 import TableCell from '../../../atoms/Table/TableCell';
 import ActionButtons from '../../ActionButtons';
+import './index.css';
 
 export interface Column {
   key: string;
@@ -12,16 +13,17 @@ export type TableDataRow = Record<string, React.ReactNode>;
 interface TableRowProps {
   columns: Column[];
   row: TableDataRow;
+  onEdit?: (row: TableDataRow) => void;
 }
 
-const TableRow: React.FC<TableRowProps> = ({ columns, row }) => {
+const TableRow: React.FC<TableRowProps> = ({ columns, row, onEdit }) => {
   return (
-    <tr>
+    <tr className="app-table-row">
       {columns.map((column, index) => (
         <TableCell key={`${index}-${column.key}`}>{row[column.key]}</TableCell>
       ))}
       <TableCell>
-        <ActionButtons />
+        <ActionButtons onEdit={() => onEdit?.(row)} />
       </TableCell>
     </tr>
   );

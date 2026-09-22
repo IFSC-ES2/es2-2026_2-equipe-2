@@ -53,3 +53,27 @@
 - Uso: criação dos testes para Categoria.service
 - Artefato: `api-estoque/test/services/categoria.service.test.ts`
 - Validação: validado rodando os testes e verificando se os valores não estão chumbados e não realizado conforme deveria
+
+- Data: 17/09/2026
+- Ferramenta: Gemini
+- Uso: Ligação do banco de dados para Categoria.service
+- Artefato: `frontend/src/services/produto.service.ts`
+- Validação: validado pontos de interação do banco com e validação dos dados retornados
+
+- Data: 15/09/2026
+- Ferramenta: Gemini
+- Uso: criação de todos os testes do frontend
+- Artefato: frontend/src/components/
+- Validação: todo o valor de input e output foi validado para estar de acordo com o que era esperado quando o código foi feito
+
+- Data: 16/09/2026
+- Ferramenta: Gemini
+- Uso: consulta para criação dos componentes do frontend
+- Artefato: frontend/src/components/
+- Validação: a tipagem foi bastante pesquisada para ser adequada com o código e evitar erros
+
+- Data: 20/09/2026
+- Ferramenta: Antigravity
+- Uso: utilização para consultar o que é utilizado dentro do frontend e o seu motivo
+- Artefato: frontend/src/components/\*
+- Validação: checkando componentes que chamam aqueles componentes validados

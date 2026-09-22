@@ -1,5 +1,4 @@
 import { Router } from "express";
-import EstoqueListController from "../controllers/EstoqueListController";
 import routerCategoria from "./categorias.routes";
 import routerProduto from "./produtos.routes";
 import { HttpStatus } from "../config/status";
@@ -10,8 +9,6 @@ class Routes {
     router.get("/ping", (_req, res) => {
       res.status(200).json({ pong: true });
     });
-
-    router.get("/api/estoque", EstoqueListController.getList);
 
     router.use("/categorias", routerCategoria);
     router.use("/produtos", routerProduto);

@@ -1,0 +1,45 @@
+:root {
+  --bs-primary: #2f9bd6;
+  --bs-primary-rgb: 47, 155, 214;
+  --bs-secondary: #12315c;
+  --bs-secondary-rgb: 18, 49, 92;
+  --bs-danger: #e05252;
+  --bs-danger-rgb: 224, 82, 82;
+  --bs-success: #34a853;
+  --bs-success-rgb: 52, 168, 83;
+
+  --bs-body-bg: #eaf3fa;
+  --bs-body-color: #1a2b3c;
+  --bs-body-font-family: 'Inter', system-ui, sans-serif;
+
+  --bs-border-radius: 0.9rem;
+  --bs-border-radius-sm: 0.6rem;
+  --bs-border-radius-lg: 1.2rem;
+
+  --app-navy-900: #0b2545;
+  --app-text-muted: #5c7a94;
+}
+
+body {
+  background-color: var(--bs-body-bg);
+}
+
+.btn-primary {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+  color: #fff;
+}
+.btn-primary:hover {
+  filter: brightness(0.92);
+  color: #fff;
+}
+
+.btn-secondary {
+  background-color: var(--bs-secondary);
+  border-color: var(--bs-secondary);
+  color: #fff;
+}
+.btn-secondary:hover {
+  filter: brightness(1.15);
+  color: #fff;
+}
