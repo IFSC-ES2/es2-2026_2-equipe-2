@@ -77,3 +77,9 @@
 - Uso: utilização para consultar o que é utilizado dentro do frontend e o seu motivo
 - Artefato: frontend/src/components/\*
 - Validação: checkando componentes que chamam aqueles componentes validados
+
+- Data: 22/09/2026
+- Ferramenta: Claude
+- Uso: criação dos schemas para documentação da API
+- Artefato: api-estoque/src/docs/schemas
+- Validação: verificar se os schemas estão condizentes com os retornos da API e respeito suas responsabilidades
