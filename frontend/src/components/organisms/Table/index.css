@@ -1,4 +1,4 @@
-.app-table {
-  border-collapse: separate;
-  border-spacing: 0 6px;
-}
+.table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd)>th {
+   background-color: #D9E9F1;
+ }
