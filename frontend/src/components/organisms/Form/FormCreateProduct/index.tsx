@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '../../../atoms/Button';
 import FormInput from '../../../atoms/Inputs/FormInput';
 import FormTextarea from '../../../atoms/Inputs/FormTextarea';
+import FormSelect, {
+  type SelectOption,
+} from '../../../atoms/Inputs/FormSelect';
 import { createProduto } from '../../../../services/produto.service';
+import { getCategorias } from '../../../../services/categoria.service';
+import { getFornecedores } from '../../../../services/fornecedor.service';
 import type { ProdutoCreate } from '../../../../interfaces/produto.interface';
 
 export interface FormCreateProductProps {
@@ -31,6 +36,46 @@ const FormCreateProduct: React.FC<FormCreateProductProps> = ({
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
+  const [categoriasOptions, setCategoriasOptions] = useState<SelectOption[]>(
+    [],
+  );
+  const [fornecedoresOptions, setFornecedoresOptions] = useState<
+    SelectOption[]
+  >([]);
+
+  useEffect(() => {
+    const fetchOptions = async () => {
+      try {
+        const [categorias, fornecedores] = await Promise.all([
+          getCategorias(),
+          getFornecedores(),
+        ]);
+
+        const catOptions = [
+          { label: 'Selecione uma categoria', value: '' },
+          ...categorias.map((c: unknown) => ({
+            label: c.nome,
+            value: String(c.id),
+          })),
+        ];
+
+        const forOptions = [
+          { label: 'Selecione um fornecedor', value: '' },
+          ...fornecedores.map((f: unknown) => ({
+            label: f.nome,
+            value: String(f.id),
+          })),
+        ];
+
+        setCategoriasOptions(catOptions);
+        setFornecedoresOptions(forOptions);
+      } catch (err) {
+        console.error('Erro ao carregar opções', err);
+      }
+    };
+    fetchOptions();
+  }, []);
+
   const resetForm = () => {
     setFormData(INITIAL_FORM);
     setError(null);
@@ -42,7 +87,9 @@ const FormCreateProduct: React.FC<FormCreateProductProps> = ({
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -69,8 +116,12 @@ const FormCreateProduct: React.FC<FormCreateProductProps> = ({
       sku: skuTrimmed,
       nome: nomeTrimmed,
       descricao: formData.descricao.trim() ? formData.descricao.trim() : null,
-      categoria_id: formData.categoria_id ? Number(formData.categoria_id) : null,
-      fornecedor_id: formData.fornecedor_id ? Number(formData.fornecedor_id) : null,
+      categoria_id: formData.categoria_id
+        ? Number(formData.categoria_id)
+        : null,
+      fornecedor_id: formData.fornecedor_id
+        ? Number(formData.fornecedor_id)
+        : null,
       preco: precoNum,
       quantidade:
         formData.quantidade !== '' ? Number(formData.quantidade) : undefined,
@@ -87,7 +138,9 @@ const FormCreateProduct: React.FC<FormCreateProductProps> = ({
       resetForm();
       onSuccess?.();
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Erro ao cadastrar produto');
+      setError(
+        err instanceof Error ? err.message : 'Erro ao cadastrar produto',
+      );
     } finally {
       setLoading(false);
     }
@@ -139,23 +192,21 @@ const FormCreateProduct: React.FC<FormCreateProductProps> = ({
 
       <div className="row">
         <div className="col-md-6">
-          <FormInput
-            label="Categoria (ID)"
+          <FormSelect
+            label="Categoria"
             name="categoria_id"
-            type="number"
             value={formData.categoria_id}
             onChange={handleChange}
-            placeholder="Ex: 1"
+            options={categoriasOptions}
           />
         </div>
         <div className="col-md-6">
-          <FormInput
-            label="Fornecedor (ID)"
+          <FormSelect
+            label="Fornecedor"
             name="fornecedor_id"
-            type="number"
             value={formData.fornecedor_id}
             onChange={handleChange}
-            placeholder="Ex: 1"
+            options={fornecedoresOptions}
           />
         </div>
       </div>
@@ -206,11 +257,7 @@ const FormCreateProduct: React.FC<FormCreateProductProps> = ({
             Cancelar
           </Button>
         )}
-        <Button
-          type="submit"
-          variant="primary"
-          disabled={loading}
-        >
+        <Button type="submit" variant="primary" disabled={loading}>
           {loading ? 'Salvando...' : 'Salvar Produto'}
         </Button>
       </div>

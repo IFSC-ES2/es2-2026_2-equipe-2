@@ -1,3 +1,4 @@
+import routerFornecedor from "./fornecedores.routes";
 import { Router } from "express";
 import routerCategoria from "./categorias.routes";
 import routerProduto from "./produtos.routes";
@@ -12,6 +13,7 @@ class Routes {
 
     router.use("/categorias", routerCategoria);
     router.use("/produtos", routerProduto);
+    router.use("/fornecedores", routerFornecedor);
 
     router.use("/docs", serve, setup);
 

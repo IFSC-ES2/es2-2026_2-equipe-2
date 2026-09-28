@@ -27,18 +27,31 @@ const produtoLabels: Record<string, string> = {
 };
 
 function mapProdutoColumns(columns: Column[]): Column[] {
-  return columns.map((column) => ({
-    ...column,
-    label: produtoLabels[column.key] ?? column.label,
-  }));
+  return columns
+    .filter(
+      (column) => column.key !== 'categoria' && column.key !== 'fornecedor',
+    )
+    .map((column) => ({
+      ...column,
+      label: produtoLabels[column.key] ?? column.label,
+    }));
 }
 
 export async function getProdutos(): Promise<GenericListResponse> {
   const result = await fetchGenericList(PRODUTOS_API_URL);
 
+  const formattedData = result.data.map((item) => {
+    const p = item as Produto;
+    return {
+      ...p,
+      categoria_id: p.categoria?.nome ?? p.categoria_id,
+      fornecedor_id: p.fornecedor?.nome ?? p.fornecedor_id,
+    };
+  });
+
   return {
     columns: mapProdutoColumns(result.columns),
-    data: result.data,
+    data: formattedData,
   };
 }
 

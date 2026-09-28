@@ -64,11 +64,15 @@ describe('Organism ProductCreateModal', () => {
       />,
     );
 
-    fireEvent.change(screen.getByLabelText(/SKU \*/i), { target: { value: 'SKU-01' } });
+    fireEvent.change(screen.getByLabelText(/SKU \*/i), {
+      target: { value: 'SKU-01' },
+    });
     fireEvent.change(screen.getByLabelText(/Nome do Produto \*/i), {
       target: { value: 'Produto Teste' },
     });
-    fireEvent.change(screen.getByLabelText(/Preço/i), { target: { value: '15' } });
+    fireEvent.change(screen.getByLabelText(/Preço/i), {
+      target: { value: '15' },
+    });
 
     fireEvent.click(screen.getByText('Salvar Produto'));
 

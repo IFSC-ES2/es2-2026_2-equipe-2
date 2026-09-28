@@ -41,17 +41,23 @@ describe('Organism FormCreateProduct', () => {
     const saveService = vi.fn();
     render(<FormCreateProduct saveService={saveService} />);
 
-    fireEvent.change(screen.getByLabelText(/SKU \*/i), { target: { value: 'SKU-001' } });
+    fireEvent.change(screen.getByLabelText(/SKU \*/i), {
+      target: { value: 'SKU-001' },
+    });
     fireEvent.change(screen.getByLabelText(/Nome do Produto \*/i), {
       target: { value: 'Produto Teste' },
     });
-    fireEvent.change(screen.getByLabelText(/Preço/i), { target: { value: '-5' } });
+    fireEvent.change(screen.getByLabelText(/Preço/i), {
+      target: { value: '-5' },
+    });
 
     fireEvent.click(screen.getByText('Salvar Produto'));
 
     await waitFor(() => {
       expect(
-        screen.getByText('O preço deve ser um valor numérico maior ou igual a zero.'),
+        screen.getByText(
+          'O preço deve ser um valor numérico maior ou igual a zero.',
+        ),
       ).toBeDefined();
     });
 
@@ -62,9 +68,13 @@ describe('Organism FormCreateProduct', () => {
     const saveService = vi.fn().mockResolvedValueOnce({ id: 1 });
     const onSuccess = vi.fn();
 
-    render(<FormCreateProduct saveService={saveService} onSuccess={onSuccess} />);
+    render(
+      <FormCreateProduct saveService={saveService} onSuccess={onSuccess} />,
+    );
 
-    fireEvent.change(screen.getByLabelText(/SKU \*/i), { target: { value: 'ABC-100' } });
+    fireEvent.change(screen.getByLabelText(/SKU \*/i), {
+      target: { value: 'ABC-100' },
+    });
     fireEvent.change(screen.getByLabelText(/Nome do Produto \*/i), {
       target: { value: 'Parafuso Aço' },
     });
@@ -77,7 +87,9 @@ describe('Organism FormCreateProduct', () => {
     fireEvent.change(screen.getByLabelText(/Fornecedor \(ID\)/i), {
       target: { value: '3' },
     });
-    fireEvent.change(screen.getByLabelText(/Preço/i), { target: { value: '29.90' } });
+    fireEvent.change(screen.getByLabelText(/Preço/i), {
+      target: { value: '29.90' },
+    });
     fireEvent.change(screen.getByLabelText(/Quantidade Inicial/i), {
       target: { value: '100' },
     });
@@ -113,16 +125,24 @@ describe('Organism FormCreateProduct', () => {
   });
 
   it('deve exibir mensagem de erro quando saveService falhar', async () => {
-    const saveService = vi.fn().mockRejectedValueOnce(new Error('SKU duplicado'));
+    const saveService = vi
+      .fn()
+      .mockRejectedValueOnce(new Error('SKU duplicado'));
     const onSuccess = vi.fn();
 
-    render(<FormCreateProduct saveService={saveService} onSuccess={onSuccess} />);
+    render(
+      <FormCreateProduct saveService={saveService} onSuccess={onSuccess} />,
+    );
 
-    fireEvent.change(screen.getByLabelText(/SKU \*/i), { target: { value: 'ABC-100' } });
+    fireEvent.change(screen.getByLabelText(/SKU \*/i), {
+      target: { value: 'ABC-100' },
+    });
     fireEvent.change(screen.getByLabelText(/Nome do Produto \*/i), {
       target: { value: 'Parafuso Aço' },
     });
-    fireEvent.change(screen.getByLabelText(/Preço/i), { target: { value: '10' } });
+    fireEvent.change(screen.getByLabelText(/Preço/i), {
+      target: { value: '10' },
+    });
 
     fireEvent.click(screen.getByText('Salvar Produto'));
 

@@ -27,7 +27,12 @@ const Table: React.FC<TableProps> = ({ columns, data, onEdit }) => {
         <tbody>
           {data && data.length > 0 ? (
             data.map((row, rowIndex) => (
-              <TableRow key={rowIndex} columns={columns} row={row} onEdit={onEdit} />
+              <TableRow
+                key={rowIndex}
+                columns={columns}
+                row={row}
+                onEdit={onEdit}
+              />
             ))
           ) : (
             <tr>
