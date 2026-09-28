@@ -15,6 +15,14 @@ export interface FormCreateProductProps {
   onCancel?: () => void;
   saveService?: (data: ProdutoCreate) => Promise<unknown>;
 }
+interface Categoria {
+  id: number;
+  nome: string;
+}
+interface Fornecedor {
+  id: number;
+  nome: string;
+}
 
 const INITIAL_FORM = {
   sku: '',
@@ -53,7 +61,7 @@ const FormCreateProduct: React.FC<FormCreateProductProps> = ({
 
         const catOptions = [
           { label: 'Selecione uma categoria', value: '' },
-          ...categorias.map((c: unknown) => ({
+          ...categorias.map((c: Categoria) => ({
             label: c.nome,
             value: String(c.id),
           })),
@@ -61,7 +69,7 @@ const FormCreateProduct: React.FC<FormCreateProductProps> = ({
 
         const forOptions = [
           { label: 'Selecione um fornecedor', value: '' },
-          ...fornecedores.map((f: unknown) => ({
+          ...fornecedores.map((f: Fornecedor) => ({
             label: f.nome,
             value: String(f.id),
           })),
@@ -91,7 +99,9 @@ const FormCreateProduct: React.FC<FormCreateProductProps> = ({
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >,
   ) => {
-    const { name, value } = e.target;
+    const target = e.target as HTMLInputElement | HTMLSelectElement;
+    const name = target.name || e.currentTarget.name;
+    const value = target.value;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
