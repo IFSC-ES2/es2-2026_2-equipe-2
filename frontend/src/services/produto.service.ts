@@ -1,4 +1,4 @@
-import type { Column } from '../components/organisms/Table';
+import type { Column, TableDataRow } from '../components/organisms/Table';
 import {
   fetchGenericList,
   type GenericListResponse,
@@ -40,13 +40,13 @@ function mapProdutoColumns(columns: Column[]): Column[] {
 export async function getProdutos(): Promise<GenericListResponse> {
   const result = await fetchGenericList(PRODUTOS_API_URL);
 
-  const formattedData = result.data.map((item) => {
-    const p = item as Produto;
+  const formattedData: TableDataRow[] = result.data.map((item: unknown) => {
+    const produto = item as Produto;
     return {
-      ...p,
-      categoria_id: p.categoria?.nome ?? p.categoria_id,
-      fornecedor_id: p.fornecedor?.nome ?? p.fornecedor_id,
-    };
+      ...produto,
+      categoria_id: produto.categoria?.nome ?? produto.categoria_id,
+      fornecedor_id: produto.fornecedor?.nome ?? produto.fornecedor_id,
+    } as unknown as TableDataRow;
   });
 
   return {
