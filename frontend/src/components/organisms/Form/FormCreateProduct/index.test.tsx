@@ -2,24 +2,42 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import FormCreateProduct from '.';
 
+vi.mock('../../../../services/categoria.service', () => ({
+  getCategorias: vi
+    .fn()
+    .mockResolvedValue([{ id: 2, nome: 'Categoria Teste' }]),
+}));
+
+vi.mock('../../../../services/fornecedor.service', () => ({
+  getFornecedores: vi
+    .fn()
+    .mockResolvedValue([{ id: 3, nome: 'Fornecedor Teste' }]),
+}));
+
 describe('Organism FormCreateProduct', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it('deve renderizar os campos do formulário e botões de ação', () => {
+  it('deve renderizar os campos do formulário e botões de ação', async () => {
     render(<FormCreateProduct onCancel={vi.fn()} />);
 
     expect(screen.getByLabelText(/SKU \*/i)).toBeDefined();
     expect(screen.getByLabelText(/Nome do Produto \*/i)).toBeDefined();
     expect(screen.getByLabelText(/Descrição/i)).toBeDefined();
-    expect(screen.getByLabelText(/Categoria \(ID\)/i)).toBeDefined();
-    expect(screen.getByLabelText(/Fornecedor \(ID\)/i)).toBeDefined();
+
+    expect(screen.getByLabelText(/^Categoria$/i)).toBeDefined();
+    expect(screen.getByLabelText(/^Fornecedor$/i)).toBeDefined();
+
     expect(screen.getByLabelText(/Preço/i)).toBeDefined();
     expect(screen.getByLabelText(/Quantidade Inicial/i)).toBeDefined();
     expect(screen.getByLabelText(/Estoque Mínimo/i)).toBeDefined();
     expect(screen.getByText('Salvar Produto')).toBeDefined();
     expect(screen.getByText('Cancelar')).toBeDefined();
+
+    await waitFor(() => {
+      expect(screen.getByText('Categoria Teste')).toBeDefined();
+    });
   });
 
   it('deve exibir mensagem de erro de validação se campos obrigatórios não forem preenchidos', async () => {
@@ -41,17 +59,23 @@ describe('Organism FormCreateProduct', () => {
     const saveService = vi.fn();
     render(<FormCreateProduct saveService={saveService} />);
 
-    fireEvent.change(screen.getByLabelText(/SKU \*/i), { target: { value: 'SKU-001' } });
+    fireEvent.change(screen.getByLabelText(/SKU \*/i), {
+      target: { value: 'SKU-001' },
+    });
     fireEvent.change(screen.getByLabelText(/Nome do Produto \*/i), {
       target: { value: 'Produto Teste' },
     });
-    fireEvent.change(screen.getByLabelText(/Preço/i), { target: { value: '-5' } });
+    fireEvent.change(screen.getByLabelText(/Preço/i), {
+      target: { value: '-5' },
+    });
 
     fireEvent.click(screen.getByText('Salvar Produto'));
 
     await waitFor(() => {
       expect(
-        screen.getByText('O preço deve ser um valor numérico maior ou igual a zero.'),
+        screen.getByText(
+          'O preço deve ser um valor numérico maior ou igual a zero.',
+        ),
       ).toBeDefined();
     });
 
@@ -62,22 +86,32 @@ describe('Organism FormCreateProduct', () => {
     const saveService = vi.fn().mockResolvedValueOnce({ id: 1 });
     const onSuccess = vi.fn();
 
-    render(<FormCreateProduct saveService={saveService} onSuccess={onSuccess} />);
+    render(
+      <FormCreateProduct saveService={saveService} onSuccess={onSuccess} />,
+    );
 
-    fireEvent.change(screen.getByLabelText(/SKU \*/i), { target: { value: 'ABC-100' } });
+    await waitFor(() => {
+      expect(screen.getByText('Categoria Teste')).toBeDefined();
+    });
+
+    fireEvent.change(screen.getByLabelText(/SKU \*/i), {
+      target: { value: 'ABC-100' },
+    });
     fireEvent.change(screen.getByLabelText(/Nome do Produto \*/i), {
       target: { value: 'Parafuso Aço' },
     });
     fireEvent.change(screen.getByLabelText(/Descrição/i), {
       target: { value: 'Pacote com 50 unidades' },
     });
-    fireEvent.change(screen.getByLabelText(/Categoria \(ID\)/i), {
+    fireEvent.change(screen.getByLabelText(/^Categoria$/i), {
       target: { value: '2' },
     });
-    fireEvent.change(screen.getByLabelText(/Fornecedor \(ID\)/i), {
+    fireEvent.change(screen.getByLabelText(/^Fornecedor$/i), {
       target: { value: '3' },
     });
-    fireEvent.change(screen.getByLabelText(/Preço/i), { target: { value: '29.90' } });
+    fireEvent.change(screen.getByLabelText(/Preço/i), {
+      target: { value: '29.90' },
+    });
     fireEvent.change(screen.getByLabelText(/Quantidade Inicial/i), {
       target: { value: '100' },
     });
@@ -113,16 +147,24 @@ describe('Organism FormCreateProduct', () => {
   });
 
   it('deve exibir mensagem de erro quando saveService falhar', async () => {
-    const saveService = vi.fn().mockRejectedValueOnce(new Error('SKU duplicado'));
+    const saveService = vi
+      .fn()
+      .mockRejectedValueOnce(new Error('SKU duplicado'));
     const onSuccess = vi.fn();
 
-    render(<FormCreateProduct saveService={saveService} onSuccess={onSuccess} />);
+    render(
+      <FormCreateProduct saveService={saveService} onSuccess={onSuccess} />,
+    );
 
-    fireEvent.change(screen.getByLabelText(/SKU \*/i), { target: { value: 'ABC-100' } });
+    fireEvent.change(screen.getByLabelText(/SKU \*/i), {
+      target: { value: 'ABC-100' },
+    });
     fireEvent.change(screen.getByLabelText(/Nome do Produto \*/i), {
       target: { value: 'Parafuso Aço' },
     });
-    fireEvent.change(screen.getByLabelText(/Preço/i), { target: { value: '10' } });
+    fireEvent.change(screen.getByLabelText(/Preço/i), {
+      target: { value: '10' },
+    });
 
     fireEvent.click(screen.getByText('Salvar Produto'));
 

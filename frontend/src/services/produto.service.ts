@@ -1,4 +1,4 @@
-import type { Column } from '../components/organisms/Table';
+import type { Column, TableDataRow } from '../components/organisms/Table';
 import {
   fetchGenericList,
   type GenericListResponse,
@@ -27,18 +27,31 @@ const produtoLabels: Record<string, string> = {
 };
 
 function mapProdutoColumns(columns: Column[]): Column[] {
-  return columns.map((column) => ({
-    ...column,
-    label: produtoLabels[column.key] ?? column.label,
-  }));
+  return columns
+    .filter(
+      (column) => column.key !== 'categoria' && column.key !== 'fornecedor',
+    )
+    .map((column) => ({
+      ...column,
+      label: produtoLabels[column.key] ?? column.label,
+    }));
 }
 
 export async function getProdutos(): Promise<GenericListResponse> {
   const result = await fetchGenericList(PRODUTOS_API_URL);
 
+  const formattedData: TableDataRow[] = result.data.map((item: unknown) => {
+    const produto = item as Produto;
+    return {
+      ...produto,
+      categoria_id: produto.categoria?.nome ?? produto.categoria_id,
+      fornecedor_id: produto.fornecedor?.nome ?? produto.fornecedor_id,
+    } as unknown as TableDataRow;
+  });
+
   return {
     columns: mapProdutoColumns(result.columns),
-    data: result.data,
+    data: formattedData,
   };
 }
 
