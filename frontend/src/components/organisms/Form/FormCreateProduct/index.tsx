@@ -260,14 +260,18 @@ const FormCreateProduct: React.FC<FormCreateProductProps> = ({
         {onCancel && (
           <Button
             type="button"
-            variant="secondary"
+            variant="danger"
             onClick={handleCancel}
             disabled={loading}
           >
             Cancelar
           </Button>
         )}
-        <Button type="submit" variant="primary" disabled={loading}>
+        <Button
+          type="submit"
+          variant="success"
+          disabled={loading}
+        >
           {loading ? 'Salvando...' : 'Salvar Produto'}
         </Button>
       </div>

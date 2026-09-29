@@ -10,9 +10,7 @@ function App() {
       <div className="App">
         <header className="app-header p-3 mb-4 border-bottom">
           <div className="container">
-            <h1 className="h4 mb-0 fw-bold app-header-title">
-              Sistema de Gestão
-            </h1>
+            <h1 className="h4 mb-0 fw-bold app-header-title">AURA</h1>
           </div>
         </header>
 

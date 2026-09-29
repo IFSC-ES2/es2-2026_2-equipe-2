@@ -22,7 +22,7 @@ const Table: React.FC<TableProps> = ({ columns, data, onEdit }) => {
 
   return (
     <div className="table-responsive">
-      <table className="table table-hover app-table">
+      <table className="table table-hover app-table table-striped">
         <TableHeader columns={columns} />
         <tbody>
           {data && data.length > 0 ? (
