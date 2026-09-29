@@ -1,5 +1,5 @@
 import { ValidationError, EntityNotFound } from "../errors/index";
-import { Produto, ProdutoCreate, ProdutoUpdate } from "../models/index";
+import { Produto, ProdutoCreate, ProdutoUpdate, ProdutoComRelacionamentos } from "../models/index";
 import { ProdutoRepository } from "../repositories/Produto.repository";
 import logger from "../config/logger";
 import validateId from "../utils/validateId";
@@ -13,11 +13,11 @@ export class ProdutoService {
     this.repository = repository ?? new ProdutoRepository();
   }
 
-  public async findAll(): Promise<Produto[] | null> {
+  public async findAll(): Promise<ProdutoComRelacionamentos[] | null> {
     try {
       logger.info("[Produto.service] findAll - fetching all products");
 
-      const produtos = await this.repository.findAll();
+      const produtos = await this.repository.findAllWithRelacionamentos();
 
       logger.info(
         `[Produto.service] findAll - ${produtos?.length || "0"} products retrieved`,
@@ -33,7 +33,7 @@ export class ProdutoService {
     }
   }
 
-  public async findById(id: number | string): Promise<Produto | null> {
+  public async findById(id: number | string): Promise<ProdutoComRelacionamentos | null> {
     try {
       const parsedId = Number(id);
       logger.info(`[Produto.service] findById - fetching product ${parsedId}`);
@@ -42,7 +42,7 @@ export class ProdutoService {
         throw ValidationError.invalidId(ENTITY_NAME);
       }
 
-      const produto = await this.repository.findById(parsedId);
+      const produto = await this.repository.findByIdWithRelacionamentos(parsedId);
 
       if (!produto) throw new EntityNotFound(ENTITY_NAME);
 
