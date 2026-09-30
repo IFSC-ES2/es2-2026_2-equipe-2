@@ -52,7 +52,9 @@
   font-size: 0.95rem;
   font-weight: 500;
   border-radius: 8px;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .sidebar-link:hover {

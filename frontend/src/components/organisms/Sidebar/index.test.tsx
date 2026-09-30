@@ -44,7 +44,11 @@ describe('Organism Sidebar', () => {
 
   it('deve permitir customizar a marca e os itens de navegação', () => {
     const customItems = [
-      { label: 'Relatórios', to: '/relatorios', icon: 'bi-file-earmark-bar-graph' },
+      {
+        label: 'Relatórios',
+        to: '/relatorios',
+        icon: 'bi-file-earmark-bar-graph',
+      },
     ];
 
     render(
@@ -53,7 +57,9 @@ describe('Organism Sidebar', () => {
       </MemoryRouter>,
     );
 
-    expect(screen.getByRole('heading', { level: 1, name: 'SISTEMA X' })).toBeDefined();
+    expect(
+      screen.getByRole('heading', { level: 1, name: 'SISTEMA X' }),
+    ).toBeDefined();
     expect(screen.getByRole('link', { name: /relatórios/i })).toBeDefined();
     expect(screen.queryByRole('link', { name: /estoque/i })).toBeNull();
   });

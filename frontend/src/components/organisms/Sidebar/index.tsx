@@ -10,7 +10,11 @@ export interface NavItem {
 }
 
 const defaultNavItems: NavItem[] = [
-  { label: 'Dashboard', to: '/dashboard', icon: 'bi-layout-text-window-reverse' },
+  {
+    label: 'Dashboard',
+    to: '/dashboard',
+    icon: 'bi-layout-text-window-reverse',
+  },
   { label: 'Vendas', to: '/vendas', icon: 'bi-cash-coin' },
   { label: 'Finanças', to: '/financas', icon: 'bi-bank' },
   { label: 'Estoque', to: '/estoque', icon: 'bi-box-seam' },
@@ -42,7 +46,10 @@ const Sidebar: React.FC<SidebarProps> = ({
                   `sidebar-link ${isActive ? 'active' : ''}`
                 }
               >
-                <i className={`bi ${item.icon} sidebar-icon`} aria-hidden="true" />
+                <i
+                  className={`bi ${item.icon} sidebar-icon`}
+                  aria-hidden="true"
+                />
                 <span className="sidebar-label">{item.label}</span>
               </NavLink>
             </li>
