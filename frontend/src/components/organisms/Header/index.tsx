@@ -9,10 +9,7 @@ export interface HeaderProps {
   className?: string;
 }
 
-const Header: React.FC<HeaderProps> = ({
-  title,
-  className = '',
-}) => {
+const Header: React.FC<HeaderProps> = ({ title, className = '' }) => {
   const [usuario, setUsuario] = useState<Usuario | null>(null);
 
   useEffect(() => {
@@ -50,7 +47,10 @@ const Header: React.FC<HeaderProps> = ({
             <span className="user-name">{usuario?.nome ?? ''}</span>
             <span className="user-email">{usuario?.email ?? ''}</span>
           </div>
-          <i className="bi bi-chevron-down user-dropdown-icon" aria-hidden="true" />
+          <i
+            className="bi bi-chevron-down user-dropdown-icon"
+            aria-hidden="true"
+          />
         </div>
       </div>
     </header>
