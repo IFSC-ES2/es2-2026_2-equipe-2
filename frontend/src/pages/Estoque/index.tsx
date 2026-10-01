@@ -92,10 +92,11 @@ const Estoque: React.FC = () => {
           </div>
         )}
 
-        {!loading && !error && <Table columns={columns} data={data} />}
+        {!loading && !error && (
+          <Table columns={columns} data={data} onDelete={handleDelete} />
+        )}
       </div>
 
-      <Table columns={columns} data={data} onDelete={handleDelete} />
       <ProductCreateModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
