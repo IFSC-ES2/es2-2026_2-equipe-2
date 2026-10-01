@@ -40,12 +40,15 @@ describe('Molécula ActionButtons', () => {
     expect(onEditMock).toHaveBeenCalledTimes(1);
   });
 
-  it('deve disparar a função onDelete quando o botão Excluir for clicado', () => {
+  it('deve disparar a função onDelete quando o botão Excluir for clicado e confirmar', () => {
     const onDeleteMock = vi.fn();
     render(<ActionButtons onDelete={onDeleteMock} />);
 
     const deleteButton = screen.getByTitle('Excluir');
     fireEvent.click(deleteButton);
+
+    const confirmButton = screen.getByText('Confirmar');
+    fireEvent.click(confirmButton);
 
     expect(onDeleteMock).toHaveBeenCalledTimes(1);
   });

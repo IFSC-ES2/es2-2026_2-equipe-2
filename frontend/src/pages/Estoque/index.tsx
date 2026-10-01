@@ -6,7 +6,7 @@ import Table, {
 } from '../../components/organisms/Table';
 import ProductCreateModal from '../../components/organisms/Modals/ProductCreateModal';
 import BaseLayout from '../../components/templates/BaseLayout';
-import { getProdutos } from '../../services/produto.service';
+import { getProdutos, deleteProduto } from '../../services/produto.service';
 
 const Estoque: React.FC = () => {
   const [columns, setColumns] = useState<Column[]>([]);
@@ -58,6 +58,15 @@ const Estoque: React.FC = () => {
       isMounted = false;
     };
   }, []);
+  const handleDelete = async (row: TableDataRow) => {
+    try {
+      const { id } = row as { id: string };
+      await deleteProduto(id);
+      await loadData();
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Erro ao excluir produto');
+    }
+  };
 
   return (
     <BaseLayout title="Estoque">
@@ -86,6 +95,7 @@ const Estoque: React.FC = () => {
         {!loading && !error && <Table columns={columns} data={data} />}
       </div>
 
+      <Table columns={columns} data={data} onDelete={handleDelete} />
       <ProductCreateModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

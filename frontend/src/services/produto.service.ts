@@ -10,7 +10,7 @@ import {
   type ProdutoCreate,
 } from '../interfaces/produto.interface';
 
-const PRODUTOS_API_URL = 'http://localhost:8080/api/produtos';
+const PRODUTOS_API_URL = 'http://localhost:5000/produtos';
 
 const produtoLabels: Record<string, string> = {
   id: 'ID',
@@ -97,4 +97,19 @@ export async function createProduto(data: ProdutoCreate) {
 
   const result: Produto = await response.json();
   return result;
+}
+
+export async function deleteProduto(id: string): Promise<void> {
+  const response = await fetch(`${PRODUTOS_API_URL}/${id}`, {
+    method: 'DELETE',
+  });
+
+  if (!response.ok) {
+    const errorBody = await response.json().catch(() => null);
+    const friendlyMessage = errorBody?.title?.includes('still referenced')
+      ? 'Não é possível excluir porque o produto está associado a itens de pedido.'
+      : (errorBody?.message ??
+        `Erro ao excluir produto (status ${response.status})`);
+    throw new Error(friendlyMessage);
+  }
 }

@@ -129,7 +129,7 @@ export class ProdutoController {
       logger.info(`[ProdutoController] delete - product ${id} deleted`);
 
       return res
-        .status(HttpStatus.OK)
+        .status(HttpStatus.NO_CONTENT)
         .json(
           createSuccessBodyResponse(HttpStatus.OK, "Product deleted", deleted),
         );
