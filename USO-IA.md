@@ -83,3 +83,9 @@
 - Uso: criação dos schemas para documentação da API
 - Artefato: api-estoque/src/docs/schemas
 - Validação: verificar se os schemas estão condizentes com os retornos da API e respeito suas responsabilidades
+
+- Data: 30/09/2026
+- Ferramenta: Antigravity
+- Uso: auxílio na criação da barra lateral (Sidebar) e nos testes unitários de cada um dos componentes criados
+- Artefato: `frontend/src/components/organisms/Sidebar/`, `frontend/src/components/organisms/Header/`, `frontend/src/components/templates/BaseLayout/`
+- Validação: execução de todos os testes unitários com sucesso garantindo o funcionamento da navegação e componentes
