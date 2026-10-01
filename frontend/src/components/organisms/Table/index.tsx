@@ -13,9 +13,10 @@ interface TableProps {
   columns: Column[];
   data: TableDataRow[];
   onEdit?: (row: TableDataRow) => void;
+  onDelete?: (row: TableDataRow) => void;
 }
 
-const Table: React.FC<TableProps> = ({ columns, data, onEdit }) => {
+const Table: React.FC<TableProps> = ({ columns, data, onEdit, onDelete }) => {
   if (!columns || columns.length === 0) {
     return <p>Nenhuma coluna disponível para exibição.</p>;
   }
@@ -32,6 +33,7 @@ const Table: React.FC<TableProps> = ({ columns, data, onEdit }) => {
                 columns={columns}
                 row={row}
                 onEdit={onEdit}
+                onDelete={onDelete}
               />
             ))
           ) : (

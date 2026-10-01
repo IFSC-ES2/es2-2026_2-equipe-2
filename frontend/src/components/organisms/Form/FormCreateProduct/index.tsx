@@ -267,11 +267,7 @@ const FormCreateProduct: React.FC<FormCreateProductProps> = ({
             Cancelar
           </Button>
         )}
-        <Button
-          type="submit"
-          variant="success"
-          disabled={loading}
-        >
+        <Button type="submit" variant="success" disabled={loading}>
           {loading ? 'Salvando...' : 'Salvar Produto'}
         </Button>
       </div>
