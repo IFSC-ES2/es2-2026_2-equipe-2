@@ -1,7 +1,7 @@
 import routerFornecedor from "./fornecedores.routes";
 import { Router } from "express";
 import routerCategoria from "./categorias.routes";
-import routerClientes from "./clientes.routes";
+import routerCliente from "./clientes.routes";
 import routerProduto from "./produtos.routes";
 import { HttpStatus } from "../config/status";
 import { serve, setup } from "../docs/swagger";
