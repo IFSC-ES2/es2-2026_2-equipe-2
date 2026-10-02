@@ -1,19 +1,19 @@
 /**
  * @swagger
  * tags:
- *   name: Produto
- *   description: Gerenciamento de produtos do estoque
+ *   name: Cliente
+ *   description: Gerenciamento de clientes
  */
 
 /**
  * @swagger
- * /produtos:
+ * /clientes:
  *   get:
- *     summary: Lista todos os produtos
- *     tags: [Produto]
+ *     summary: Lista todos os clientes
+ *     tags: [Cliente]
  *     responses:
  *       200:
- *         description: Lista de produtos retornada com sucesso
+ *         description: Lista de clientes retornada com sucesso
  *         content:
  *           application/json:
  *             schema:
@@ -22,13 +22,13 @@
  *                 - type: object
  *                   properties:
  *                     title:
- *                       example: "Products retrieved"
+ *                       example: "Clients retrieved"
  *                     data:
  *                       type: array
  *                       items:
- *                         $ref: '#/components/schemas/Produto'
+ *                         $ref: '#/components/schemas/Cliente'
  *       500:
- *         description: Erro interno ao buscar produtos
+ *         description: Erro interno ao buscar clientes
  *         content:
  *           application/json:
  *             schema:
@@ -37,21 +37,21 @@
 
 /**
  * @swagger
- * /produtos/{id}:
+ * /clientes/{id}:
  *   get:
- *     summary: Busca um produto pelo ID
- *     tags: [Produto]
+ *     summary: Busca um cliente pelo ID
+ *     tags: [Cliente]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID do produto
+ *         description: ID do cliente
  *         example: 1
  *     responses:
  *       200:
- *         description: Produto encontrado com sucesso
+ *         description: Cliente encontrado com sucesso
  *         content:
  *           application/json:
  *             schema:
@@ -60,9 +60,9 @@
  *                 - type: object
  *                   properties:
  *                     title:
- *                       example: "Product retrieved"
+ *                       example: "Client retrieved"
  *                     data:
- *                       $ref: '#/components/schemas/Produto'
+ *                       $ref: '#/components/schemas/Cliente'
  *       400:
  *         description: ID inválido
  *         content:
@@ -70,7 +70,7 @@
  *             schema:
  *               $ref: '#/components/schemas/BadRequestError'
  *       404:
- *         description: Produto não encontrado
+ *         description: Cliente não encontrado
  *         content:
  *           application/json:
  *             schema:
@@ -79,19 +79,19 @@
 
 /**
  * @swagger
- * /produtos:
+ * /clientes:
  *   post:
- *     summary: Cria um novo produto
- *     tags: [Produto]
+ *     summary: Cria um novo cliente
+ *     tags: [Cliente]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/ProdutoCreate'
+ *             $ref: '#/components/schemas/ClienteCreate'
  *     responses:
  *       201:
- *         description: Produto criado com sucesso
+ *         description: Cliente criado com sucesso
  *         content:
  *           application/json:
  *             schema:
@@ -102,11 +102,11 @@
  *                     status:
  *                       example: 201
  *                     title:
- *                       example: "Product created"
+ *                       example: "Client created"
  *                     data:
- *                       $ref: '#/components/schemas/Produto'
+ *                       $ref: '#/components/schemas/Cliente'
  *       400:
- *         description: Dados inválidos para criação do produto
+ *         description: Dados inválidos para criação do cliente
  *         content:
  *           application/json:
  *             schema:
@@ -115,27 +115,27 @@
 
 /**
  * @swagger
- * /produtos/{id}:
+ * /clientes/{id}:
  *   put:
- *     summary: Atualiza um produto existente
- *     tags: [Produto]
+ *     summary: Atualiza um cliente existente
+ *     tags: [Cliente]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID do produto
+ *         description: ID do cliente
  *         example: 1
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/ProdutoUpdate'
+ *             $ref: '#/components/schemas/ClienteUpdate'
  *     responses:
  *       200:
- *         description: Produto atualizado com sucesso
+ *         description: Cliente atualizado com sucesso
  *         content:
  *           application/json:
  *             schema:
@@ -144,9 +144,9 @@
  *                 - type: object
  *                   properties:
  *                     title:
- *                       example: "Product updated"
+ *                       example: "Client updated"
  *                     data:
- *                       $ref: '#/components/schemas/Produto'
+ *                       $ref: '#/components/schemas/Cliente'
  *       400:
  *         description: ID inválido ou dados inválidos
  *         content:
@@ -154,7 +154,7 @@
  *             schema:
  *               $ref: '#/components/schemas/BadRequestError'
  *       404:
- *         description: Produto não encontrado
+ *         description: Cliente não encontrado
  *         content:
  *           application/json:
  *             schema:
@@ -163,21 +163,21 @@
 
 /**
  * @swagger
- * /produtos/{id}:
+ * /clientes/{id}:
  *   delete:
- *     summary: Remove um produto
- *     tags: [Produto]
+ *     summary: Remove um cliente
+ *     tags: [Cliente]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID do produto
+ *         description: ID do cliente
  *         example: 1
  *     responses:
  *       200:
- *         description: Produto removido com sucesso
+ *         description: Cliente removido com sucesso
  *         content:
  *           application/json:
  *             schema:
@@ -186,9 +186,9 @@
  *                 - type: object
  *                   properties:
  *                     title:
- *                       example: "Product deleted"
+ *                       example: "Client deleted"
  *                     data:
- *                       $ref: '#/components/schemas/Produto'
+ *                       $ref: '#/components/schemas/Cliente'
  *       400:
  *         description: ID inválido
  *         content:
@@ -196,7 +196,7 @@
  *             schema:
  *               $ref: '#/components/schemas/BadRequestError'
  *       404:
- *         description: Produto não encontrado
+ *         description: Cliente não encontrado
  *         content:
  *           application/json:
  *             schema:
