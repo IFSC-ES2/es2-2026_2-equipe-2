@@ -16,7 +16,6 @@ const defaultNavItems: NavItem[] = [
     icon: 'bi-layout-text-window-reverse',
   },
   { label: 'Vendas', to: '/vendas', icon: 'bi-cash-coin' },
-  { label: 'Finanças', to: '/financas', icon: 'bi-bank' },
   { label: 'Clientes', to: '/clientes', icon: 'bi-people' },
   { label: 'Estoque', to: '/estoque', icon: 'bi-box-seam' },
 ];
