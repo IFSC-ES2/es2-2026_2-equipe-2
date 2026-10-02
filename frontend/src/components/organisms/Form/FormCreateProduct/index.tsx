@@ -5,15 +5,22 @@ import FormTextarea from '../../../atoms/Inputs/FormTextarea';
 import FormSelect, {
   type SelectOption,
 } from '../../../atoms/Inputs/FormSelect';
-import { createProduto } from '../../../../services/produto.service';
+import {
+  createProduto,
+  updateProdutos,
+} from '../../../../services/produto.service';
 import { getCategorias } from '../../../../services/categoria.service';
 import { getFornecedores } from '../../../../services/fornecedor.service';
-import type { ProdutoCreate } from '../../../../interfaces/produto.interface';
+import type {
+  ProdutoCreate,
+  Produto,
+} from '../../../../interfaces/produto.interface';
 
 export interface FormCreateProductProps {
   onSuccess?: () => void;
   onCancel?: () => void;
   saveService?: (data: ProdutoCreate) => Promise<unknown>;
+  product?: Produto; // optional for edit mode
 }
 interface Categoria {
   id: number;
@@ -39,11 +46,27 @@ const FormCreateProduct: React.FC<FormCreateProductProps> = ({
   onSuccess,
   onCancel,
   saveService = createProduto,
+  product,
 }) => {
-  const [formData, setFormData] = useState(INITIAL_FORM);
+  const buildInitialForm = (product?: Produto) =>
+    product
+      ? {
+          sku: product.sku,
+          nome: product.nome,
+          descricao: product.descricao ?? '',
+          categoria_id:
+            product.categoria?.id != null ? String(product.categoria.id) : '',
+          fornecedor_id:
+            product.fornecedor?.id != null ? String(product.fornecedor.id) : '',
+          preco: product.preco.toString(),
+          quantidade: product.quantidade?.toString() ?? '',
+          estoque_minimo: product.estoque_minimo?.toString() ?? '',
+        }
+      : INITIAL_FORM;
+
+  const [formData, setFormData] = useState(() => buildInitialForm(product));
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-
   const [categoriasOptions, setCategoriasOptions] = useState<SelectOption[]>(
     [],
   );
@@ -59,24 +82,21 @@ const FormCreateProduct: React.FC<FormCreateProductProps> = ({
           getFornecedores(),
         ]);
 
-        const catOptions = [
+        setCategoriasOptions([
           { label: 'Selecione uma categoria', value: '' },
           ...categorias.map((c: Categoria) => ({
             label: c.nome,
             value: String(c.id),
           })),
-        ];
+        ]);
 
-        const forOptions = [
+        setFornecedoresOptions([
           { label: 'Selecione um fornecedor', value: '' },
           ...fornecedores.map((f: Fornecedor) => ({
             label: f.nome,
             value: String(f.id),
           })),
-        ];
-
-        setCategoriasOptions(catOptions);
-        setFornecedoresOptions(forOptions);
+        ]);
       } catch (err) {
         console.error('Erro ao carregar opções', err);
       }
@@ -85,7 +105,7 @@ const FormCreateProduct: React.FC<FormCreateProductProps> = ({
   }, []);
 
   const resetForm = () => {
-    setFormData(INITIAL_FORM);
+    setFormData(buildInitialForm(product));
     setError(null);
   };
 
@@ -144,7 +164,10 @@ const FormCreateProduct: React.FC<FormCreateProductProps> = ({
     try {
       setLoading(true);
       setError(null);
-      await saveService(payload);
+      const service = product
+        ? (data: ProdutoCreate) => updateProdutos(product.id.toString(), data)
+        : saveService;
+      await service(payload);
       resetForm();
       onSuccess?.();
     } catch (err: unknown) {

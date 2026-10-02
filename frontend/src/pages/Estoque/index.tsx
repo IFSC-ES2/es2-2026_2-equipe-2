@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '../../components/atoms/Button';
 import Table, {
   type Column,
@@ -7,21 +7,28 @@ import Table, {
 import ProductCreateModal from '../../components/organisms/Modals/ProductCreateModal';
 import BaseLayout from '../../components/templates/BaseLayout';
 import { getProdutos, deleteProduto } from '../../services/produto.service';
+import type { Produto } from '../../interfaces/produto.interface';
 
 const Estoque: React.FC = () => {
   const [columns, setColumns] = useState<Column[]>([]);
   const [data, setData] = useState<TableDataRow[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<Produto | undefined>(
+    undefined,
+  );
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const loadData = useCallback(async () => {
+  const applyResult = (result: Awaited<ReturnType<typeof getProdutos>>) => {
+    setColumns(result.columns);
+    setData(result.data);
+  };
+
+  const loadData = async () => {
     try {
       setLoading(true);
       setError(null);
-      const result = await getProdutos();
-      setColumns(result.columns);
-      setData(result.data);
+      applyResult(await getProdutos());
     } catch (err: unknown) {
       setError(
         err instanceof Error ? err.message : 'Erro ao carregar produtos',
@@ -29,17 +36,14 @@ const Estoque: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  };
 
   useEffect(() => {
     let isMounted = true;
 
     getProdutos()
       .then((result) => {
-        if (isMounted) {
-          setColumns(result.columns);
-          setData(result.data);
-        }
+        if (isMounted) applyResult(result);
       })
       .catch((err: unknown) => {
         if (isMounted) {
@@ -49,15 +53,29 @@ const Estoque: React.FC = () => {
         }
       })
       .finally(() => {
-        if (isMounted) {
-          setLoading(false);
-        }
+        if (isMounted) setLoading(false);
       });
 
     return () => {
       isMounted = false;
     };
   }, []);
+
+  const handleEdit = (row: TableDataRow) => {
+    setSelectedProduct(row as unknown as Produto);
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setSelectedProduct(undefined);
+  };
+
+  const handleSuccess = () => {
+    loadData();
+    handleModalClose();
+  };
+
   const handleDelete = async (row: TableDataRow) => {
     try {
       const { id } = row as { id: string };
@@ -93,14 +111,20 @@ const Estoque: React.FC = () => {
         )}
 
         {!loading && !error && (
-          <Table columns={columns} data={data} onDelete={handleDelete} />
+          <Table
+            columns={columns}
+            data={data}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+          />
         )}
       </div>
 
       <ProductCreateModal
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSuccess={loadData}
+        onClose={handleModalClose}
+        onSuccess={handleSuccess}
+        product={selectedProduct}
       />
     </BaseLayout>
   );
