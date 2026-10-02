@@ -95,3 +95,9 @@
 - Uso: implementação do Swagger clientes (criação dos schemas Cliente, ClienteCreate e ClienteUpdate; documentação dos endpoints GET, POST, PUT e DELETE em /clientes e /clientes/{id}) e correção dos retornos de erro na rota DELETE de produtos
 - Artefato: `api-estoque/src/docs/*`
 - Validação: validação do build TypeScript (`npm run build`), execução dos testes unitários (`vitest`) com 100% de sucesso e verificando o Swagger disposto em `/api/docs/#/`
+
+- Data: 01/10/2026
+- Ferramenta: Antigravity
+- Uso: auxílio na atualização do código para implementar o deletar e editar na página de clientes e criação de seus respectivos testes
+- Artefato: `frontend/src/components/organisms/Modals/ClientCreateModal/`, `frontend/src/components/organisms/Form/FormCreateClient/`
+- Validação: verificação dos códigos para ver se está no padrão e funcional
