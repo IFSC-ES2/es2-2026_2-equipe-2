@@ -47,7 +47,12 @@ Em muitas distribuidoras, o controle de estoque, a conferência de mercadorias e
 Gestão logística e operações de armazém, nos processos de recebimento, armazenagem, conferência e expedição de mercadorias em empresas distribuidoras.
 
 **(c) Usuários principais e demais interessados**  
-Operadores, responsáveis pelo registro de carga e descarga de mercadorias; Equipe de conferência, que valida pedidos recebidos e expedidos; Equipe administrativa/comercial, responsável pelo cadastro e gestão de clientes; Gestores/supervisores, que acompanham níveis de estoque e o andamento das operações.
+Operadores, responsáveis pelo registro de carga e descarga de mercadorias; Equipe de conferência, que valida pedidos recebidos e expedidos; Equipe administrativa/comercial, responsável pelo cadastro e gestão de cliente- **PRs desta etapa:**
+
+- [#40 - ci/configuração inicial ci ](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/40)
+- [#41 - Docs/fluxo trabalho](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/41)
+- [#42 - docs: atributos de qualidadedocs: foi inserido os atributos de qualidade, relacionamento com riscos](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/42)
+- [#43 - docs(riscos): Criação do arquivo riscos.md](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/43)s; Gestores/supervisores, que acompanham níveis de estoque e o andamento das operações.
 
 **(d) Local, organização ou contexto de aplicação**  
 O sistema é pensado para uma distribuidora de médio porte, com múltiplos depósitos, baseada em uma empresa real do setor conhecida pela equipe.
@@ -119,92 +124,56 @@ Ter uma primeira versão funcionando que já mostre o começo do fluxo da opera�
 - O que depende de sistemas externos ficou de fora do semestre;
 - O que tem regras de negócio mais complexas, como financeiro, também ficou de fora por falta de tempo.
 
-## Como Rodar o Projeto (Docker)
+## 3. Funcionalidades Implementadas
 
-O projeto possui dois ambientes configurados via Docker Compose: **desenvolvimento** (com hot-reload) e **produção** (build otimizado). A configuração é dividida em três arquivos:
+### API de Estoque (`api-estoque`)
 
-- `docker-compose.yml` — base, com o que é comum a qualquer ambiente (**Banco de dados**)
-- `docker-compose.dev.yml` — overrides de desenvolvimento (hot-reload, portas de dev)
-- `docker-compose.prod.yml` — overrides de produção (build otimizado, portas de prod)
+| Recurso      | Endpoints disponíveis                                              |
+| ------------ | ------------------------------------------------------------------ |
+| Produtos     | `GET`, `POST /produtos` · `GET`, `PUT`, `DELETE /produtos/:id`     |
+| Categorias   | `GET`, `POST /categorias` · `GET`, `PUT`, `DELETE /categorias/:id` |
+| Fornecedores | `GET`                                                              |
+| Clientes     | `GET`, `POST /clientes` · `GET`, `PUT`, `DELETE /clientes/:id`     |
+| Documentação | `GET /docs` — Swagger UI com todos os endpoints documentados       |
 
-O banco de dados é o mesmo independente do ambiente; o que muda entre dev e prod são apenas os serviços `web` e `api-estoque` (Dockerfile, portas e variáveis de ambiente).
+### Frontend
 
-Para simplificar os comandos, o projeto possui um `Makefile` na raiz com os atalhos mais usados. Todos os exemplos abaixo usam `make`; se preferir, o comando `docker compose` equivalente está descrito em cada seção.
+- Barra lateral (Sidebar) com navegação entre Dashboard, Vendas, Finanças e Estoque;
+- Layout base compartilhado por todas as páginas;
+- Página de Estoque com listagem, criação, edição e exclusão de produtos via modais;
+- Exibição do nome do fornecedor e da categoria na tabela de produtos;
+- Ícones de ação (editar/excluir) com estilização Bootstrap.
 
-### Ambiente de Desenvolvimento
+## Como Rodar o Projeto
 
-Sobe `web` e `api-estoque` com hot-reload (Vite e tsx watch, respectivamente), sincronizando alterações do código-fonte automaticamente com o container, além do Nginx e do banco.
+### Pré-requisitos
+
+- [Docker](https://docs.docker.com/get-docker/) e [Docker Compose](https://docs.docker.com/compose/install/) instalados;
+- Arquivo `.env.development` na raiz do projeto (copie de `.env.example`).
+
+```bash
+cp .env.example .env.development
+```
+
+### Subindo o ambiente de desenvolvimento
 
 ```bash
 make dev
 ```
 
-> **Importante:** o alvo `dev` usa `docker compose watch` internamente, e não `up`, para que as alterações em `src/` sejam refletidas automaticamente nos containers via hot-reload.
+Esse comando usa `docker compose watch` internamente, sincronizando alterações do código-fonte automaticamente com os containers (hot-reload no frontend e na API).
 
-Acesse em: [http://localhost:3000](http://localhost:3000) (frontend) e [http://localhost:5000/ping](http://localhost:5000/ping) (API — ajuste conforme as portas definidas em `.env.development`)
+Após subir, acesse:
 
-### Ambiente de Produção
-
-Gera o build de produção de ambos os serviços e sobe tudo já otimizado, junto com Nginx e banco, em background.
-
-```bash
-make prod
-```
-
-Acesse pela porta configurada em `.env.production`.
-
-### Logs
-
-```bash
-make logs-dev   # logs em tempo real do ambiente de desenvolvimento
-make logs-prod  # logs em tempo real do ambiente de produção
-```
-
-### Status dos containers
-
-```bash
-make ps-dev
-make ps-prod
-```
+| Serviço        | Endereço                                                         |
+| -------------- | ---------------------------------------------------------------- |
+| **Frontend**   | [http://localhost:8080](http://localhost:8080)                   |
+| **Swagger UI** | [http://localhost:8080/api/docs](http://localhost:8080/api/docs) |
 
 ### Encerrando os containers
 
 ```bash
-make down-dev   # ambiente de desenvolvimento
-make down-prod  # ambiente de produção
+make down
 ```
 
-### Reiniciando os containers
-
-```bash
-make restart-dev
-make restart-prod
-```
-
-### Rebuild manual (sem cache)
-
-Caso precise forçar a reconstrução das imagens (ex: após alterar um `Dockerfile` ou `package.json`):
-
-```bash
-make build       # imagens de desenvolvimento
-make build-prod  # imagens de produção
-```
-
-### Todos os comandos disponíveis
-
-| Comando             | Descrição                             |
-| ------------------- | ------------------------------------- |
-| `make dev`          | Sobe o ambiente de dev com hot-reload |
-| `make prod`         | Sobe o ambiente de prod em background |
-| `make down-dev`     | Encerra os containers de dev          |
-| `make down-prod`    | Encerra os containers de prod         |
-| `make build`        | Rebuild sem cache (dev)               |
-| `make build-prod`   | Rebuild sem cache (prod)              |
-| `make logs-dev`     | Logs em tempo real (dev)              |
-| `make logs-prod`    | Logs em tempo real (prod)             |
-| `make ps-dev`       | Lista containers em execução (dev)    |
-| `make ps-prod`      | Lista containers em execução (prod)   |
-| `make restart-dev`  | Reinicia o ambiente de dev            |
-| `make restart-prod` | Reinicia o ambiente de prod           |
-
-> **Nota (Windows):** o `make` não vem instalado por padrão. Use o WSL, Git Bash, ou instale via Chocolatey (`choco install make`). Alternativamente, rode os comandos `docker compose` equivalentes listados em cada seção.
+> **Nota (Windows):** o `make` não vem instalado por padrão. Use o WSL, Git Bash, ou instale via Chocolatey (`choco install make`).

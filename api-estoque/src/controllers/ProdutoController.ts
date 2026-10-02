@@ -54,7 +54,11 @@ export class ProdutoController {
       return res
         .status(HttpStatus.OK)
         .json(
-          createSuccessBodyResponse(HttpStatus.OK, "Product retrieved", produto),
+          createSuccessBodyResponse(
+            HttpStatus.OK,
+            "Product retrieved",
+            produto,
+          ),
         );
     } catch (error) {
       logger.error(
@@ -68,7 +72,9 @@ export class ProdutoController {
   public async create(req: Request, res: Response): Promise<Response> {
     try {
       const data: ProdutoCreate = req.body;
-      logger.info(`[ProdutoController] create - creating product "${data?.nome}"`);
+      logger.info(
+        `[ProdutoController] create - creating product "${data?.nome}"`,
+      );
 
       const created = await this.service.create(data);
 

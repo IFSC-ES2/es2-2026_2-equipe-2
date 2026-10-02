@@ -89,3 +89,9 @@
 - Uso: auxílio na criação da barra lateral (Sidebar) e nos testes unitários de cada um dos componentes criados
 - Artefato: `frontend/src/components/organisms/Sidebar/`, `frontend/src/components/organisms/Header/`, `frontend/src/components/templates/BaseLayout/`
 - Validação: execução de todos os testes unitários com sucesso garantindo o funcionamento da navegação e componentes
+
+- Data: 01/10/2026
+- Ferramenta: Antigravity
+- Uso: implementação do Swagger clientes (criação dos schemas Cliente, ClienteCreate e ClienteUpdate; documentação dos endpoints GET, POST, PUT e DELETE em /clientes e /clientes/{id}) e correção dos retornos de erro na rota DELETE de produtos
+- Artefato: `api-estoque/src/docs/*`
+- Validação: validação do build TypeScript (`npm run build`), execução dos testes unitários (`vitest`) com 100% de sucesso e verificando o Swagger disposto em `/api/docs/#/`
