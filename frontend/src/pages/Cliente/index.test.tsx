@@ -110,4 +110,136 @@ describe('Page Cliente', () => {
 
     expect(clienteService.getClientes).toHaveBeenCalledTimes(2);
   });
+
+  it('deve abrir o modal de edição com os dados ao clicar em Editar e recarregar os dados ao salvar', async () => {
+    vi.mocked(clienteService.getClientes).mockResolvedValue({
+      columns: [
+        { key: 'id', label: 'ID' },
+        { key: 'nome', label: 'Nome' },
+        { key: 'email', label: 'E-mail' },
+      ],
+      data: [{ id: 1, nome: 'João da Silva', email: 'joao@email.com' }],
+    });
+
+    renderCliente();
+
+    await waitFor(() => {
+      expect(screen.getByText('João da Silva')).toBeDefined();
+    });
+
+    fireEvent.click(screen.getByTitle('Editar'));
+
+    await waitFor(() => {
+      expect(screen.getByText('Editar Cliente')).toBeDefined();
+      expect(
+        (screen.getByLabelText(/Nome \/ Razão Social \*/i) as HTMLInputElement)
+          .value,
+      ).toBe('João da Silva');
+      expect(
+        (screen.getByLabelText(/E-mail \*/i) as HTMLInputElement).value,
+      ).toBe('joao@email.com');
+      expect(screen.getByText('Salvar Alterações')).toBeDefined();
+    });
+
+    fireEvent.change(screen.getByLabelText(/Nome \/ Razão Social \*/i), {
+      target: { value: 'João da Silva Editado' },
+    });
+
+    vi.mocked(clienteService.updateCliente).mockResolvedValueOnce({
+      id: 1,
+      nome: 'João da Silva Editado',
+      email: 'joao@email.com',
+      telefone: null,
+      documento: null,
+      endereco: null,
+      criado_em: new Date().toISOString(),
+    });
+
+    fireEvent.click(screen.getByText('Salvar Alterações'));
+
+    await waitFor(() => {
+      expect(screen.queryByText('Editar Cliente')).toBeNull();
+    });
+
+    expect(clienteService.updateCliente).toHaveBeenCalledWith(1, {
+      nome: 'João da Silva Editado',
+      email: 'joao@email.com',
+      telefone: null,
+      documento: null,
+      endereco: null,
+    });
+    expect(clienteService.getClientes).toHaveBeenCalledTimes(2);
+  });
+
+  it('deve excluir o cliente ao clicar em Excluir e confirmar a exclusão', async () => {
+    vi.mocked(clienteService.getClientes).mockResolvedValue({
+      columns: [
+        { key: 'id', label: 'ID' },
+        { key: 'nome', label: 'Nome' },
+        { key: 'email', label: 'E-mail' },
+      ],
+      data: [{ id: 1, nome: 'João da Silva', email: 'joao@email.com' }],
+    });
+
+    renderCliente();
+
+    await waitFor(() => {
+      expect(screen.getByText('João da Silva')).toBeDefined();
+    });
+
+    fireEvent.click(screen.getByTitle('Excluir'));
+
+    await waitFor(() => {
+      expect(screen.getByText('Confirmar exclusão')).toBeDefined();
+    });
+
+    vi.mocked(clienteService.deleteCliente).mockResolvedValueOnce();
+
+    fireEvent.click(screen.getByText('Confirmar'));
+
+    await waitFor(() => {
+      expect(clienteService.deleteCliente).toHaveBeenCalledWith(1);
+    });
+
+    expect(clienteService.getClientes).toHaveBeenCalledTimes(2);
+  });
+
+  it('deve exibir mensagem de erro quando a exclusão falhar', async () => {
+    vi.mocked(clienteService.getClientes).mockResolvedValue({
+      columns: [
+        { key: 'id', label: 'ID' },
+        { key: 'nome', label: 'Nome' },
+        { key: 'email', label: 'E-mail' },
+      ],
+      data: [{ id: 1, nome: 'João da Silva', email: 'joao@email.com' }],
+    });
+
+    vi.mocked(clienteService.deleteCliente).mockRejectedValueOnce(
+      new Error(
+        'Não é possível excluir porque o cliente está associado a pedidos.',
+      ),
+    );
+
+    renderCliente();
+
+    await waitFor(() => {
+      expect(screen.getByText('João da Silva')).toBeDefined();
+    });
+
+    fireEvent.click(screen.getByTitle('Excluir'));
+
+    await waitFor(() => {
+      expect(screen.getByText('Confirmar exclusão')).toBeDefined();
+    });
+
+    fireEvent.click(screen.getByText('Confirmar'));
+
+    await waitFor(() => {
+      expect(
+        screen.getByText(
+          'Não é possível excluir porque o cliente está associado a pedidos.',
+        ),
+      ).toBeDefined();
+    });
+  });
 });
