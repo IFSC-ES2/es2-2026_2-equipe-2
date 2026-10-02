@@ -1,4 +1,4 @@
-import type { Column } from '../components/organisms/GenericTable';
+import type { Column, TableDataRow } from '../components/organisms/Table';
 import {
   fetchGenericList,
   type GenericListResponse,
@@ -10,7 +10,7 @@ import {
   type ProdutoCreate,
 } from '../interfaces/produto.interface';
 
-const PRODUTOS_API_URL = 'http://localhost:8080/api/produtos';
+const PRODUTOS_API_URL = 'http://localhost:5000/produtos';
 
 const produtoLabels: Record<string, string> = {
   id: 'ID',
@@ -27,18 +27,31 @@ const produtoLabels: Record<string, string> = {
 };
 
 function mapProdutoColumns(columns: Column[]): Column[] {
-  return columns.map((column) => ({
-    ...column,
-    label: produtoLabels[column.key] ?? column.label,
-  }));
+  return columns
+    .filter(
+      (column) => column.key !== 'categoria' && column.key !== 'fornecedor',
+    )
+    .map((column) => ({
+      ...column,
+      label: produtoLabels[column.key] ?? column.label,
+    }));
 }
 
 export async function getProdutos(): Promise<GenericListResponse> {
   const result = await fetchGenericList(PRODUTOS_API_URL);
 
+  const formattedData: TableDataRow[] = result.data.map((item: unknown) => {
+    const produto = item as Produto;
+    return {
+      ...produto,
+      categoria_id: produto.categoria?.nome ?? produto.categoria_id,
+      fornecedor_id: produto.fornecedor?.nome ?? produto.fornecedor_id,
+    } as unknown as TableDataRow;
+  });
+
   return {
     columns: mapProdutoColumns(result.columns),
-    data: result.data,
+    data: formattedData,
   };
 }
 
@@ -84,4 +97,19 @@ export async function createProduto(data: ProdutoCreate) {
 
   const result: Produto = await response.json();
   return result;
+}
+
+export async function deleteProduto(id: string): Promise<void> {
+  const response = await fetch(`${PRODUTOS_API_URL}/${id}`, {
+    method: 'DELETE',
+  });
+
+  if (!response.ok) {
+    const errorBody = await response.json().catch(() => null);
+    const friendlyMessage = errorBody?.title?.includes('still referenced')
+      ? 'Não é possível excluir porque o produto está associado a itens de pedido.'
+      : (errorBody?.message ??
+        `Erro ao excluir produto (status ${response.status})`);
+    throw new Error(friendlyMessage);
+  }
 }

@@ -1,7 +1,4 @@
-import type {
-  Column,
-  TableDataRow,
-} from '../components/organisms/GenericTable';
+import type { Column, TableDataRow } from '../components/organisms/Table';
 
 export interface GenericListResponse {
   columns: Column[];

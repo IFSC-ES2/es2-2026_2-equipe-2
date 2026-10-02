@@ -19,7 +19,9 @@ vi.mock("./../src/config/logger", () => ({
 function makeMockRepository(): ProdutoRepository {
   return {
     findAll: vi.fn(),
+    findAllWithRelacionamentos: vi.fn(),
     findById: vi.fn(),
+    findByIdWithRelacionamentos: vi.fn(),
     create: vi.fn(),
     update: vi.fn(),
     delete: vi.fn(),
@@ -63,17 +65,19 @@ describe("ProdutoService", () => {
 
   describe("findAll", () => {
     it("deve retornar todos os produtos", async () => {
-      (repository.findAll as any).mockResolvedValue([produtoMock]);
+      (repository.findAllWithRelacionamentos as any).mockResolvedValue([
+        produtoMock,
+      ]);
 
       const result = await service.findAll();
 
-      expect(repository.findAll).toHaveBeenCalledOnce();
+      expect(repository.findAllWithRelacionamentos).toHaveBeenCalledOnce();
       expect(result).toEqual([produtoMock]);
     });
 
     it("deve propagar o erro quando o repository falhar", async () => {
       const error = new Error("database offline");
-      (repository.findAll as any).mockRejectedValue(error);
+      (repository.findAllWithRelacionamentos as any).mockRejectedValue(error);
 
       await expect(service.findAll()).rejects.toThrow(error);
     });
@@ -81,20 +85,24 @@ describe("ProdutoService", () => {
 
   describe("findById", () => {
     it("deve retornar o produto quando o id é válido", async () => {
-      (repository.findById as any).mockResolvedValue(produtoMock);
+      (repository.findByIdWithRelacionamentos as any).mockResolvedValue(
+        produtoMock,
+      );
 
       const result = await service.findById(1);
 
-      expect(repository.findById).toHaveBeenCalledWith(1);
+      expect(repository.findByIdWithRelacionamentos).toHaveBeenCalledWith(1);
       expect(result).toEqual(produtoMock);
     });
 
     it("deve aceitar id em formato string e converter para number", async () => {
-      (repository.findById as any).mockResolvedValue(produtoMock);
+      (repository.findByIdWithRelacionamentos as any).mockResolvedValue(
+        produtoMock,
+      );
 
       await service.findById("1");
 
-      expect(repository.findById).toHaveBeenCalledWith(1);
+      expect(repository.findByIdWithRelacionamentos).toHaveBeenCalledWith(1);
     });
 
     it.each([0, NaN, "abc", undefined as any, null as any])(
@@ -103,19 +111,19 @@ describe("ProdutoService", () => {
         await expect(service.findById(invalidId)).rejects.toThrow(
           ValidationError,
         );
-        expect(repository.findById).not.toHaveBeenCalled();
+        expect(repository.findByIdWithRelacionamentos).not.toHaveBeenCalled();
       },
     );
 
     it("deve lançar EntityNotFound quando o produto não existe", async () => {
-      (repository.findById as any).mockResolvedValue(null);
+      (repository.findByIdWithRelacionamentos as any).mockResolvedValue(null);
 
       await expect(service.findById(999)).rejects.toThrow(EntityNotFound);
     });
 
     it("deve propagar o erro quando o repository falhar", async () => {
       const error = new Error("database offline");
-      (repository.findById as any).mockRejectedValue(error);
+      (repository.findByIdWithRelacionamentos as any).mockRejectedValue(error);
 
       await expect(service.findById(1)).rejects.toThrow(error);
     });
@@ -240,34 +248,34 @@ describe("ProdutoService", () => {
     it("deve lançar EntityNotFound quando o produto não existe", async () => {
       (repository.findById as any).mockResolvedValue(null);
 
-      await expect(
-        service.update(999, { preco: 100 }),
-      ).rejects.toThrow(EntityNotFound);
+      await expect(service.update(999, { preco: 100 })).rejects.toThrow(
+        EntityNotFound,
+      );
       expect(repository.update).not.toHaveBeenCalled();
     });
 
     it("deve lançar ValidationError para id inválido", async () => {
-      await expect(
-        service.update(0, { preco: 100 }),
-      ).rejects.toThrow(ValidationError);
+      await expect(service.update(0, { preco: 100 })).rejects.toThrow(
+        ValidationError,
+      );
       expect(repository.findById).not.toHaveBeenCalled();
     });
 
     it("deve lançar ValidationError quando o preco é negativo", async () => {
       (repository.findById as any).mockResolvedValue(produtoMock);
 
-      await expect(
-        service.update(1, { preco: -5 }),
-      ).rejects.toThrow(ValidationError);
+      await expect(service.update(1, { preco: -5 })).rejects.toThrow(
+        ValidationError,
+      );
       expect(repository.update).not.toHaveBeenCalled();
     });
 
     it("deve lançar ValidationError quando a quantidade é negativa", async () => {
       (repository.findById as any).mockResolvedValue(produtoMock);
 
-      await expect(
-        service.update(1, { quantidade: -3 }),
-      ).rejects.toThrow(ValidationError);
+      await expect(service.update(1, { quantidade: -3 })).rejects.toThrow(
+        ValidationError,
+      );
       expect(repository.update).not.toHaveBeenCalled();
     });
 
@@ -276,9 +284,7 @@ describe("ProdutoService", () => {
       (repository.findById as any).mockResolvedValue(produtoMock);
       (repository.update as any).mockRejectedValue(error);
 
-      await expect(
-        service.update(1, { preco: 100 }),
-      ).rejects.toThrow(error);
+      await expect(service.update(1, { preco: 100 })).rejects.toThrow(error);
     });
   });
 

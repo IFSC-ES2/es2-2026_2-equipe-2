@@ -1,0 +1,30 @@
+.base-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--bs-body-bg, #eaf3fa);
+}
+
+.base-layout-main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-width: 0;
+  min-height: 100vh;
+}
+
+.base-layout-content {
+  flex-grow: 1;
+  padding: 0 2rem 2rem 2rem;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .base-layout {
+    flex-direction: column;
+  }
+
+  .base-layout-content {
+    padding: 0 1rem 1rem 1rem;
+  }
+}

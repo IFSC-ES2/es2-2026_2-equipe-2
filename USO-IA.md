@@ -71,3 +71,39 @@
 - Uso: consulta para criação dos componentes do frontend
 - Artefato: frontend/src/components/
 - Validação: a tipagem foi bastante pesquisada para ser adequada com o código e evitar erros
+
+- Data: 20/09/2026
+- Ferramenta: Antigravity
+- Uso: utilização para consultar o que é utilizado dentro do frontend e o seu motivo
+- Artefato: frontend/src/components/\*
+- Validação: checkando componentes que chamam aqueles componentes validados
+
+- Data: 22/09/2026
+- Ferramenta: Claude
+- Uso: criação dos schemas para documentação da API
+- Artefato: api-estoque/src/docs/schemas
+- Validação: verificar se os schemas estão condizentes com os retornos da API e respeito suas responsabilidades
+
+- Data: 30/09/2026
+- Ferramenta: Antigravity
+- Uso: auxílio na criação da barra lateral (Sidebar) e nos testes unitários de cada um dos componentes criados
+- Artefato: `frontend/src/components/organisms/Sidebar/`, `frontend/src/components/organisms/Header/`, `frontend/src/components/templates/BaseLayout/`
+- Validação: execução de todos os testes unitários com sucesso garantindo o funcionamento da navegação e componentes
+
+- Data: 01/10/2026
+- Ferramenta: Antigravity
+- Uso: implementação do Swagger clientes (criação dos schemas Cliente, ClienteCreate e ClienteUpdate; documentação dos endpoints GET, POST, PUT e DELETE em /clientes e /clientes/{id}) e correção dos retornos de erro na rota DELETE de produtos
+- Artefato: `api-estoque/src/docs/*`
+- Validação: validação do build TypeScript (`npm run build`), execução dos testes unitários (`vitest`) com 100% de sucesso e verificando o Swagger disposto em `/api/docs/#/`
+
+- Data: 01/10/2026
+- Ferramenta: Gemini
+- Uso: identificação de padrões de projeto OO aplicados (Singleton e Facade) no backend e redação do documento ADR registrando essas escolhas arquiteturais
+- Artefato: `docs/adrs/ADR-0007-padroes-de-projeto-oo.md`
+- Validação: conferência das classes apontadas no backend (`App.ts`, `database.ts`) garantindo a real aplicação dos padrões identificados e verificação da estrutura da ADR gerada
+
+- Data: 01/10/2026
+- Ferramenta: Antigravity
+- Uso: auxílio na atualização do código para implementar o deletar e editar na página de clientes e criação de seus respectivos testes
+- Artefato: `frontend/src/components/organisms/Modals/ClientCreateModal/`, `frontend/src/components/organisms/Form/FormCreateClient/`
+- Validação: verificação dos códigos para ver se está no padrão e funcional
