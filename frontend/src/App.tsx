@@ -6,7 +6,7 @@ import './App.css';
 import Estoque from './pages/Estoque';
 import Dashboard from './pages/Dashboard';
 import Vendas from './pages/Vendas';
-import Financas from './pages/Financas';
+import Cliente from './pages/Cliente';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
           <Route path="/estoque" element={<Estoque />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/vendas" element={<Vendas />} />
-          <Route path="/financas" element={<Financas />} />
+          <Route path="/clientes" element={<Cliente />} />
           <Route path="/" element={<Navigate to="/estoque" replace />} />
           <Route path="*" element={<Navigate to="/estoque" replace />} />
         </Routes>

@@ -24,7 +24,7 @@ describe('Organism Sidebar', () => {
 
     expect(screen.getByRole('link', { name: /dashboard/i })).toBeDefined();
     expect(screen.getByRole('link', { name: /vendas/i })).toBeDefined();
-    expect(screen.getByRole('link', { name: /finanças/i })).toBeDefined();
+    expect(screen.getByRole('link', { name: /clientes/i })).toBeDefined();
     expect(screen.getByRole('link', { name: /estoque/i })).toBeDefined();
   });
 
