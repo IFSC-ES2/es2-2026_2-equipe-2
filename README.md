@@ -32,11 +32,24 @@ Sistema de apoio à gestão operacional de armazéns e centros de distribuição
 - **Fluxo de trabalho:** [FLUXO-DE-TRABALHO.md](./docs/FLUXO-DE-TRABALHO.md)
 - **CI mínimo:** [CI.md](./docs/CI.md)
 - **Critérios de qualidade:** [qualidade.md](./docs/qualidade.md)
+- **Planejamento Sprint 1:** [planejamento-S1.md](./docs/planejamento-S1.md)
+- **Escopo Sprint 1:** [escopo-S1.md](./docs/escopo-S1.md)
+- **Contribuições Sprint 1:** [CONTRIBUICOES.md](./docs/CONTRIBUICOES.md)
+- **Planejamento Sprint 2:** [planejamento-S2.md](./docs/planejamento-S2.md)
+- **Contribuições Sprint 2:** [CONTRIBUICOES-S2.md](./docs/CONTRIBUICOES-S2.md)
+
 - **PRs desta etapa:**
-  - [#40 - ci/configuração inicial ci ](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/40)
-  - [#41 - Docs/fluxo trabalho](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/41)
-  - [#42 - docs: atributos de qualidadedocs: foi inserido os atributos de qualidade, relacionamento com riscos](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/42)
-  - [#43 - docs(riscos): Criação do arquivo riscos.md](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/43)
+  - [#91 - docs/swagger api estoque ](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/91)
+  - [#96 - feat: Adicionado exibição do nome do fornecedor e da categoria](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/96)
+  - [#104 - Style/estilizacao](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/104)
+  - [#105 - Feat/barra lateral e base layout](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/105)
+  - [#106 - feat: Adicionado delete de produtos e rodado format](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/106)
+  - [#107 - Feat/crud clientes](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/107)
+  - [#108 - feat/add editar em produtos](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/108)
+  - [#112 - Docs/swagger clientes](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/112)
+  - [#116 - docs: update readme](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/116)
+  - [#117 - docs: Criação da ADR-0007](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/117)
+  - [#118 - Feat/pagina clientes](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/118)
 
 ## 1. Visão do Produto
 
