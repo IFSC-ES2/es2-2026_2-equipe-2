@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '../../components/atoms/Button';
 import Table, {
   type Column,
@@ -14,18 +14,21 @@ const Cliente: React.FC = () => {
   const [data, setData] = useState<TableDataRow[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedCliente, setSelectedCliente] = useState<
     ClienteType | undefined
   >(undefined);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const loadData = useCallback(async () => {
+  const applyResult = (result: Awaited<ReturnType<typeof getClientes>>) => {
+    setColumns(result.columns);
+    setData(result.data);
+  };
+
+  const loadData = async () => {
     try {
       setLoading(true);
       setError(null);
-      const result = await getClientes();
-      setColumns(result.columns);
-      setData(result.data);
+      applyResult(await getClientes());
     } catch (err: unknown) {
       setError(
         err instanceof Error ? err.message : 'Erro ao carregar clientes',
@@ -33,17 +36,14 @@ const Cliente: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  };
 
   useEffect(() => {
     let isMounted = true;
 
     getClientes()
       .then((result) => {
-        if (isMounted) {
-          setColumns(result.columns);
-          setData(result.data);
-        }
+        if (isMounted) applyResult(result);
       })
       .catch((err: unknown) => {
         if (isMounted) {
@@ -53,9 +53,7 @@ const Cliente: React.FC = () => {
         }
       })
       .finally(() => {
-        if (isMounted) {
-          setLoading(false);
-        }
+        if (isMounted) setLoading(false);
       });
 
     return () => {
@@ -63,23 +61,24 @@ const Cliente: React.FC = () => {
     };
   }, []);
 
-  const handleOpenCreate = () => {
-    setSelectedCliente(undefined);
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedCliente(undefined);
-  };
-
   const handleEdit = (row: TableDataRow) => {
     setSelectedCliente(row as unknown as ClienteType);
     setIsModalOpen(true);
   };
 
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setSelectedCliente(undefined);
+  };
+
+  const handleSuccess = () => {
+    loadData();
+    handleModalClose();
+  };
+
   const handleDelete = async (row: TableDataRow) => {
     try {
+      setError(null);
       const { id } = row as { id: string | number };
       await deleteCliente(id);
       await loadData();
@@ -93,7 +92,7 @@ const Cliente: React.FC = () => {
       <div className="card border-0 shadow-sm rounded-4 p-4 bg-white">
         <div className="d-flex justify-content-between align-items-center mb-4">
           <h3 className="h4 fw-bold mb-0">Listagem dos Clientes</h3>
-          <Button onClick={handleOpenCreate} variant="primary">
+          <Button onClick={() => setIsModalOpen(true)} variant="primary">
             Novo Cliente
           </Button>
         </div>
@@ -124,8 +123,8 @@ const Cliente: React.FC = () => {
 
       <ClientCreateModal
         isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        onSuccess={loadData}
+        onClose={handleModalClose}
+        onSuccess={handleSuccess}
         cliente={selectedCliente}
       />
     </BaseLayout>

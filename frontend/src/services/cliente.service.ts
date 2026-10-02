@@ -48,7 +48,9 @@ export async function createCliente(data: ClienteCreate): Promise<Cliente> {
   if (!response.ok) {
     const errorBody = await response.json().catch(() => null);
     throw new Error(
-      errorBody?.message ?? `Erro ao criar cliente (status ${response.status})`,
+      errorBody?.title ??
+        errorBody?.message ??
+        `Erro ao criar cliente (status ${response.status})`,
     );
   }
 
@@ -69,7 +71,8 @@ export async function updateCliente(
   if (!response.ok) {
     const errorBody = await response.json().catch(() => null);
     throw new Error(
-      errorBody?.message ??
+      errorBody?.title ??
+        errorBody?.message ??
         `Erro ao atualizar cliente (status ${response.status})`,
     );
   }
@@ -85,9 +88,13 @@ export async function deleteCliente(id: number | string): Promise<void> {
 
   if (!response.ok) {
     const errorBody = await response.json().catch(() => null);
-    throw new Error(
-      errorBody?.message ??
-        `Erro ao excluir cliente (status ${response.status})`,
-    );
+    const friendlyMessage =
+      errorBody?.data?.detail?.includes('still referenced') ||
+      errorBody?.title?.includes('still referenced')
+        ? 'Não é possível excluir porque o cliente está associado a pedidos.'
+        : (errorBody?.title ??
+          errorBody?.message ??
+          `Erro ao excluir cliente (status ${response.status})`);
+    throw new Error(friendlyMessage);
   }
 }

@@ -14,29 +14,59 @@ export interface FormClientProps {
   cliente?: Cliente;
   onSuccess?: () => void;
   onCancel?: () => void;
+  saveService?: (data: ClienteCreate) => Promise<unknown>;
 }
 
-const buildInitialForm = (cliente?: Cliente) => ({
-  nome: cliente?.nome ?? '',
-  email: cliente?.email ?? '',
-  telefone: cliente?.telefone ?? '',
-  documento: cliente?.documento ?? '',
-  endereco: cliente?.endereco ?? '',
-});
+const INITIAL_FORM = {
+  nome: '',
+  email: '',
+  telefone: '',
+  documento: '',
+  endereco: '',
+};
+
+const isDocumentoValid = (documento: string) => {
+  const trimmed = documento.trim();
+  if (!trimmed) return true;
+  return /^[0-9.\-/\s]+$/.test(trimmed) && /\d/.test(trimmed);
+};
+
+const isTelefoneValid = (telefone: string) => {
+  const trimmed = telefone.trim();
+  if (!trimmed) return true;
+  return /^[0-9()\-+\s]+$/.test(trimmed) && /\d/.test(trimmed);
+};
 
 const FormCreateClient: React.FC<FormClientProps> = ({
   cliente,
   onSuccess,
   onCancel,
+  saveService = createCliente,
 }) => {
   const isEditMode = Boolean(cliente);
-  const [formData, setFormData] = useState(buildInitialForm(cliente));
+
+  const buildInitialForm = (cliente?: Cliente) =>
+    cliente
+      ? {
+          nome: cliente.nome ?? '',
+          email: cliente.email ?? '',
+          telefone: cliente.telefone ?? '',
+          documento: cliente.documento ?? '',
+          endereco: cliente.endereco ?? '',
+        }
+      : INITIAL_FORM;
+
+  const [formData, setFormData] = useState(() => buildInitialForm(cliente));
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleCancel = () => {
+  const resetForm = () => {
     setFormData(buildInitialForm(cliente));
     setError(null);
+  };
+
+  const handleCancel = () => {
+    resetForm();
     onCancel?.();
   };
 
@@ -56,6 +86,18 @@ const FormCreateClient: React.FC<FormClientProps> = ({
       return;
     }
 
+    if (!isDocumentoValid(formData.documento)) {
+      setError(
+        'Documento inválido. Utilize apenas números e símbolos de CPF/CNPJ.',
+      );
+      return;
+    }
+
+    if (!isTelefoneValid(formData.telefone)) {
+      setError('Telefone inválido. Utilize apenas números e símbolos.');
+      return;
+    }
+
     const payload: ClienteCreate = {
       nome: nomeTrimmed,
       email: emailTrimmed,
@@ -68,15 +110,21 @@ const FormCreateClient: React.FC<FormClientProps> = ({
       setLoading(true);
       setError(null);
 
-      if (isEditMode && cliente) {
-        await updateCliente(cliente.id, payload);
-      } else {
-        await createCliente(payload);
-      }
+      const service = cliente
+        ? (data: ClienteCreate) => updateCliente(cliente.id, data)
+        : saveService;
+      await service(payload);
 
+      resetForm();
       onSuccess?.();
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Erro ao salvar cliente');
+      setError(
+        err instanceof Error
+          ? err.message
+          : isEditMode
+            ? 'Erro ao atualizar cliente'
+            : 'Erro ao cadastrar cliente',
+      );
     } finally {
       setLoading(false);
     }
