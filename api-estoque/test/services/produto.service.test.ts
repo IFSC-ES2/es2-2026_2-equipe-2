@@ -65,7 +65,9 @@ describe("ProdutoService", () => {
 
   describe("findAll", () => {
     it("deve retornar todos os produtos", async () => {
-      (repository.findAllWithRelacionamentos as any).mockResolvedValue([produtoMock]);
+      (repository.findAllWithRelacionamentos as any).mockResolvedValue([
+        produtoMock,
+      ]);
 
       const result = await service.findAll();
 
@@ -83,7 +85,9 @@ describe("ProdutoService", () => {
 
   describe("findById", () => {
     it("deve retornar o produto quando o id é válido", async () => {
-      (repository.findByIdWithRelacionamentos as any).mockResolvedValue(produtoMock);
+      (repository.findByIdWithRelacionamentos as any).mockResolvedValue(
+        produtoMock,
+      );
 
       const result = await service.findById(1);
 
@@ -92,7 +96,9 @@ describe("ProdutoService", () => {
     });
 
     it("deve aceitar id em formato string e converter para number", async () => {
-      (repository.findByIdWithRelacionamentos as any).mockResolvedValue(produtoMock);
+      (repository.findByIdWithRelacionamentos as any).mockResolvedValue(
+        produtoMock,
+      );
 
       await service.findById("1");
 
@@ -242,34 +248,34 @@ describe("ProdutoService", () => {
     it("deve lançar EntityNotFound quando o produto não existe", async () => {
       (repository.findById as any).mockResolvedValue(null);
 
-      await expect(
-        service.update(999, { preco: 100 }),
-      ).rejects.toThrow(EntityNotFound);
+      await expect(service.update(999, { preco: 100 })).rejects.toThrow(
+        EntityNotFound,
+      );
       expect(repository.update).not.toHaveBeenCalled();
     });
 
     it("deve lançar ValidationError para id inválido", async () => {
-      await expect(
-        service.update(0, { preco: 100 }),
-      ).rejects.toThrow(ValidationError);
+      await expect(service.update(0, { preco: 100 })).rejects.toThrow(
+        ValidationError,
+      );
       expect(repository.findById).not.toHaveBeenCalled();
     });
 
     it("deve lançar ValidationError quando o preco é negativo", async () => {
       (repository.findById as any).mockResolvedValue(produtoMock);
 
-      await expect(
-        service.update(1, { preco: -5 }),
-      ).rejects.toThrow(ValidationError);
+      await expect(service.update(1, { preco: -5 })).rejects.toThrow(
+        ValidationError,
+      );
       expect(repository.update).not.toHaveBeenCalled();
     });
 
     it("deve lançar ValidationError quando a quantidade é negativa", async () => {
       (repository.findById as any).mockResolvedValue(produtoMock);
 
-      await expect(
-        service.update(1, { quantidade: -3 }),
-      ).rejects.toThrow(ValidationError);
+      await expect(service.update(1, { quantidade: -3 })).rejects.toThrow(
+        ValidationError,
+      );
       expect(repository.update).not.toHaveBeenCalled();
     });
 
@@ -278,9 +284,7 @@ describe("ProdutoService", () => {
       (repository.findById as any).mockResolvedValue(produtoMock);
       (repository.update as any).mockRejectedValue(error);
 
-      await expect(
-        service.update(1, { preco: 100 }),
-      ).rejects.toThrow(error);
+      await expect(service.update(1, { preco: 100 })).rejects.toThrow(error);
     });
   });
 

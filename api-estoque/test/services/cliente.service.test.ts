@@ -208,16 +208,16 @@ describe("ClienteService", () => {
     it("deve lançar EntityNotFound quando o cliente não existe", async () => {
       (repository.findById as any).mockResolvedValue(null);
 
-      await expect(
-        service.update(999, { nome: "Novo Nome" }),
-      ).rejects.toThrow(EntityNotFound);
+      await expect(service.update(999, { nome: "Novo Nome" })).rejects.toThrow(
+        EntityNotFound,
+      );
       expect(repository.update).not.toHaveBeenCalled();
     });
 
     it("deve lançar ValidationError para id inválido", async () => {
-      await expect(
-        service.update(0, { nome: "Novo Nome" }),
-      ).rejects.toThrow(ValidationError);
+      await expect(service.update(0, { nome: "Novo Nome" })).rejects.toThrow(
+        ValidationError,
+      );
       expect(repository.findById).not.toHaveBeenCalled();
     });
 
@@ -226,9 +226,9 @@ describe("ClienteService", () => {
       (repository.findById as any).mockResolvedValue(clienteMock);
       (repository.update as any).mockRejectedValue(error);
 
-      await expect(
-        service.update(1, { nome: "Novo Nome" }),
-      ).rejects.toThrow(error);
+      await expect(service.update(1, { nome: "Novo Nome" })).rejects.toThrow(
+        error,
+      );
     });
   });
 
