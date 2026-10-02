@@ -1,5 +1,10 @@
 import { ValidationError, EntityNotFound } from "../errors/index";
-import { Produto, ProdutoCreate, ProdutoUpdate, ProdutoComRelacionamentos } from "../models/index";
+import {
+  Produto,
+  ProdutoCreate,
+  ProdutoUpdate,
+  ProdutoComRelacionamentos,
+} from "../models/index";
 import { ProdutoRepository } from "../repositories/Produto.repository";
 import logger from "../config/logger";
 import validateId from "../utils/validateId";
@@ -33,7 +38,9 @@ export class ProdutoService {
     }
   }
 
-  public async findById(id: number | string): Promise<ProdutoComRelacionamentos | null> {
+  public async findById(
+    id: number | string,
+  ): Promise<ProdutoComRelacionamentos | null> {
     try {
       const parsedId = Number(id);
       logger.info(`[Produto.service] findById - fetching product ${parsedId}`);
@@ -42,7 +49,8 @@ export class ProdutoService {
         throw ValidationError.invalidId(ENTITY_NAME);
       }
 
-      const produto = await this.repository.findByIdWithRelacionamentos(parsedId);
+      const produto =
+        await this.repository.findByIdWithRelacionamentos(parsedId);
 
       if (!produto) throw new EntityNotFound(ENTITY_NAME);
 
@@ -84,7 +92,9 @@ export class ProdutoService {
         sku,
         nome,
         descricao:
-          typeof data.descricao === "string" ? data.descricao.trim() : data.descricao,
+          typeof data.descricao === "string"
+            ? data.descricao.trim()
+            : data.descricao,
       });
 
       logger.info(
@@ -93,10 +103,7 @@ export class ProdutoService {
 
       return created;
     } catch (error) {
-      logger.error(
-        "[Produto.service] create - error creating product",
-        error,
-      );
+      logger.error("[Produto.service] create - error creating product", error);
       throw error;
     }
   }
@@ -164,10 +171,16 @@ export class ProdutoService {
 
       return true;
     } catch (error: any) {
-      logger.error(`[Produto.service] delete - error deleting product ${id}`, error);
-      if ((error as any)?.code === '23503') {
-        const { ForeignKeyViolationError } = await import('../errors/ForeignKeyViolation');
-        throw new ForeignKeyViolationError(error.detail || 'Cannot delete product with related records');
+      logger.error(
+        `[Produto.service] delete - error deleting product ${id}`,
+        error,
+      );
+      if ((error as any)?.code === "23503") {
+        const { ForeignKeyViolationError } =
+          await import("../errors/ForeignKeyViolation");
+        throw new ForeignKeyViolationError(
+          error.detail || "Cannot delete product with related records",
+        );
       }
       throw error;
     }

@@ -68,7 +68,9 @@ export class ClienteController {
   public async create(req: Request, res: Response): Promise<Response> {
     try {
       const data: ClienteCreate = req.body;
-      logger.info(`[ClienteController] create - creating client "${data?.nome}"`);
+      logger.info(
+        `[ClienteController] create - creating client "${data?.nome}"`,
+      );
 
       const created = await this.service.create(data);
 
@@ -86,10 +88,7 @@ export class ClienteController {
           ),
         );
     } catch (error) {
-      logger.error(
-        "[ClienteController] create - error creating client",
-        error,
-      );
+      logger.error("[ClienteController] create - error creating client", error);
       return handleError(error, res);
     }
   }

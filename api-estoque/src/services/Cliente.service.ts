@@ -25,10 +25,7 @@ export class ClienteService {
 
       return clientes;
     } catch (error) {
-      logger.error(
-        "[Cliente.service] findAll - error fetching clients",
-        error,
-      );
+      logger.error("[Cliente.service] findAll - error fetching clients", error);
       throw error;
     }
   }
@@ -73,11 +70,17 @@ export class ClienteService {
         nome,
         email,
         telefone:
-          typeof data.telefone === "string" ? data.telefone.trim() : data.telefone,
+          typeof data.telefone === "string"
+            ? data.telefone.trim()
+            : data.telefone,
         documento:
-          typeof data.documento === "string" ? data.documento.trim() : data.documento,
+          typeof data.documento === "string"
+            ? data.documento.trim()
+            : data.documento,
         endereco:
-          typeof data.endereco === "string" ? data.endereco.trim() : data.endereco,
+          typeof data.endereco === "string"
+            ? data.endereco.trim()
+            : data.endereco,
       });
 
       logger.info(
@@ -86,10 +89,7 @@ export class ClienteService {
 
       return created;
     } catch (error) {
-      logger.error(
-        "[Cliente.service] create - error creating client",
-        error,
-      );
+      logger.error("[Cliente.service] create - error creating client", error);
       throw error;
     }
   }

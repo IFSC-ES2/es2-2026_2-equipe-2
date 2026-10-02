@@ -15,7 +15,7 @@ class Routes {
     router.use("/categorias", routerCategoria);
     router.use("/produtos", routerProduto);
     router.use("/fornecedores", routerFornecedor);
-    router.use("/clientes", routerCliente)
+    router.use("/clientes", routerCliente);
 
     router.use("/docs", serve, setup);
 
