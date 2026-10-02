@@ -95,3 +95,9 @@
 - Uso: implementação do Swagger clientes (criação dos schemas Cliente, ClienteCreate e ClienteUpdate; documentação dos endpoints GET, POST, PUT e DELETE em /clientes e /clientes/{id}) e correção dos retornos de erro na rota DELETE de produtos
 - Artefato: `api-estoque/src/docs/*`
 - Validação: validação do build TypeScript (`npm run build`), execução dos testes unitários (`vitest`) com 100% de sucesso e verificando o Swagger disposto em `/api/docs/#/`
+
+- Data: 01/10/2026
+- Ferramenta: Gemini
+- Uso: identificação de padrões de projeto OO aplicados (Singleton e Facade) no backend e redação do documento ADR registrando essas escolhas arquiteturais
+- Artefato: `docs/adrs/ADR-0007-padroes-de-projeto-oo.md`
+- Validação: conferência das classes apontadas no backend (`App.ts`, `database.ts`) garantindo a real aplicação dos padrões identificados e verificação da estrutura da ADR gerada
