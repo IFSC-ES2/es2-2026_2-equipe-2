@@ -97,6 +97,12 @@
 - Validação: validação do build TypeScript (`npm run build`), execução dos testes unitários (`vitest`) com 100% de sucesso e verificando o Swagger disposto em `/api/docs/#/`
 
 - Data: 01/10/2026
+- Ferramenta: Gemini
+- Uso: identificação de padrões de projeto OO aplicados (Singleton e Facade) no backend e redação do documento ADR registrando essas escolhas arquiteturais
+- Artefato: `docs/adrs/ADR-0007-padroes-de-projeto-oo.md`
+- Validação: conferência das classes apontadas no backend (`App.ts`, `database.ts`) garantindo a real aplicação dos padrões identificados e verificação da estrutura da ADR gerada
+
+- Data: 01/10/2026
 - Ferramenta: Antigravity
 - Uso: auxílio na atualização do código para implementar o deletar e editar na página de clientes e criação de seus respectivos testes
 - Artefato: `frontend/src/components/organisms/Modals/ClientCreateModal/`, `frontend/src/components/organisms/Form/FormCreateClient/`
