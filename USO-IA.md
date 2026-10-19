@@ -107,3 +107,9 @@
 - Uso: auxílio na atualização do código para implementar o deletar e editar na página de clientes e criação de seus respectivos testes
 - Artefato: `frontend/src/components/organisms/Modals/ClientCreateModal/`, `frontend/src/components/organisms/Form/FormCreateClient/`
 - Validação: verificação dos códigos para ver se está no padrão e funcional
+
+- Data: 18/10/2026
+- Ferramenta: Antigravity
+- Uso: auxílio na criação do CRUD de pedidos
+- Artefato: `api-estoque\src\repositories\Pedido.repository.ts`, `api-estoque\src\services\Pedido.service.ts`, `api-estoque\src\controllers\PedidoController.ts`
+- Validação: verificação dos códigos para ver se está no padrão do projeto e verificação se está tudo funcionando corretamente
