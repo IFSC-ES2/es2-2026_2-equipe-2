@@ -107,3 +107,21 @@
 - Uso: auxílio na atualização do código para implementar o deletar e editar na página de clientes e criação de seus respectivos testes
 - Artefato: `frontend/src/components/organisms/Modals/ClientCreateModal/`, `frontend/src/components/organisms/Form/FormCreateClient/`
 - Validação: verificação dos códigos para ver se está no padrão e funcional
+
+- Data: 18/10/2026
+- Ferramenta: Antigravity
+- Uso: auxílio na criação do CRUD de pedidos
+- Artefato: `api-estoque\src\repositories\Pedido.repository.ts`, `api-estoque\src\services\Pedido.service.ts`, `api-estoque\src\controllers\PedidoController.ts`
+- Validação: verificação dos códigos para ver se está no padrão do projeto e verificação se está tudo funcionando corretamente
+
+- Data: 19/10/2026
+- Ferramenta: Claude
+- Uso: criação dos testes para Pedido.service
+- Artefato: `api-estoque/test/services/pedido.service.test.ts`
+- Validação: validação feita atraves dos testes rodando e verificação se está sendo realizado de forma correta
+
+- Data: 19/10/2026
+- Ferramenta: Antigravity
+- Uso: implementação do Swagger de pedidos
+- Artefato: `api-estoque/src/docs/schemas/pedido.schema.ts`, `api-estoque/src/docs/pedido/pedido.docs.ts`
+- Validação: validação verificando os endpoints implementados dentro de `localhost:8080/api/docs/#/` executando eles
