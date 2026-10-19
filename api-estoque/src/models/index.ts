@@ -2,3 +2,4 @@ export * from "./Categoria";
 export * from "./Fornecedor";
 export * from "./Produto";
 export * from "./Cliente";
+export * from "./Pedido";
