@@ -3,6 +3,7 @@ import { BaseRepository } from "./BaseRepository";
 import {
   Pedido,
   PedidoCreate,
+  PedidoUpdate,
   PedidoComRelacionamentos,
   ItemPedidoComProduto,
 } from "../models/Pedido";
@@ -60,6 +61,57 @@ export class PedidoRepository extends BaseRepository<Pedido> {
       await client.query("COMMIT");
 
       return pedido;
+    } catch (error) {
+      await client.query("ROLLBACK");
+      throw error;
+    } finally {
+      client.release();
+    }
+  }
+
+  public async updateComItens(
+    id: number,
+    data: PedidoUpdate,
+  ): Promise<Pedido | null> {
+    const client: PoolClient = await this.pool.connect();
+
+    try {
+      await client.query("BEGIN");
+
+      let valorTotal: number | null = null;
+
+      if (data.itens) {
+        await client.query("DELETE FROM itens_pedido WHERE pedido_id = $1", [
+          id,
+        ]);
+
+        for (const item of data.itens) {
+          await client.query(
+            `INSERT INTO itens_pedido (pedido_id, produto_id, quantidade, preco_unitario)
+             VALUES ($1, $2, $3, $4)`,
+            [id, item.produto_id, item.quantidade, item.preco_unitario],
+          );
+        }
+
+        valorTotal = data.itens.reduce(
+          (total, item) => total + item.quantidade * item.preco_unitario,
+          0,
+        );
+      }
+
+      const result = await client.query<Pedido>(
+        `UPDATE pedidos
+         SET cliente_id  = COALESCE($2, cliente_id),
+             data_pedido = COALESCE($3, data_pedido),
+             valor_total = COALESCE($4, valor_total)
+         WHERE id = $1
+         RETURNING *`,
+        [id, data.cliente_id ?? null, data.data_pedido ?? null, valorTotal],
+      );
+
+      await client.query("COMMIT");
+
+      return result.rows[0] || null;
     } catch (error) {
       await client.query("ROLLBACK");
       throw error;

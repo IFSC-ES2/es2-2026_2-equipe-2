@@ -39,3 +39,5 @@ export interface PedidoCreate {
   data_pedido?: Date;
   itens: ItemPedidoCreate[];
 }
+
+export type PedidoUpdate = Partial<PedidoCreate>;
