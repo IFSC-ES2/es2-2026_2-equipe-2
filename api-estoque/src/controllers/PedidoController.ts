@@ -5,7 +5,7 @@ import { HttpStatus } from "../config/status";
 import { createSuccessBodyResponse } from "../utils/createResponseBody";
 import { handleError } from "../utils/handleError";
 import validateId from "../utils/validateId";
-import { PedidoCreate } from "../models/index";
+import { PedidoCreate, PedidoUpdate } from "../models/index";
 
 export class PedidoController {
   private service: PedidoService;
@@ -73,6 +73,54 @@ export class PedidoController {
         );
     } catch (error) {
       logger.error("[PedidoController] create - error creating order", error);
+      return handleError(error, res);
+    }
+  }
+
+  public async update(req: Request, res: Response): Promise<Response> {
+    try {
+      const id = validateId(req.params.id);
+      const data: PedidoUpdate = req.body;
+
+      logger.info(`[PedidoController] update - updating order ${id}`);
+
+      const pedido = await this.service.update(id, data);
+
+      logger.info(`[PedidoController] update - order ${id} updated`);
+
+      return res
+        .status(HttpStatus.OK)
+        .json(
+          createSuccessBodyResponse(HttpStatus.OK, "Order updated", pedido),
+        );
+    } catch (error) {
+      logger.error(
+        `[PedidoController] update - error updating order ${req.params.id}`,
+        error,
+      );
+      return handleError(error, res);
+    }
+  }
+
+  public async delete(req: Request, res: Response): Promise<Response> {
+    try {
+      const id = validateId(req.params.id);
+      logger.info(`[PedidoController] delete - deleting order ${id}`);
+
+      const deleted = await this.service.delete(id);
+
+      logger.info(`[PedidoController] delete - order ${id} deleted`);
+
+      return res
+        .status(HttpStatus.OK)
+        .json(
+          createSuccessBodyResponse(HttpStatus.OK, "Order deleted", deleted),
+        );
+    } catch (error) {
+      logger.error(
+        `[PedidoController] delete - error deleting order ${req.params.id}`,
+        error,
+      );
       return handleError(error, res);
     }
   }
