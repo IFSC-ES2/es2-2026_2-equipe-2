@@ -112,3 +112,94 @@
  *             schema:
  *               $ref: '#/components/schemas/BadRequestError'
  */
+
+/**
+ * @swagger
+ * /pedidos/{id}:
+ *   put:
+ *     summary: Atualiza um pedido existente
+ *     tags: [Pedido]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID do pedido
+ *         example: 1
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/PedidoUpdate'
+ *     responses:
+ *       200:
+ *         description: Pedido atualizado com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               allOf:
+ *                 - $ref: '#/components/schemas/SuccessResponse'
+ *                 - type: object
+ *                   properties:
+ *                     title:
+ *                       example: "Order updated"
+ *                     data:
+ *                       $ref: '#/components/schemas/Pedido'
+ *       400:
+ *         description: ID inválido ou dados inválidos
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/BadRequestError'
+ *       404:
+ *         description: Pedido não encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/NotFoundError'
+ */
+
+/**
+ * @swagger
+ * /pedidos/{id}:
+ *   delete:
+ *     summary: Remove um pedido
+ *     tags: [Pedido]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID do pedido
+ *         example: 1
+ *     responses:
+ *       200:
+ *         description: Pedido removido com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               allOf:
+ *                 - $ref: '#/components/schemas/SuccessResponse'
+ *                 - type: object
+ *                   properties:
+ *                     title:
+ *                       example: "Order deleted"
+ *                     data:
+ *                       type: boolean
+ *                       example: true
+ *       400:
+ *         description: ID inválido
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/BadRequestError'
+ *       404:
+ *         description: Pedido não encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/NotFoundError'
+ */

@@ -119,4 +119,20 @@
  *       required:
  *         - cliente_id
  *         - itens
+ *
+ *     PedidoUpdate:
+ *       type: object
+ *       properties:
+ *         cliente_id:
+ *           type: integer
+ *           example: 1
+ *         data_pedido:
+ *           type: string
+ *           format: date-time
+ *           nullable: true
+ *           example: "2026-10-19T14:30:00Z"
+ *         itens:
+ *           type: array
+ *           items:
+ *             $ref: '#/components/schemas/ItemPedidoCreate'
  */
