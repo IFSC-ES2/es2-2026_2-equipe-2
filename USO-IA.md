@@ -119,3 +119,10 @@
 - Uso: criação dos testes para Pedido.service
 - Artefato: `api-estoque/test/services/pedido.service.test.ts`
 - Validação: validação feita atraves dos testes rodando e verificação se está sendo realizado de forma correta
+
+- Data: 19/10/2026
+- Ferramenta: Antigravity
+- Uso: implementação do Swagger de pedidos
+- Artefato: `api-estoque/src/docs/schemas/pedido.schema.ts`, `api-estoque/src/docs/pedido/pedido.docs.ts`
+- Validação: validação verificando os endpoints implementados dentro de `localhost:8080/api/docs/#/` executando eles
+- Validação: validação feita atraves dos testes rodando e verificação se está sendo realizado de forma correta
