@@ -119,3 +119,9 @@
 - Uso: criação dos testes para Pedido.service
 - Artefato: `api-estoque/test/services/pedido.service.test.ts`
 - Validação: validação feita atraves dos testes rodando e verificação se está sendo realizado de forma correta
+
+- Data: 21/10/2026
+- Ferramenta: Antigravity
+- Uso: expansão dos dados de seed para o banco de dados (inserção de novos clientes, produtos, pedidos e movimentações de estoque)
+- Artefato: `conf/init-db.sql`
+- Validação: conferência da sintaxe SQL e verificação dos dados inseridos no banco
