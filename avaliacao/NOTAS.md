@@ -2,13 +2,20 @@
 
 ## Tabela de Notas
 
-| Entrega                            | Peso | Nota |
-| ---------------------------------- | ---: | ---: |
-| Entrega 1 - Kickoff                |    5 |  8,0 |
-| Entrega 2 - Inception              |    5 |  7,8 |
-| Entrega 3 - Estimativas e Métricas |    5 |  8,4 |
-| Entrega 4 - Riscos e Consolidação  |    5 |  8,2 |
+| Entrega | Peso | Bernardo Amaral | Daniel Luiz | Isac Lehmkuhl | Monica Cancellier | Victor Eduardo |
+|---|---:|---:|---:|---:|---:|---:|
+| Entrega 1 - Kickoff | 5 | 8,0 | 8,0 | 8,0 | 8,0 | 8,0 |
+| Entrega 2 - Inception | 5 | 7,8 | 7,8 | 7,8 | 7,8 | 7,8 |
+| Entrega 3 - Estimativas e Métricas | 5 | 8,4 | 8,4 | 8,4 | 8,4 | 8,4 |
+| Entrega 4 - Riscos e Consolidação | 5 | 8,2 | 8,2 | 8,2 | 8,2 | 8,2 |
+| Entrega 5 - Sprint 1 | 10 | 8,6 | 8,2 | 8,9 | 3,7 | 8,4 |
 
 ## Nota Parcial
 
-Nota parcial: 8,1 / 10,0
+| Integrante | Nota parcial |
+|---|---:|
+| Bernardo Amaral Lisboa | **8,3 / 10** |
+| Daniel Luiz da Rocha Cordeiro | **8,1 / 10** |
+| Isac Lehmkuhl dos Santos | **8,4 / 10** |
+| Monica Cancellier | **6,6 / 10** |
+| Victor Eduardo Peixer Munarim | **8,2 / 10** |
