@@ -1,0 +1,2 @@
+INTERFACE:
+A pagina consta a cor azul escuro porque serenidade e à racionalidade. Ele tende a reduzir a sensação de ansiedade e a transmitir seriedade, por isso é a cor mais usada em sistemas corporativos, bancos e plataformas de gestão.(menus, titulos)
