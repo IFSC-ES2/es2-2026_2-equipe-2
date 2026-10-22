@@ -1,0 +1,51 @@
+.filtro-vendas-container {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 1.25rem 1.5rem;
+  margin-top: 1.5rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.05);
+}
+
+.filtro-vendas-title {
+  font-family: serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e3a8a;
+  margin-bottom: 1.25rem;
+}
+
+.filtro-vendas-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.filtro-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.filtro-item label {
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.filtro-item input,
+.filtro-item select {
+  font-size: 0.875rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  padding: 0.45rem 0.75rem;
+  background-color: #f8fafc;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.filtro-item input:focus,
+.filtro-item select:focus {
+  border-color: #3b82f6;
+  background-color: #ffffff;
+}
