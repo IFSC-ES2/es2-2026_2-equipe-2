@@ -1,0 +1,13 @@
+.order-item-adder {
+  background-color: var(--bs-light, #f8f9fa);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 0.5rem;
+}
+
+.order-item-adder-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #475569;
+  margin-bottom: 0.75rem;
+}

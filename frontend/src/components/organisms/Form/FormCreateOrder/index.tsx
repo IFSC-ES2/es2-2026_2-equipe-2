@@ -2,6 +2,7 @@ import React, { useState, useEffect, useId } from 'react';
 import Button from '../../../atoms/Button';
 import FormSelect from '../../../atoms/Inputs/FormSelect';
 import FormInput from '../../../atoms/Inputs/FormInput';
+import OrderItemAdder from '../../../molecules/OrderItemAdder';
 import { getClientes } from '../../../../services/cliente.service';
 import { getProdutos } from '../../../../services/produto.service';
 import {
@@ -171,7 +172,7 @@ const FormCreateOrder: React.FC<FormCreateOrderProps> = ({
       }
       if (precoNum < precoMin) {
         setError(
-          `Desconto acima do limite permitido de 15% (mínimo R$ ${precoMin.toFixed(2)}).`,
+          `O desconto ultrapassou o limite permitido de 15% (mínimo R$ ${precoMin.toFixed(2)}).`,
         );
         return;
       }
@@ -302,81 +303,16 @@ const FormCreateOrder: React.FC<FormCreateOrderProps> = ({
         </div>
       </div>
 
-      <div className="card p-3 bg-light border-0 rounded-3 mt-2">
-        <h6 className="fw-bold mb-3 text-secondary">
-          Adicionar Itens ao Pedido
-        </h6>
-        <div className="row g-2 align-items-end">
-          <div className="col-md-5">
-            <label
-              htmlFor="adicionar-produto-select"
-              className="form-label small fw-semibold"
-            >
-              Produto
-            </label>
-            <select
-              id="adicionar-produto-select"
-              className="form-select form-select-sm"
-              value={novoProdutoId}
-              onChange={(e) => handleSelectNovoProduto(e.target.value)}
-            >
-              <option value="">Selecione um produto...</option>
-              {produtos.map((p) => (
-                <option key={p.id} value={p.id}>
-                  {p.nome} - R$ {Number(p.preco).toFixed(2)} (Estoque:{' '}
-                  {p.quantidade})
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="col-md-2">
-            <label
-              htmlFor="adicionar-produto-qtd"
-              className="form-label small fw-semibold"
-            >
-              Qtd.
-            </label>
-            <input
-              id="adicionar-produto-qtd"
-              type="number"
-              min="1"
-              className="form-control form-control-sm"
-              value={novaQuantidade}
-              onChange={(e) =>
-                setNovaQuantidade(Math.max(1, parseInt(e.target.value) || 1))
-              }
-            />
-          </div>
-          <div className="col-md-3">
-            <label
-              htmlFor="adicionar-produto-preco"
-              className="form-label small fw-semibold"
-            >
-              Preço Unit. (R$)
-            </label>
-            <input
-              id="adicionar-produto-preco"
-              type="number"
-              step="0.01"
-              min="0.01"
-              className="form-control form-control-sm"
-              value={novoPreco}
-              onChange={(e) => handlePrecoChange(e.target.value)}
-              placeholder="0,00"
-            />
-          </div>
-          <div className="col-md-2 d-grid">
-            <Button
-              type="button"
-              variant="secondary"
-              size="sm"
-              onClick={handleAdicionarItem}
-            >
-              + Adicionar
-            </Button>
-          </div>
-        </div>
-      </div>
+      <OrderItemAdder
+        produtos={produtos}
+        selectedProdutoId={novoProdutoId}
+        quantidade={novaQuantidade}
+        preco={novoPreco}
+        onProdutoChange={handleSelectNovoProduto}
+        onQuantidadeChange={setNovaQuantidade}
+        onPrecoChange={handlePrecoChange}
+        onAddItem={handleAdicionarItem}
+      />
 
       <div>
         <h6 className="fw-bold mb-2">Itens Selecionados ({itens.length})</h6>
