@@ -16,7 +16,7 @@ export class ClienteRepository extends BaseRepository<Cliente> {
   }
 
   public async findByEmail(email: string): Promise<Cliente | null> {
-    const result = await this.query(
+    const result = await this.query<Cliente>(
       `SELECT * FROM ${this.tableName} WHERE email = $1`,
       [email],
     );
@@ -24,7 +24,7 @@ export class ClienteRepository extends BaseRepository<Cliente> {
   }
 
   public async findByDocumento(documento: string): Promise<Cliente | null> {
-    const result = await this.query(
+    const result = await this.query<Cliente>(
       `SELECT * FROM ${this.tableName} WHERE documento = $1`,
       [documento],
     );
@@ -32,7 +32,7 @@ export class ClienteRepository extends BaseRepository<Cliente> {
   }
 
   public async findByNome(nome: string): Promise<Cliente[]> {
-    const result = await this.query(
+    const result = await this.query<Cliente>(
       `SELECT * FROM ${this.tableName} WHERE nome ILIKE $1 ORDER BY id`,
       [`%${nome}%`],
     );
