@@ -150,3 +150,9 @@
 - Uso: integração do serviço de pedidos com a API HTTP e orquestração do CRUD na página de vendas
 - Artefato: `frontend/src/services/pedido.service.ts`, `frontend/src/pages/Vendas/index.tsx`
 - Validação: testes de integração com chamadas de listagem, criação, edição e exclusão de pedidos
+
+- Data: 22/10/2026
+- Ferramenta: Claude
+- Uso: ajuste e estruturação do documento de reengenharia (descrição do problema de design, refatoração aplicada, métricas antes/depois e justificativa sobre ADR)
+- Artefato: `docs/REENGENHARIA.md`
+- Validação: contagens e resultados de testes conferidos executando os comandos listados no próprio documento
