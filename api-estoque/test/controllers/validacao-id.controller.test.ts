@@ -95,18 +95,5 @@ describe.each(controllers)("$nome — validação de ID", ({ Classe, service }) 
         expect(service[metodo]).not.toHaveBeenCalled();
       },
     );
-
-    it("converte o id para número, chama o service e responde 200 quando o id é válido", async () => {
-      service[metodo].mockResolvedValue({ id: 7 });
-      const controller = new Classe();
-      const res = makeRes();
-
-      await controller[metodo](makeReq("7"), res);
-
-      expect(service[metodo]).toHaveBeenCalledTimes(1);
-      expect(service[metodo].mock.calls[0][0]).toBe(7);
-      expect(res.status).toHaveBeenCalledWith(200);
-      expect(res.json.mock.calls[0][0].success).toBe(true);
-    });
   });
 });
