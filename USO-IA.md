@@ -156,3 +156,9 @@
 - Uso: ajuste e estruturação do documento de reengenharia (descrição do problema de design, refatoração aplicada, métricas antes/depois e justificativa sobre ADR)
 - Artefato: `docs/REENGENHARIA.md`
 - Validação: contagens e resultados de testes conferidos executando os comandos listados no próprio documento
+
+- Data: 22/10/2026
+- Ferramenta: Claude
+- Uso: estruturação do documento de arquitetura, auxilio nas modificações e definição das ADRs
+- Artefato: `docs/ARQUITETURA.md` `docs/adrs/ADR-0008-backend-monolitico-modular.md`
+- Validação: leitura integral dos arquivos e comparação com o estado atual do projeto para validação do atual estado documentado
