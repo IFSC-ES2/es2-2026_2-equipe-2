@@ -5,9 +5,9 @@ export abstract class BaseRepository<T extends QueryResultRow> {
   protected tableName: string = "";
   protected pool: Pool = pool;
 
-  protected async query<R extends QueryResultRow = any>(
+  protected async query<R extends QueryResultRow = QueryResultRow>(
     text: string,
-    params?: any[],
+    params?: unknown[],
   ): Promise<QueryResult<R>> {
     try {
       return await this.pool.query<R>(text, params);
@@ -18,14 +18,14 @@ export abstract class BaseRepository<T extends QueryResultRow> {
   }
 
   public async findAll(): Promise<T[]> {
-    const result = await this.query(
+    const result = await this.query<T>(
       `SELECT * FROM ${this.tableName} ORDER BY id`,
     );
     return result.rows;
   }
 
   public async findById(id: number): Promise<T | null> {
-    const result = await this.query(
+    const result = await this.query<T>(
       `SELECT * FROM ${this.tableName} WHERE id = $1`,
       [id],
     );
@@ -33,19 +33,19 @@ export abstract class BaseRepository<T extends QueryResultRow> {
   }
 
   public async delete(id: number): Promise<void> {
-    await this.query(`DELETE FROM ${this.tableName} WHERE id = $1`, [id]);
+    await this.query<T>(`DELETE FROM ${this.tableName} WHERE id = $1`, [id]);
   }
 
-  protected async insert(data: Record<string, any>): Promise<T> {
+  protected async insert(data: Record<string, unknown>): Promise<T> {
     const entries = Object.entries(data)
-      .filter(([_, value]) => value !== undefined && value !== null)
+      .filter(([, value]) => value !== undefined && value !== null)
       .map(([key, value]) => [
         key,
         value instanceof Date ? value.toISOString() : value,
       ]);
 
     const fields = entries.map(([key]) => key);
-    const values = entries.map(([_, value]) => value);
+    const values = entries.map(([, value]) => value);
     const placeholders = values.map((_, index) => `$${index + 1}`).join(", ");
 
     const query = `
@@ -54,16 +54,16 @@ export abstract class BaseRepository<T extends QueryResultRow> {
       RETURNING *
     `;
 
-    const result = await this.query(query, values);
-    return result.rows[0];
+    const result = await this.query<T>(query, values);
+    return result.rows[0] as T;
   }
 
   protected async update(
     id: number,
-    data: Record<string, any>,
+    data: Record<string, unknown>,
   ): Promise<T | null> {
     const entries = Object.entries(data)
-      .filter(([_, value]) => value !== undefined && value !== null)
+      .filter(([, value]) => value !== undefined && value !== null)
       .map(([key, value]) => [
         key,
         value instanceof Date ? value.toISOString() : value,
@@ -77,7 +77,7 @@ export abstract class BaseRepository<T extends QueryResultRow> {
       .map(([key], index) => `${key} = $${index + 2}`)
       .join(", ");
 
-    const values = [id, ...entries.map(([_, value]) => value)];
+    const values = [id, ...entries.map(([, value]) => value)];
 
     const query = `
       UPDATE ${this.tableName} 
@@ -86,7 +86,7 @@ export abstract class BaseRepository<T extends QueryResultRow> {
       RETURNING *
     `;
 
-    const result = await this.query(query, values);
+    const result = await this.query<T>(query, values);
     return result.rows[0] || null;
   }
 }

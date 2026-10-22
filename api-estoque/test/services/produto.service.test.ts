@@ -65,7 +65,7 @@ describe("ProdutoService", () => {
 
   describe("findAll", () => {
     it("deve retornar todos os produtos", async () => {
-      (repository.findAllWithRelacionamentos as any).mockResolvedValue([
+      vi.mocked(repository.findAllWithRelacionamentos).mockResolvedValue([
         produtoMock,
       ]);
 
@@ -77,7 +77,7 @@ describe("ProdutoService", () => {
 
     it("deve propagar o erro quando o repository falhar", async () => {
       const error = new Error("database offline");
-      (repository.findAllWithRelacionamentos as any).mockRejectedValue(error);
+      vi.mocked(repository.findAllWithRelacionamentos).mockRejectedValue(error);
 
       await expect(service.findAll()).rejects.toThrow(error);
     });
@@ -85,7 +85,7 @@ describe("ProdutoService", () => {
 
   describe("findById", () => {
     it("deve retornar o produto quando o id é válido", async () => {
-      (repository.findByIdWithRelacionamentos as any).mockResolvedValue(
+      vi.mocked(repository.findByIdWithRelacionamentos).mockResolvedValue(
         produtoMock,
       );
 
@@ -96,7 +96,7 @@ describe("ProdutoService", () => {
     });
 
     it("deve aceitar id em formato string e converter para number", async () => {
-      (repository.findByIdWithRelacionamentos as any).mockResolvedValue(
+      vi.mocked(repository.findByIdWithRelacionamentos).mockResolvedValue(
         produtoMock,
       );
 
@@ -105,7 +105,7 @@ describe("ProdutoService", () => {
       expect(repository.findByIdWithRelacionamentos).toHaveBeenCalledWith(1);
     });
 
-    it.each([0, NaN, "abc", undefined as any, null as any])(
+    it.each([0, NaN, "abc", undefined as never, null as never])(
       "deve lançar ValidationError para id inválido (%s)",
       async (invalidId) => {
         await expect(service.findById(invalidId)).rejects.toThrow(
@@ -116,14 +116,16 @@ describe("ProdutoService", () => {
     );
 
     it("deve lançar EntityNotFound quando o produto não existe", async () => {
-      (repository.findByIdWithRelacionamentos as any).mockResolvedValue(null);
+      vi.mocked(repository.findByIdWithRelacionamentos).mockResolvedValue(null);
 
       await expect(service.findById(999)).rejects.toThrow(EntityNotFound);
     });
 
     it("deve propagar o erro quando o repository falhar", async () => {
       const error = new Error("database offline");
-      (repository.findByIdWithRelacionamentos as any).mockRejectedValue(error);
+      vi.mocked(repository.findByIdWithRelacionamentos).mockRejectedValue(
+        error,
+      );
 
       await expect(service.findById(1)).rejects.toThrow(error);
     });
@@ -131,7 +133,7 @@ describe("ProdutoService", () => {
 
   describe("create", () => {
     it("deve criar um produto com os dados informados", async () => {
-      (repository.create as any).mockResolvedValue(produtoMock);
+      vi.mocked(repository.create).mockResolvedValue(produtoMock);
 
       const result = await service.create(produtoCreateMock);
 
@@ -140,7 +142,7 @@ describe("ProdutoService", () => {
     });
 
     it("deve remover espaços em branco das extremidades de sku, nome e descricao", async () => {
-      (repository.create as any).mockResolvedValue(produtoMock);
+      vi.mocked(repository.create).mockResolvedValue(produtoMock);
 
       await service.create({
         ...produtoCreateMock,
@@ -157,7 +159,7 @@ describe("ProdutoService", () => {
       });
     });
 
-    it.each(["", "   ", undefined as any, null as any])(
+    it.each(["", "   ", undefined as never, null as never])(
       "deve lançar ValidationError quando o sku é inválido (%s)",
       async (invalidSku) => {
         await expect(
@@ -167,7 +169,7 @@ describe("ProdutoService", () => {
       },
     );
 
-    it.each(["", "   ", undefined as any, null as any])(
+    it.each(["", "   ", undefined as never, null as never])(
       "deve lançar ValidationError quando o nome é inválido (%s)",
       async (invalidNome) => {
         await expect(
@@ -177,7 +179,7 @@ describe("ProdutoService", () => {
       },
     );
 
-    it.each([undefined as any, null as any])(
+    it.each([undefined as never, null as never])(
       "deve lançar ValidationError quando o preco não é informado (%s)",
       async (invalidPreco) => {
         await expect(
@@ -203,7 +205,7 @@ describe("ProdutoService", () => {
 
     it("deve propagar o erro quando o repository falhar", async () => {
       const error = new Error("unique constraint violation");
-      (repository.create as any).mockRejectedValue(error);
+      vi.mocked(repository.create).mockRejectedValue(error);
 
       await expect(service.create(produtoCreateMock)).rejects.toThrow(error);
     });
@@ -212,8 +214,8 @@ describe("ProdutoService", () => {
   describe("update", () => {
     it("deve atualizar o produto quando ele existe", async () => {
       const atualizado = { ...produtoMock, preco: 1999.9, quantidade: 30 };
-      (repository.findById as any).mockResolvedValue(produtoMock);
-      (repository.update as any).mockResolvedValue(atualizado);
+      vi.mocked(repository.findById).mockResolvedValue(produtoMock);
+      vi.mocked(repository.update).mockResolvedValue(atualizado);
 
       const result = await service.update(1, {
         preco: 1999.9,
@@ -229,8 +231,8 @@ describe("ProdutoService", () => {
     });
 
     it("deve remover espaços em branco das extremidades de sku, nome e descricao ao atualizar", async () => {
-      (repository.findById as any).mockResolvedValue(produtoMock);
-      (repository.update as any).mockResolvedValue(produtoMock);
+      vi.mocked(repository.findById).mockResolvedValue(produtoMock);
+      vi.mocked(repository.update).mockResolvedValue(produtoMock);
 
       await service.update(1, {
         sku: "  ELE-0002  ",
@@ -246,7 +248,7 @@ describe("ProdutoService", () => {
     });
 
     it("deve lançar EntityNotFound quando o produto não existe", async () => {
-      (repository.findById as any).mockResolvedValue(null);
+      vi.mocked(repository.findById).mockResolvedValue(null);
 
       await expect(service.update(999, { preco: 100 })).rejects.toThrow(
         EntityNotFound,
@@ -262,7 +264,7 @@ describe("ProdutoService", () => {
     });
 
     it("deve lançar ValidationError quando o preco é negativo", async () => {
-      (repository.findById as any).mockResolvedValue(produtoMock);
+      vi.mocked(repository.findById).mockResolvedValue(produtoMock);
 
       await expect(service.update(1, { preco: -5 })).rejects.toThrow(
         ValidationError,
@@ -271,7 +273,7 @@ describe("ProdutoService", () => {
     });
 
     it("deve lançar ValidationError quando a quantidade é negativa", async () => {
-      (repository.findById as any).mockResolvedValue(produtoMock);
+      vi.mocked(repository.findById).mockResolvedValue(produtoMock);
 
       await expect(service.update(1, { quantidade: -3 })).rejects.toThrow(
         ValidationError,
@@ -281,8 +283,8 @@ describe("ProdutoService", () => {
 
     it("deve propagar o erro quando o repository falhar", async () => {
       const error = new Error("database offline");
-      (repository.findById as any).mockResolvedValue(produtoMock);
-      (repository.update as any).mockRejectedValue(error);
+      vi.mocked(repository.findById).mockResolvedValue(produtoMock);
+      vi.mocked(repository.update).mockRejectedValue(error);
 
       await expect(service.update(1, { preco: 100 })).rejects.toThrow(error);
     });
@@ -290,8 +292,8 @@ describe("ProdutoService", () => {
 
   describe("delete", () => {
     it("deve deletar o produto e retornar true", async () => {
-      (repository.findById as any).mockResolvedValue(produtoMock);
-      (repository.delete as any).mockResolvedValue(undefined);
+      vi.mocked(repository.findById).mockResolvedValue(produtoMock);
+      vi.mocked(repository.delete).mockResolvedValue(undefined);
 
       const result = await service.delete(1);
 
@@ -300,7 +302,7 @@ describe("ProdutoService", () => {
     });
 
     it("deve lançar EntityNotFound quando o produto não existe", async () => {
-      (repository.findById as any).mockResolvedValue(null);
+      vi.mocked(repository.findById).mockResolvedValue(null);
 
       await expect(service.delete(999)).rejects.toThrow(EntityNotFound);
       expect(repository.delete).not.toHaveBeenCalled();
@@ -313,8 +315,8 @@ describe("ProdutoService", () => {
 
     it("deve propagar o erro quando o repository falhar", async () => {
       const error = new Error("database offline");
-      (repository.findById as any).mockResolvedValue(produtoMock);
-      (repository.delete as any).mockRejectedValue(error);
+      vi.mocked(repository.findById).mockResolvedValue(produtoMock);
+      vi.mocked(repository.delete).mockRejectedValue(error);
 
       await expect(service.delete(1)).rejects.toThrow(error);
     });

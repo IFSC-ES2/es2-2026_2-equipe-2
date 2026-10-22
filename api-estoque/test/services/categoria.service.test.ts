@@ -40,7 +40,7 @@ describe("CategoriaService", () => {
 
   describe("findAll", () => {
     it("deve retornar todas as categorias", async () => {
-      (repository.findAll as any).mockResolvedValue([categoriaMock]);
+      vi.mocked(repository.findAll).mockResolvedValue([categoriaMock]);
 
       const result = await service.findAll();
 
@@ -50,7 +50,7 @@ describe("CategoriaService", () => {
 
     it("deve propagar o erro quando o repository falhar", async () => {
       const error = new Error("database offline");
-      (repository.findAll as any).mockRejectedValue(error);
+      vi.mocked(repository.findAll).mockRejectedValue(error);
 
       await expect(service.findAll()).rejects.toThrow(error);
     });
@@ -58,7 +58,7 @@ describe("CategoriaService", () => {
 
   describe("findById", () => {
     it("deve retornar a categoria quando o id é válido", async () => {
-      (repository.findById as any).mockResolvedValue(categoriaMock);
+      vi.mocked(repository.findById).mockResolvedValue(categoriaMock);
 
       const result = await service.findById(1);
 
@@ -67,14 +67,14 @@ describe("CategoriaService", () => {
     });
 
     it("deve aceitar id em formato string e converter para number", async () => {
-      (repository.findById as any).mockResolvedValue(categoriaMock);
+      vi.mocked(repository.findById).mockResolvedValue(categoriaMock);
 
       await service.findById("1");
 
       expect(repository.findById).toHaveBeenCalledWith(1);
     });
 
-    it.each([0, NaN, "abc", undefined as any, null as any])(
+    it.each([0, NaN, "abc", undefined as never, null as never])(
       "deve lançar ValidationError para id inválido (%s)",
       async (invalidId) => {
         await expect(service.findById(invalidId)).rejects.toThrow(
@@ -86,7 +86,7 @@ describe("CategoriaService", () => {
 
     it("deve propagar o erro quando o repository falhar", async () => {
       const error = new Error("database offline");
-      (repository.findById as any).mockRejectedValue(error);
+      vi.mocked(repository.findById).mockRejectedValue(error);
 
       await expect(service.findById(1)).rejects.toThrow(error);
     });
@@ -94,7 +94,7 @@ describe("CategoriaService", () => {
 
   describe("create", () => {
     it("deve criar uma categoria com o nome informado", async () => {
-      (repository.create as any).mockResolvedValue(categoriaMock);
+      vi.mocked(repository.create).mockResolvedValue(categoriaMock);
 
       const result = await service.create("Alimentação");
 
@@ -105,7 +105,7 @@ describe("CategoriaService", () => {
     });
 
     it("deve remover espaços em branco das extremidades do nome", async () => {
-      (repository.create as any).mockResolvedValue(categoriaMock);
+      vi.mocked(repository.create).mockResolvedValue(categoriaMock);
 
       await service.create("  Alimentação  ");
 
@@ -114,7 +114,7 @@ describe("CategoriaService", () => {
       });
     });
 
-    it.each(["", "   ", undefined as any, null as any])(
+    it.each(["", "   ", undefined as never, null as never])(
       "deve lançar ValidationError quando o nome é inválido (%s)",
       async (invalidNome) => {
         await expect(service.create(invalidNome)).rejects.toThrow(
@@ -126,7 +126,7 @@ describe("CategoriaService", () => {
 
     it("deve propagar o erro quando o repository falhar", async () => {
       const error = new Error("unique constraint violation");
-      (repository.create as any).mockRejectedValue(error);
+      vi.mocked(repository.create).mockRejectedValue(error);
 
       await expect(service.create("Alimentação")).rejects.toThrow(error);
     });
@@ -135,8 +135,8 @@ describe("CategoriaService", () => {
   describe("update", () => {
     it("deve atualizar a categoria quando ela existe", async () => {
       const atualizada = { ...categoriaMock, nome: "Transporte" };
-      (repository.findById as any).mockResolvedValue(categoriaMock);
-      (repository.update as any).mockResolvedValue(atualizada);
+      vi.mocked(repository.findById).mockResolvedValue(categoriaMock);
+      vi.mocked(repository.update).mockResolvedValue(atualizada);
 
       const result = await service.update(1, "Transporte");
 
@@ -148,7 +148,7 @@ describe("CategoriaService", () => {
     });
 
     it("deve lançar EntityNotFound quando a categoria não existe", async () => {
-      (repository.findById as any).mockResolvedValue(null);
+      vi.mocked(repository.findById).mockResolvedValue(null);
 
       await expect(service.update(999, "Transporte")).rejects.toThrow(
         EntityNotFound,
@@ -170,8 +170,8 @@ describe("CategoriaService", () => {
 
     it("deve propagar o erro quando o repository falhar", async () => {
       const error = new Error("database offline");
-      (repository.findById as any).mockResolvedValue(categoriaMock);
-      (repository.update as any).mockRejectedValue(error);
+      vi.mocked(repository.findById).mockResolvedValue(categoriaMock);
+      vi.mocked(repository.update).mockRejectedValue(error);
 
       await expect(service.update(1, "Transporte")).rejects.toThrow(error);
     });
@@ -179,7 +179,7 @@ describe("CategoriaService", () => {
 
   describe("delete", () => {
     it("deve deletar a categoria e retornar true", async () => {
-      (repository.delete as any).mockResolvedValue(undefined);
+      vi.mocked(repository.delete).mockResolvedValue(undefined);
 
       const result = await service.delete(1);
 
@@ -194,7 +194,7 @@ describe("CategoriaService", () => {
 
     it("deve propagar o erro quando o repository falhar", async () => {
       const error = new Error("database offline");
-      (repository.delete as any).mockRejectedValue(error);
+      vi.mocked(repository.delete).mockRejectedValue(error);
 
       await expect(service.delete(1)).rejects.toThrow(error);
     });

@@ -170,16 +170,17 @@ export class ProdutoService {
       logger.info(`[Produto.service] delete - product ${parsedId} deleted`);
 
       return true;
-    } catch (error: any) {
+    } catch (error) {
       logger.error(
         `[Produto.service] delete - error deleting product ${id}`,
         error,
       );
-      if ((error as any)?.code === "23503") {
+      const dbError = error as { code?: string; detail?: string };
+      if (dbError?.code === "23503") {
         const { ForeignKeyViolationError } =
           await import("../errors/ForeignKeyViolation");
         throw new ForeignKeyViolationError(
-          error.detail || "Cannot delete product with related records",
+          dbError.detail || "Cannot delete product with related records",
         );
       }
       throw error;
