@@ -122,6 +122,24 @@
 
 - Data: 21/10/2026
 - Ferramenta: Antigravity
-- Uso: expansão dos dados de seed para o banco de dados (inserção de novos clientes, produtos, pedidos e movimentações de estoque)
+- Uso: expansão e estruturação dos dados de seed para o banco de dados (inserção de novos clientes, produtos, pedidos em intervalos temporais, itens e movimentações de estoque, com ajuste da sequence)
 - Artefato: `conf/init-db.sql`
-- Validação: conferência da sintaxe SQL e verificação dos dados inseridos no banco
+- Validação: conferência da sintaxe SQL, integridade referencial com chaves estrangeiras e verificação dos dados inseridos no banco
+
+- Data: 21/10/2026
+- Ferramenta: Antigravity
+- Uso: implementação dos componentes visuais da página de vendas (gráfico de faturamento por períodos, ranking de produtos mais vendidos e barra de filtros avançados)
+- Artefato: `frontend/src/pages/Vendas/GraficoVendas/`, `frontend/src/pages/Vendas/FiltroVendas/`
+- Validação: validação da renderização responsiva, aplicação dos estilos CSS e testes dos filtros reativos
+
+- Data: 21/10/2026
+- Ferramenta: Antigravity
+- Uso: refatoração baseada em Atomic Design do formulário de pedidos, reutilizando os átomos `FormSelect`, `FormInput` e `Button`
+- Artefato: `frontend/src/components/molecules/OrderItemAdder/`, `frontend/src/components/organisms/Form/FormCreateOrder/`
+- Validação: criação e execução de testes unitários com Vitest para a nova molécula e validação de 100% dos testes da aplicação passando com sucesso
+
+- Data: 21/10/2026
+- Ferramenta: Antigravity
+- Uso: integração do serviço de pedidos com a API HTTP e orquestração do CRUD na página de vendas
+- Artefato: `frontend/src/services/pedido.service.ts`, `frontend/src/pages/Vendas/index.tsx`
+- Validação: testes de integração com chamadas de listagem, criação, edição e exclusão de pedidos
