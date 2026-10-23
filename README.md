@@ -37,7 +37,6 @@ Sistema de apoio à gestão operacional de armazéns e centros de distribuição
 - **Contribuições Sprint 1:** [CONTRIBUICOES.md](./docs/CONTRIBUICOES.md)
 - **Planejamento Sprint 2:** [planejamento-S2.md](./docs/planejamento-S2.md)
 - **Contribuições Sprint 2:** [CONTRIBUICOES-S2.md](./docs/CONTRIBUICOES-S2.md)
-- **Avaliações das entregas 3, 4 e 5:** [ENTREGA-3.md](./avaliacao/ENTREGA-3.md), [ENTREGA-4.md](./avaliacao/ENTREGA-4.md), [ENTREGA-5.md](./avaliacao/ENTREGA-5.md)
 - **Swagger de Pedidos:** [src/docs/pedido](./api-estoque/src/docs/pedido) (disponível em `/api/docs`)
 - **Arquitetura (modelo C4):** [ARQUITETURA.md](./docs/ARQUITETURA.md)
 - **Reengenharia do backend:** [REENGENHARIA.md](./docs/REENGENHARIA.md)
