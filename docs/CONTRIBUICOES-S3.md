@@ -30,3 +30,5 @@ Registro de quem trabalhou em qual issue da entrega-7 no repositório. Cada item
 - #142 - [Refactor]: Ajustar problemas de lint e rodar format
 
 ## Monica Cancellier — UI/UX Designer
+
+- #149 - [Docs]: Criação dos README do backend e frontend
