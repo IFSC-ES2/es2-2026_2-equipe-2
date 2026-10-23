@@ -9,7 +9,7 @@ Este documento apresenta a visão geral das métricas escolhidas pela equipe, or
 | Código | Nome da métrica | Objetivo resumido | Ficha detalhada |
 |--------|------------------|---------------------|-------------------|
 | M-03 | Bugs encontrados por ambiente (desenvolvimento vs. homologação) | Avaliar se os problemas estão sendo identificados ainda em desenvolvimento, antes de chegar a etapas posteriores. | [M-03](metricas/M-03.md) |
-| M-04 | Tempo médio de conferência de um pedido | Avaliar se o sistema está tornando o processo de conferência mais rápido do que o processo manual anterior. | [M-04](metricas/M-04.md) |
+| M-04 | Testes unitários automatizados (quantidade e taxa de aprovação) | Avaliar a estabilidade e a qualidade interna do produto a cada incremento, garantindo que as regras de negócio estejam protegidas contra regressões. | [M-04](metricas/M-04.md) |
 
 ## 2. Métricas de processo
 
@@ -37,7 +37,7 @@ Este conjunto foi escolhido para cobrir três dimensões complementares do proje
 
 As métricas de **processo** (M-01, M-02) foram escolhidas porque a equipe trabalha de forma distribuída, com módulos que dependem uns dos outros (Cadastro de Clientes, Estoque, Conferência, Carga e Descarga). Acompanhar o ritmo de fechamento de issues e o tempo de revisão de PRs ajuda a identificar cedo se algum gargalo está atrasando a entrega das dependências entre módulos, permitindo ajuste de prioridades antes que o atraso se acumule.
 
-As métricas de **produto** (M-03, M-04) foram escolhidas por estarem diretamente ligadas ao problema que o sistema se propõe a resolver: reduzir erros de controle manual e agilizar a conferência de mercadorias. Medir bugs por ambiente é uma forma de avaliar a maturidade do processo de qualidade antes da entrega, enquanto o tempo médio de conferência de um pedido é a métrica mais próxima do valor real que o sistema promete gerar, sem ela, seria difícil demonstrar se o MVP de fato resolve a dor relatada.
+As métricas de **produto** (M-03, M-04) foram escolhidas por estarem diretamente ligadas à qualidade do software e à prevenção de defeitos. Medir bugs por ambiente (M-03) permite avaliar a eficácia do processo de validação antes do merge e homologação, enquanto o volume e taxa de sucesso dos testes unitários automatizados (M-04) mede diretamente a robustez técnica do produto entregue, garantindo que novas funcionalidades (como clientes e vendas) não introduzam regressões nos módulos pré-existentes (como estoque).
 
 As métricas de **projeto** (M-05, M-06) foram escolhidas para acompanhar a saúde da equipe ao longo do semestre, já que o trabalho é dividido entre cinco pessoas com papéis diferentes. Sem essas métricas, seria fácil que o desequilíbrio de carga entre os integrantes ou a dificuldade de estimar esforço só fossem percebidos tarde demais.
 
