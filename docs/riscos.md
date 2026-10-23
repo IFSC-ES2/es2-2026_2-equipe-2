@@ -14,7 +14,7 @@ Aqui será registrado os possíveis riscos iniciais do projeto, cobrindo as natu
 | **Consequência / Impacto** | Atraso na entrega da primeira versão e risco de nada ficar realmente pronto ao final do semestre. |
 | **Probabilidade** | Baixa |
 | **Impacto** | Médio |
-| **Prioridade** | Média |
+| **Prioridade** | Baixa |
 | **Estratégia de mitigação** | Manter o escopo do MVP no README e revisá-lo em cada sprint, garantindo que novas funcionalidades só entrem em versões futuras. |
 | **Ações preventivas** | - Revisar o escopo do MVP no início de cada sprint, comparando com o README/backlog inicial.<br>- Qualquer ideia de funcionalidade fora do MVP vira issue marcada como "futuro", não entra direto na sprint atual.<br>- O Arquiteto (Daniel) valida se uma issue nova realmente pertence ao escopo do MVP antes dela ser priorizada. |
 | **Ações caso o risco se concretize** | - Pausar a funcionalidade fora do escopo assim que identificada e movê-la para o backlog futuro.<br>- Reunir a equipe para revisar o que ainda falta do MVP original e repriorizar imediatamente. |
@@ -30,7 +30,7 @@ Aqui será registrado os possíveis riscos iniciais do projeto, cobrindo as natu
 | **Descrição** |  O tempo estimado para cada parte do sistema pode não bater com o tempo que será gasto. |
 | **Causa** | Falta de experiência da equipe com o processo de estimativa e erros de cálculo, principalmente em tarefas de infraestrutura, como Docker e Nginx, que a equipe ainda está aprendendo. |
 | **Consequência / Impacto** | Atraso nas próximas entregas do semestre, podendo comprometer a finalização do projeto. |
-| **Probabilidade** | Média |
+| **Probabilidade** | Alta |
 | **Impacto** | Alto |
 | **Prioridade** | Alta |
 | **Estratégia de mitigação** | Reavaliar as estimativas a cada entrega, com base no que deu tempo de fazer e, caso necessário, cortar uma parte do escopo. |
@@ -84,9 +84,9 @@ Aqui será registrado os possíveis riscos iniciais do projeto, cobrindo as natu
 | **Descrição** | Com o prazo apertado, certas funcionalidades podem acabar sendo feitas sem testes automatizados. |
 | **Causa** | Foco em entregar as funcionalidades a tempo, deixando os testes de fora pela falta de tempo sobrando. |
 | **Consequência / Impacto** | Bugs que aparecem depois de pronto, dando mais trabalho do que se fossem encontrados anteriormente. |
-| **Probabilidade** | Média |
+| **Probabilidade** | Baixa |
 | **Impacto** | Médio |
-| **Prioridade** | Média |
+| **Prioridade** | Baixa |
 | **Estratégia de mitigação** | Definir um mínimo de testes automatizados para as funcionalidades do MVP e configurar para rodar automáticamente nos pull requests. |
 | **Ações preventivas** | - Definir, junto com a equipe, um mínimo obrigatório de testes por Pull Request.<br>- Configurar o pipeline de CI para rodar os testes automaticamente e bloquear o merge caso falhem. |
 | **Ações caso o risco se concretize** | - Registrar uma issue de "dívida técnica" para cada funcionalidade entregue sem teste, para cobrir isso depois.<br>- Priorizar a escrita de testes para os módulos mais críticos primeiro, caso o tempo não permita cobrir tudo. |
@@ -134,3 +134,14 @@ e cada um possuir funções específicas.
   de cada vez
 - O risco 03 ficou como média, ela tem uma baixa probabilidade de acontecer,
 porém, causa um grande impacto
+
+### Alterações de risco Sprint-2
+
+Na sprint 2 percebemos certos riscos que estavam com estimativas erradas, documentado abaixo estarão as mudanças em cada risco e o motivo da mudança.
+
+- Risco 01 - Prioridade foi decrescida de média para baixa, nessa sprint 2 percebemos que é improvavel o aumento do escopo para o mvp final, pois estamos com um bom foco apenas no essencial
+
+- Risco 02 - Nessa sprint 2 a probabilidade foi aumentada de média para alta, percebemos que o cálculo da estimativa está sendo uma falha muito grande de nossa parte,
+ficando sobrecarregado ao final da sprint por não estarmos prestando atenção
+
+- Risco 05 - A prioridade e a probabilidade foram diminuidas de média para baixa, acreditamos que os testes estão sendo feitos em um bom tempo e boa quantidade, eles não vem sendo uma dificuldade para as principais funcionalidades por hora.

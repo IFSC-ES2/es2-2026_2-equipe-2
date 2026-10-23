@@ -13,21 +13,28 @@ interface TableProps {
   columns: Column[];
   data: TableDataRow[];
   onEdit?: (row: TableDataRow) => void;
+  onDelete?: (row: TableDataRow) => void;
 }
 
-const Table: React.FC<TableProps> = ({ columns, data, onEdit }) => {
+const Table: React.FC<TableProps> = ({ columns, data, onEdit, onDelete }) => {
   if (!columns || columns.length === 0) {
     return <p>Nenhuma coluna disponível para exibição.</p>;
   }
 
   return (
     <div className="table-responsive">
-      <table className="table table-hover app-table">
+      <table className="table table-hover app-table table-striped">
         <TableHeader columns={columns} />
         <tbody>
           {data && data.length > 0 ? (
             data.map((row, rowIndex) => (
-              <TableRow key={rowIndex} columns={columns} row={row} onEdit={onEdit} />
+              <TableRow
+                key={rowIndex}
+                columns={columns}
+                row={row}
+                onEdit={onEdit}
+                onDelete={onDelete}
+              />
             ))
           ) : (
             <tr>

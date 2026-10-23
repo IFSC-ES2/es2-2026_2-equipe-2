@@ -1,7 +1,6 @@
-.app-header {
-  background-color: #ffffff;
-}
-
 .app-header-title {
-  color: var(--bs-primary);
+  color: #ffffff;
+}
+.app-header {
+  background-color: #01427b;
 }

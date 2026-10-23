@@ -22,7 +22,12 @@ describe('Organism Modal', () => {
 
   it('deve renderizar título e conteúdo quando isOpen for verdadeiro', () => {
     render(
-      <Modal isOpen={true} onClose={vi.fn()} title="Meu Modal" footer={<button>Ação</button>}>
+      <Modal
+        isOpen={true}
+        onClose={vi.fn()}
+        title="Meu Modal"
+        footer={<button>Ação</button>}
+      >
         <p>Conteúdo Interno</p>
       </Modal>,
     );

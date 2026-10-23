@@ -14,16 +14,25 @@ interface TableRowProps {
   columns: Column[];
   row: TableDataRow;
   onEdit?: (row: TableDataRow) => void;
+  onDelete?: (row: TableDataRow) => void;
 }
 
-const TableRow: React.FC<TableRowProps> = ({ columns, row, onEdit }) => {
+const TableRow: React.FC<TableRowProps> = ({
+  columns,
+  row,
+  onEdit,
+  onDelete,
+}) => {
   return (
     <tr className="app-table-row">
       {columns.map((column, index) => (
         <TableCell key={`${index}-${column.key}`}>{row[column.key]}</TableCell>
       ))}
       <TableCell>
-        <ActionButtons onEdit={() => onEdit?.(row)} />
+        <ActionButtons
+          onEdit={() => onEdit?.(row)}
+          onDelete={() => onDelete?.(row)}
+        />
       </TableCell>
     </tr>
   );

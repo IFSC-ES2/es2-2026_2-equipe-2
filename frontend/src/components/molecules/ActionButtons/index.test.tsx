@@ -26,26 +26,29 @@ vi.mock('../atoms/Button', () => {
 describe('Molécula ActionButtons', () => {
   it('deve renderizar os botões Editar e Excluir corretamente', () => {
     render(<ActionButtons />);
-    expect(screen.getByText('Editar')).toBeDefined();
-    expect(screen.getByText('Excluir')).toBeDefined();
+    expect(screen.getByTitle('Editar')).toBeDefined();
+    expect(screen.getByTitle('Excluir')).toBeDefined();
   });
 
   it('deve disparar a função onEdit quando o botão Editar for clicado', () => {
     const onEditMock = vi.fn();
     render(<ActionButtons onEdit={onEditMock} />);
 
-    const editButton = screen.getByText('Editar');
+    const editButton = screen.getByTitle('Editar');
     fireEvent.click(editButton);
 
     expect(onEditMock).toHaveBeenCalledTimes(1);
   });
 
-  it('deve disparar a função onDelete quando o botão Excluir for clicado', () => {
+  it('deve disparar a função onDelete quando o botão Excluir for clicado e confirmar', () => {
     const onDeleteMock = vi.fn();
     render(<ActionButtons onDelete={onDeleteMock} />);
 
-    const deleteButton = screen.getByText('Excluir');
+    const deleteButton = screen.getByTitle('Excluir');
     fireEvent.click(deleteButton);
+
+    const confirmButton = screen.getByText('Confirmar');
+    fireEvent.click(confirmButton);
 
     expect(onDeleteMock).toHaveBeenCalledTimes(1);
   });

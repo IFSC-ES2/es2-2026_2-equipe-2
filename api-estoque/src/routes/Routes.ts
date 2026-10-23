@@ -1,6 +1,9 @@
+import routerFornecedor from "./fornecedores.routes";
 import { Router } from "express";
 import routerCategoria from "./categorias.routes";
+import routerCliente from "./clientes.routes";
 import routerProduto from "./produtos.routes";
+import routerPedido from "./pedidos.routes";
 import { HttpStatus } from "../config/status";
 import { serve, setup } from "../docs/swagger";
 
@@ -12,6 +15,9 @@ class Routes {
 
     router.use("/categorias", routerCategoria);
     router.use("/produtos", routerProduto);
+    router.use("/fornecedores", routerFornecedor);
+    router.use("/clientes", routerCliente);
+    router.use("/pedidos", routerPedido);
 
     router.use("/docs", serve, setup);
 

@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import Estoque from '.';
 import * as produtoService from '../../services/produto.service';
 
@@ -7,6 +8,13 @@ vi.mock('../../services/produto.service', () => ({
   getProdutos: vi.fn(),
   createProduto: vi.fn(),
 }));
+
+const renderEstoque = () =>
+  render(
+    <MemoryRouter>
+      <Estoque />
+    </MemoryRouter>,
+  );
 
 describe('Page Estoque', () => {
   beforeEach(() => {
@@ -18,7 +26,7 @@ describe('Page Estoque', () => {
       () => new Promise(() => {}),
     );
 
-    render(<Estoque />);
+    renderEstoque();
 
     expect(screen.getByText('Listagem dos Produtos')).toBeDefined();
     expect(screen.getByText('Carregando...')).toBeDefined();
@@ -29,7 +37,7 @@ describe('Page Estoque', () => {
       new Error('Erro ao buscar produtos'),
     );
 
-    render(<Estoque />);
+    renderEstoque();
 
     await waitFor(() => {
       expect(screen.getByText('Erro ao buscar produtos')).toBeDefined();
@@ -45,7 +53,7 @@ describe('Page Estoque', () => {
       data: [{ sku: 'SKU-001', nome: 'Produto A' }],
     });
 
-    render(<Estoque />);
+    renderEstoque();
 
     await waitFor(() => {
       expect(screen.getByText('SKU-001')).toBeDefined();
@@ -59,7 +67,7 @@ describe('Page Estoque', () => {
       data: [{ id: 1 }],
     });
 
-    render(<Estoque />);
+    renderEstoque();
 
     await waitFor(() => {
       expect(screen.getByText('Novo Produto')).toBeDefined();

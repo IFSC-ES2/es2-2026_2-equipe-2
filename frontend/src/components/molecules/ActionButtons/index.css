@@ -1,0 +1,32 @@
+.btn-edit,
+.btn-delete {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.btn-edit i {
+  color: var(--bs-primary);
+}
+
+.btn-edit:hover i {
+  color: var(--app-navy-900);
+}
+
+.btn-delete i {
+  color: var(--bs-danger);
+}
+
+.btn-delete .btn-delete-hover {
+  display: none;
+}
+
+.btn-delete:hover .bi-trash:not(.btn-delete-hover) {
+  display: none;
+}
+
+.btn-delete:hover .btn-delete-hover {
+  display: inline-block;
+}

@@ -1,3 +1,16 @@
+export interface Categoria {
+  id: number;
+  nome: string;
+}
+
+export interface Fornecedor {
+  id: number;
+  nome: string;
+  cnpj?: string | null;
+  telefone?: string | null;
+  email?: string | null;
+}
+
 export interface Produto {
   id: number;
   sku: string;
@@ -10,11 +23,19 @@ export interface Produto {
   estoque_minimo: number;
   criado_em: Date;
   atualizado_em: Date;
+  categoria?: Categoria | null;
+  fornecedor?: Fornecedor | null;
 }
 
 export type ProdutoCreate = Omit<
   Produto,
-  'id' | 'criado_em' | 'atualizado_em' | 'quantidade' | 'estoque_minimo'
+  | 'id'
+  | 'criado_em'
+  | 'atualizado_em'
+  | 'quantidade'
+  | 'estoque_minimo'
+  | 'categoria'
+  | 'fornecedor'
 > & {
   quantidade?: number;
   estoque_minimo?: number;

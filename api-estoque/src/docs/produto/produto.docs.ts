@@ -194,4 +194,11 @@
  *         content:
  *           application/json:
  *             schema:
+ *               $ref: '#/components/schemas/BadRequestError'
+ *       404:
+ *         description: Produto não encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/NotFoundError'
  */

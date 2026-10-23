@@ -60,7 +60,9 @@ describe('Atom FormTextarea', () => {
       />,
     );
 
-    const textarea = screen.getByPlaceholderText('Digite os detalhes') as HTMLTextAreaElement;
+    const textarea = screen.getByPlaceholderText(
+      'Digite os detalhes',
+    ) as HTMLTextAreaElement;
     expect(textarea.rows).toBe(5);
   });
 });
