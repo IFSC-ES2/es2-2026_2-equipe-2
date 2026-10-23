@@ -37,6 +37,12 @@ Sistema de apoio à gestão operacional de armazéns e centros de distribuição
 - **Contribuições Sprint 1:** [CONTRIBUICOES.md](./docs/CONTRIBUICOES.md)
 - **Planejamento Sprint 2:** [planejamento-S2.md](./docs/planejamento-S2.md)
 - **Contribuições Sprint 2:** [CONTRIBUICOES-S2.md](./docs/CONTRIBUICOES-S2.md)
+- **Avaliações das entregas 3, 4 e 5:** [ENTREGA-3.md](./avaliacao/ENTREGA-3.md), [ENTREGA-4.md](./avaliacao/ENTREGA-4.md), [ENTREGA-5.md](./avaliacao/ENTREGA-5.md)
+- **Swagger de Pedidos:** [src/docs/pedido](./api-estoque/src/docs/pedido) (disponível em `/api/docs`)
+- **Arquitetura (modelo C4):** [ARQUITETURA.md](./docs/ARQUITETURA.md)
+- **Reengenharia do backend:** [REENGENHARIA.md](./docs/REENGENHARIA.md)
+- **ADR-0008 (backend monolítico modular):** [ADR-0008](./docs/adrs/ADR-0008-backend-monolitico-modular.md)
+- **Registro de uso de IA (atualizado):** [USO-IA.md](./USO-IA.md)
 
 - **PRs desta etapa:**
   - [#91 - docs/swagger api estoque ](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/91)
@@ -142,6 +148,7 @@ Ter uma primeira versão funcionando que já mostre o começo do fluxo da opera�
 | Categorias   | `GET`, `POST /categorias` · `GET`, `PUT`, `DELETE /categorias/:id` |
 | Fornecedores | `GET`                                                              |
 | Clientes     | `GET`, `POST /clientes` · `GET`, `PUT`, `DELETE /clientes/:id`     |
+| Pedidos (Vendas) | `GET`, `POST /pedidos` · `GET`, `PUT`, `DELETE /pedidos/:id` — criação e atualização com itens em transação |
 | Documentação | `GET /docs` — Swagger UI com todos os endpoints documentados       |
 
 ### Frontend
@@ -150,7 +157,10 @@ Ter uma primeira versão funcionando que já mostre o começo do fluxo da opera�
 - Layout base compartilhado por todas as páginas;
 - Página de Estoque com listagem, criação, edição e exclusão de produtos via modais;
 - Exibição do nome do fornecedor e da categoria na tabela de produtos;
-- Ícones de ação (editar/excluir) com estilização Bootstrap.
+- Ícones de ação (editar/excluir) com estilização Bootstrap;
+- Página de Vendas com listagem de pedidos e modal/formulário para criação de venda (service `pedido.service.ts`);
+- Seed do banco de dados ampliada para apoiar vendas e pedidos;
+- Backend padronizado e com lint corrigido (ESLint + Prettier) no backend e no frontend.
 
 ## Como Rodar o Projeto
 
