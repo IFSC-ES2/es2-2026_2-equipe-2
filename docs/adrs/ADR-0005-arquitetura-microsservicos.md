@@ -2,7 +2,10 @@
 
 ## Status
 
-Aceita
+
+Superada parcialmente pela [ADR-0008](./ADR-0008-backend-monolitico-modular.md) - 
+a decisão de usar microsserviços foi substituída por um monólito modular. 
+Permanecem válidos o Nginx como ponto único de entrada e o Docker Compose único.
 
 ## Contexto
 

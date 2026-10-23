@@ -2,7 +2,7 @@
 
 ## Status
 
-Aceita
+Superada — substituída pela [ADR-0006](./ADR-0006-tipagem-backend-e-cliente-proprio-bd.md)
 
 ## Contexto
 
