@@ -1,41 +1,41 @@
-DEV_FILES = -f docker-compose.yaml -f docker-compose.dev.yaml
-PROD_FILES = -f docker-compose.yaml -f docker-compose.prod.yaml
+COMPOSE      = docker compose -f docker-compose.yaml
+COMPOSE_DEV  = $(COMPOSE) -f docker-compose.dev.yaml
+COMPOSE_PROD = $(COMPOSE) -f docker-compose.prod.yaml
 
-DEV_ENV = --env-file .env.development
-PROD_ENV = --env-file .env.production
-
-.PHONY: dev prod down-dev down-prod build build-prod logs-dev logs-prod ps-dev ps-prod restart-dev restart-prod
+.PHONY: lint format test dev dev-watch prod down-dev down-prod build-dev build-prod logs-dev logs-prod
 
 dev:
-	docker compose $(DEV_FILES) $(DEV_ENV) watch
-
-prod:
-	docker compose $(PROD_FILES) $(PROD_ENV) up -d
+	$(COMPOSE_DEV) up --build --watch
+	
+build-dev:
+	$(COMPOSE_DEV) build --no-cache
 
 down-dev:
-	docker compose $(DEV_FILES) $(DEV_ENV) down
-
-down-prod:
-	docker compose $(PROD_FILES) $(PROD_ENV) down
-
-build:
-	docker compose $(DEV_FILES) $(DEV_ENV) build --no-cache
-
-build-prod:
-	docker compose $(PROD_FILES) $(PROD_ENV) build --no-cache
+	$(COMPOSE_DEV) down
 
 logs-dev:
-	docker compose $(DEV_FILES) $(DEV_ENV) logs -f
+	$(COMPOSE_DEV) logs -f
+
+prod:
+	$(COMPOSE_PROD) up -d --build
+
+build-prod:
+	$(COMPOSE_PROD) build --no-cache
+
+down-prod:
+	$(COMPOSE_PROD) down
 
 logs-prod:
-	docker compose $(PROD_FILES) $(PROD_ENV) logs -f
+	$(COMPOSE_PROD) logs -f
 
-ps-dev:
-	docker compose $(DEV_FILES) $(DEV_ENV) ps
+lint:
+	cd api-estoque && npm run lint
+	cd frontend && npm run lint
 
-ps-prod:
-	docker compose $(PROD_FILES) $(PROD_ENV) ps
+format:
+	cd api-estoque && npm run format
+	cd frontend && npm run format
 
-restart-dev: down-dev dev
-
-restart-prod: down-prod prod
+test:
+	cd api-estoque && npx vitest run
+	cd frontend && npx vitest run
