@@ -1,0 +1,49 @@
+.form-create-order {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.order-items-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 0.5rem;
+}
+
+.order-items-table th {
+  background-color: var(--bs-light, #f8f9fa);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6c757d;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.order-items-table td {
+  padding: 0.5rem 0.75rem;
+  vertical-align: middle;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.order-total-card {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-total-card .total-label {
+  font-weight: 600;
+  color: #475569;
+  font-size: 1rem;
+}
+
+.order-total-card .total-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+}

@@ -56,7 +56,7 @@ describe("ClienteService", () => {
 
   describe("findAll", () => {
     it("deve retornar todos os clientes", async () => {
-      (repository.findAll as any).mockResolvedValue([clienteMock]);
+      vi.mocked(repository.findAll).mockResolvedValue([clienteMock]);
 
       const result = await service.findAll();
 
@@ -66,7 +66,7 @@ describe("ClienteService", () => {
 
     it("deve propagar o erro quando o repository falhar", async () => {
       const error = new Error("database offline");
-      (repository.findAll as any).mockRejectedValue(error);
+      vi.mocked(repository.findAll).mockRejectedValue(error);
 
       await expect(service.findAll()).rejects.toThrow(error);
     });
@@ -74,7 +74,7 @@ describe("ClienteService", () => {
 
   describe("findById", () => {
     it("deve retornar o cliente quando o id é válido", async () => {
-      (repository.findById as any).mockResolvedValue(clienteMock);
+      vi.mocked(repository.findById).mockResolvedValue(clienteMock);
 
       const result = await service.findById(1);
 
@@ -83,14 +83,14 @@ describe("ClienteService", () => {
     });
 
     it("deve aceitar id em formato string e converter para number", async () => {
-      (repository.findById as any).mockResolvedValue(clienteMock);
+      vi.mocked(repository.findById).mockResolvedValue(clienteMock);
 
       await service.findById("1");
 
       expect(repository.findById).toHaveBeenCalledWith(1);
     });
 
-    it.each([0, NaN, "abc", undefined as any, null as any])(
+    it.each([0, NaN, "abc", undefined as never, null as never])(
       "deve lançar ValidationError para id inválido (%s)",
       async (invalidId) => {
         await expect(service.findById(invalidId)).rejects.toThrow(
@@ -101,14 +101,14 @@ describe("ClienteService", () => {
     );
 
     it("deve lançar EntityNotFound quando o cliente não existe", async () => {
-      (repository.findById as any).mockResolvedValue(null);
+      vi.mocked(repository.findById).mockResolvedValue(null);
 
       await expect(service.findById(999)).rejects.toThrow(EntityNotFound);
     });
 
     it("deve propagar o erro quando o repository falhar", async () => {
       const error = new Error("database offline");
-      (repository.findById as any).mockRejectedValue(error);
+      vi.mocked(repository.findById).mockRejectedValue(error);
 
       await expect(service.findById(1)).rejects.toThrow(error);
     });
@@ -116,7 +116,7 @@ describe("ClienteService", () => {
 
   describe("create", () => {
     it("deve criar um cliente com os dados informados", async () => {
-      (repository.create as any).mockResolvedValue(clienteMock);
+      vi.mocked(repository.create).mockResolvedValue(clienteMock);
 
       const result = await service.create(clienteCreateMock);
 
@@ -125,7 +125,7 @@ describe("ClienteService", () => {
     });
 
     it("deve remover espaços em branco das extremidades de nome, email, telefone, documento e endereco", async () => {
-      (repository.create as any).mockResolvedValue(clienteMock);
+      vi.mocked(repository.create).mockResolvedValue(clienteMock);
 
       await service.create({
         ...clienteCreateMock,
@@ -139,7 +139,7 @@ describe("ClienteService", () => {
       expect(repository.create).toHaveBeenCalledWith(clienteCreateMock);
     });
 
-    it.each(["", "   ", undefined as any, null as any])(
+    it.each(["", "   ", undefined as never, null as never])(
       "deve lançar ValidationError quando o nome é inválido (%s)",
       async (invalidNome) => {
         await expect(
@@ -149,7 +149,7 @@ describe("ClienteService", () => {
       },
     );
 
-    it.each(["", "   ", undefined as any, null as any])(
+    it.each(["", "   ", undefined as never, null as never])(
       "deve lançar ValidationError quando o email é inválido (%s)",
       async (invalidEmail) => {
         await expect(
@@ -161,7 +161,7 @@ describe("ClienteService", () => {
 
     it("deve propagar o erro quando o repository falhar", async () => {
       const error = new Error("unique constraint violation");
-      (repository.create as any).mockRejectedValue(error);
+      vi.mocked(repository.create).mockRejectedValue(error);
 
       await expect(service.create(clienteCreateMock)).rejects.toThrow(error);
     });
@@ -170,8 +170,8 @@ describe("ClienteService", () => {
   describe("update", () => {
     it("deve atualizar o cliente quando ele existe", async () => {
       const atualizado = { ...clienteMock, telefone: "(11) 90000-0000" };
-      (repository.findById as any).mockResolvedValue(clienteMock);
-      (repository.update as any).mockResolvedValue(atualizado);
+      vi.mocked(repository.findById).mockResolvedValue(clienteMock);
+      vi.mocked(repository.update).mockResolvedValue(atualizado);
 
       const result = await service.update(1, {
         telefone: "(11) 90000-0000",
@@ -185,8 +185,8 @@ describe("ClienteService", () => {
     });
 
     it("deve remover espaços em branco das extremidades de nome, email, telefone, documento e endereco ao atualizar", async () => {
-      (repository.findById as any).mockResolvedValue(clienteMock);
-      (repository.update as any).mockResolvedValue(clienteMock);
+      vi.mocked(repository.findById).mockResolvedValue(clienteMock);
+      vi.mocked(repository.update).mockResolvedValue(clienteMock);
 
       await service.update(1, {
         nome: "  Novo Nome  ",
@@ -206,7 +206,7 @@ describe("ClienteService", () => {
     });
 
     it("deve lançar EntityNotFound quando o cliente não existe", async () => {
-      (repository.findById as any).mockResolvedValue(null);
+      vi.mocked(repository.findById).mockResolvedValue(null);
 
       await expect(service.update(999, { nome: "Novo Nome" })).rejects.toThrow(
         EntityNotFound,
@@ -223,8 +223,8 @@ describe("ClienteService", () => {
 
     it("deve propagar o erro quando o repository falhar", async () => {
       const error = new Error("database offline");
-      (repository.findById as any).mockResolvedValue(clienteMock);
-      (repository.update as any).mockRejectedValue(error);
+      vi.mocked(repository.findById).mockResolvedValue(clienteMock);
+      vi.mocked(repository.update).mockRejectedValue(error);
 
       await expect(service.update(1, { nome: "Novo Nome" })).rejects.toThrow(
         error,
@@ -234,8 +234,8 @@ describe("ClienteService", () => {
 
   describe("delete", () => {
     it("deve deletar o cliente e retornar true", async () => {
-      (repository.findById as any).mockResolvedValue(clienteMock);
-      (repository.delete as any).mockResolvedValue(undefined);
+      vi.mocked(repository.findById).mockResolvedValue(clienteMock);
+      vi.mocked(repository.delete).mockResolvedValue(undefined);
 
       const result = await service.delete(1);
 
@@ -244,7 +244,7 @@ describe("ClienteService", () => {
     });
 
     it("deve lançar EntityNotFound quando o cliente não existe", async () => {
-      (repository.findById as any).mockResolvedValue(null);
+      vi.mocked(repository.findById).mockResolvedValue(null);
 
       await expect(service.delete(999)).rejects.toThrow(EntityNotFound);
       expect(repository.delete).not.toHaveBeenCalled();
@@ -257,8 +257,8 @@ describe("ClienteService", () => {
 
     it("deve propagar o erro quando o repository falhar", async () => {
       const error = new Error("database offline");
-      (repository.findById as any).mockResolvedValue(clienteMock);
-      (repository.delete as any).mockRejectedValue(error);
+      vi.mocked(repository.findById).mockResolvedValue(clienteMock);
+      vi.mocked(repository.delete).mockRejectedValue(error);
 
       await expect(service.delete(1)).rejects.toThrow(error);
     });

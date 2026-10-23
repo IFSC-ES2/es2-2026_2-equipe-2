@@ -20,7 +20,7 @@ export class CategoriaRepository extends BaseRepository<Categoria> {
   }
 
   public async findByNome(nome: string): Promise<Categoria | null> {
-    const result = await this.query(
+    const result = await this.query<Categoria>(
       `SELECT * FROM ${this.tableName} WHERE nome = $1`,
       [nome],
     );

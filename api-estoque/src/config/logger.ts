@@ -59,27 +59,27 @@ class Logger {
   }
 
   // Métodos públicos para logging
-  public info(message: string, ...meta: any[]): void {
+  public info(message: string, ...meta: unknown[]): void {
     this.logger.info(message, ...meta);
   }
 
-  public error(message: string, ...meta: any[]): void {
+  public error(message: string, ...meta: unknown[]): void {
     this.logger.error(message, ...meta);
   }
 
-  public warn(message: string, ...meta: any[]): void {
+  public warn(message: string, ...meta: unknown[]): void {
     this.logger.warn(message, ...meta);
   }
 
-  public debug(message: string, ...meta: any[]): void {
+  public debug(message: string, ...meta: unknown[]): void {
     this.logger.debug(message, ...meta);
   }
 
-  public verbose(message: string, ...meta: any[]): void {
+  public verbose(message: string, ...meta: unknown[]): void {
     this.logger.verbose(message, ...meta);
   }
 
-  public silly(message: string, ...meta: any[]): void {
+  public silly(message: string, ...meta: unknown[]): void {
     this.logger.silly(message, ...meta);
   }
 

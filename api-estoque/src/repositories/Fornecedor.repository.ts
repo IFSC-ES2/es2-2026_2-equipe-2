@@ -20,7 +20,7 @@ export class FornecedorRepository extends BaseRepository<Fornecedor> {
   }
 
   public async findByCnpj(cnpj: string): Promise<Fornecedor | null> {
-    const result = await this.query(
+    const result = await this.query<Fornecedor>(
       `SELECT * FROM ${this.tableName} WHERE cnpj = $1`,
       [cnpj],
     );
@@ -28,7 +28,7 @@ export class FornecedorRepository extends BaseRepository<Fornecedor> {
   }
 
   public async findByNome(nome: string): Promise<Fornecedor[]> {
-    const result = await this.query(
+    const result = await this.query<Fornecedor>(
       `SELECT * FROM ${this.tableName} WHERE nome ILIKE $1 ORDER BY id`,
       [`%${nome}%`],
     );

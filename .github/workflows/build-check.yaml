@@ -39,7 +39,7 @@ jobs:
           EOF
 
       - name: Build containers api-estoque
-        run: docker compose --env-file .env -f docker-compose.yaml -f docker-compose.prod.yaml build db api-estoque
+        run: docker compose -f docker-compose.yaml -f docker-compose.prod.yaml build db api-estoque
 
   build-frontend:
     needs: changes
@@ -61,4 +61,4 @@ jobs:
           EOF
 
       - name: Build containers frontend
-        run: docker compose --env-file .env -f docker-compose.yaml -f docker-compose.prod.yaml build web
+        run: docker compose -f docker-compose.yaml -f docker-compose.prod.yaml build web
