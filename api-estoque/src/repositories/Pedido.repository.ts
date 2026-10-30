@@ -1,5 +1,6 @@
 import { PoolClient, QueryResultRow } from "pg";
 import { BaseRepository } from "./BaseRepository";
+import { ValidationError } from "../errors/index";
 import {
   Pedido,
   PedidoCreate,
@@ -56,6 +57,7 @@ export class PedidoRepository extends BaseRepository<Pedido> {
            VALUES ($1, $2, $3, $4)`,
           [pedido.id, item.produto_id, item.quantidade, item.preco_unitario],
         );
+        await this.baixarEstoque(client, item.produto_id, item.quantidade); // NOVO
       }
 
       await client.query("COMMIT");
@@ -81,6 +83,7 @@ export class PedidoRepository extends BaseRepository<Pedido> {
       let valorTotal: number | null = null;
 
       if (data.itens) {
+        await this.devolverEstoque(client, id);
         await client.query("DELETE FROM itens_pedido WHERE pedido_id = $1", [
           id,
         ]);
@@ -91,6 +94,7 @@ export class PedidoRepository extends BaseRepository<Pedido> {
              VALUES ($1, $2, $3, $4)`,
             [id, item.produto_id, item.quantidade, item.preco_unitario],
           );
+          await this.baixarEstoque(client, item.produto_id, item.quantidade);
         }
 
         valorTotal = data.itens.reduce(
@@ -201,6 +205,59 @@ export class PedidoRepository extends BaseRepository<Pedido> {
         : null,
       itens,
     };
+  }
+  
+  private async baixarEstoque(
+    client: PoolClient,
+    produtoId: number,
+    quantidade: number,
+  ): Promise<void> {
+    const result = await client.query(
+      `UPDATE produtos
+       SET quantidade = quantidade - $1, atualizado_em = NOW()
+       WHERE id = $2 AND quantidade >= $1`,
+      [quantidade, produtoId],
+    );
+
+    if (result.rowCount === 0) {
+      const produto = await client.query<{ nome: string; quantidade: number }>(
+        `SELECT nome, quantidade FROM produtos WHERE id = $1`,
+        [produtoId],
+      );
+      const p = produto.rows[0];
+
+      throw new ValidationError(
+        p
+          ? `Estoque insuficiente para "${p.nome}". Disponível: ${p.quantidade}`
+          : `Estoque insuficiente para o produto id ${produtoId}`,
+      );
+    }
+  }
+
+  private async devolverEstoque(
+    client: PoolClient,
+    pedidoId: number,
+  ): Promise<void> {
+    await client.query(
+      `UPDATE produtos p
+       SET quantidade = p.quantidade + ip.quantidade, atualizado_em = NOW()
+       FROM itens_pedido ip
+       WHERE ip.pedido_id = $1 AND ip.produto_id = p.id`,
+      [pedidoId],
+    );
+  }
+
+  public override async delete(id: number): Promise<void> {
+    await this.query(
+      `WITH devolvido AS (
+         UPDATE produtos p
+         SET quantidade = p.quantidade + ip.quantidade, atualizado_em = NOW()
+         FROM itens_pedido ip
+         WHERE ip.pedido_id = $1 AND ip.produto_id = p.id
+       )
+       DELETE FROM pedidos WHERE id = $1`,
+      [id],
+    );
   }
 }
 
