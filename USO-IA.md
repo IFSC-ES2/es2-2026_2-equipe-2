@@ -168,3 +168,9 @@
 - Uso: modificações e embelezamento do arquivo da sprint-3
 - Artefato: `docs/entregas/sprint-3.md`
 - Validação: leitura total do arquivo e modificações em partes que houve erro
+
+- Data: 30/10/2026
+- Ferramenta: Antigravity
+- Uso: verificação e correção de código
+- Artefato: `api-estoque\src\repositories\Pedido.repository.ts`
+- Validação: leitura e verificação integral das correções feitas, estudo das modificações feitas para melhor entendimento
