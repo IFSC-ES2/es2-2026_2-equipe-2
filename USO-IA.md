@@ -174,3 +174,9 @@
 - Uso: verificação e correção de código
 - Artefato: `api-estoque\src\repositories\Pedido.repository.ts`
 - Validação: leitura e verificação integral das correções feitas, estudo das modificações feitas para melhor entendimento
+
+- Data: 01/11/2026
+- Ferramenta: Claude
+- Uso: criação da base para o documento de planejamento da sprint 4
+- Artefato: `docs\entregas\sprint-4.md`
+- Validação: leitura integral e adaptação completa do que estava fora da linha para esse sprint 4.
