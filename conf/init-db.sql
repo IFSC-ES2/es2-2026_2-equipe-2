@@ -191,3 +191,146 @@ INSERT INTO movimentacoes_estoque (produto_id, tipo, quantidade, referencia) VAL
     (11, 'SAIDA', 3, 'Pedido #12'),
     (5, 'ENTRADA', 20, 'Compra fornecedor Móveis & Cia'),
     (5, 'SAIDA', 3, 'Pedido #15');
+
+
+--Consultas
+-- Produtos com estoque no nível mínimo ou abaixo
+SELECT
+    id,
+    sku,
+    nome,
+    quantidade,
+    estoque_minimo,
+    (estoque_minimo - quantidade) AS faltam_para_o_minimo
+FROM produtos
+WHERE quantidade <= estoque_minimo
+ORDER BY (quantidade - estoque_minimo), nome;
+-- 5 Produtos com maior estoque
+SELECT
+    id,
+    sku,
+    nome,
+    quantidade,
+FROM produtos
+ORDER BY quantidade, nome
+    LIMIT 5;
+-- Produto mais vendido ultimos 30 dias
+SELECT
+    pr.id,
+    pr.sku,
+    pr.nome,
+    SUM(ip.quantidade)::int                      AS unidades_vendidas,
+    SUM(ip.quantidade * ip.preco_unitario)       AS receita
+FROM itens_pedido ip
+         JOIN pedidos  p  ON p.id  = ip.pedido_id AND p.status = 'CONCLUIDO'
+         JOIN produtos pr ON pr.id = ip.produto_id
+WHERE p.data_pedido >= NOW() - INTERVAL '30 days'
+GROUP BY pr.id, pr.sku, pr.nome
+ORDER BY unidades_vendidas DESC, receita DESC
+    LIMIT 1;
+-- Produto mais vendido ultimos 90 dias
+SELECT
+    pr.id,
+    pr.sku,
+    pr.nome,
+    SUM(ip.quantidade)::int                      AS unidades_vendidas,
+    SUM(ip.quantidade * ip.preco_unitario)       AS receita
+FROM itens_pedido ip
+         JOIN pedidos  p  ON p.id  = ip.pedido_id AND p.status = 'CONCLUIDO'
+         JOIN produtos pr ON pr.id = ip.produto_id
+WHERE p.data_pedido >= NOW() - INTERVAL '90 days'
+GROUP BY pr.id, pr.sku, pr.nome
+ORDER BY unidades_vendidas DESC, receita DESC
+    LIMIT 1;
+-- Produto mais vendido ultimos 365 dias
+SELECT
+    pr.id,
+    pr.sku,
+    pr.nome,
+    SUM(ip.quantidade)::int                      AS unidades_vendidas,
+    SUM(ip.quantidade * ip.preco_unitario)       AS receita
+FROM itens_pedido ip
+         JOIN pedidos  p  ON p.id  = ip.pedido_id AND p.status = 'CONCLUIDO'
+         JOIN produtos pr ON pr.id = ip.produto_id
+WHERE p.data_pedido >= NOW() - INTERVAL '365 days'
+GROUP BY pr.id, pr.sku, pr.nome
+ORDER BY unidades_vendidas DESC, receita DESC
+    LIMIT 1;
+-- Total produtos vendidos em 30 dias
+SELECT
+    COALESCE(SUM(ip.quantidade), 0)::int AS total_produtos_vendidos
+FROM itens_pedido ip
+         JOIN pedidos p
+              ON p.id = ip.pedido_id
+WHERE p.status = 'CONCLUIDO'
+  AND p.data_pedido >= NOW() - INTERVAL '30 days';
+-- Total produtos vendidos em 90 dias
+SELECT
+    COALESCE(SUM(ip.quantidade), 0)::int AS total_produtos_vendidos
+FROM itens_pedido ip
+         JOIN pedidos p
+              ON p.id = ip.pedido_id
+WHERE p.status = 'CONCLUIDO'
+  AND p.data_pedido >= NOW() - INTERVAL '90 days';
+-- Total produtos vendidos em 365 dias
+SELECT
+    COALESCE(SUM(ip.quantidade), 0)::int AS total_produtos_vendidos
+FROM itens_pedido ip
+         JOIN pedidos p
+              ON p.id = ip.pedido_id
+WHERE p.status = 'CONCLUIDO'
+  AND p.data_pedido >= NOW() - INTERVAL '365 days';
+-- Categoria mais vendida ultimos 30 dias
+SELECT
+    c.id,
+    c.nome,
+    SUM(ip.quantidade)::int AS unidades_vendidas,
+    SUM(ip.quantidade * ip.preco_unitario) AS receita
+FROM itens_pedido ip
+         JOIN pedidos p
+              ON p.id = ip.pedido_id
+                  AND p.status = 'CONCLUIDO'
+         JOIN produtos pr
+              ON pr.id = ip.produto_id
+         JOIN categorias c
+              ON c.id = pr.categoria_id
+WHERE p.data_pedido >= NOW() - INTERVAL '30 days'
+GROUP BY c.id, c.nome
+ORDER BY unidades_vendidas DESC, receita DESC
+    LIMIT 1;
+-- Categoria mais vendida ultimos 90 dias
+SELECT
+    c.id,
+    c.nome,
+    SUM(ip.quantidade)::int AS unidades_vendidas,
+    SUM(ip.quantidade * ip.preco_unitario) AS receita
+FROM itens_pedido ip
+         JOIN pedidos p
+              ON p.id = ip.pedido_id
+                  AND p.status = 'CONCLUIDO'
+         JOIN produtos pr
+              ON pr.id = ip.produto_id
+         JOIN categorias c
+              ON c.id = pr.categoria_id
+WHERE p.data_pedido >= NOW() - INTERVAL '90 days'
+GROUP BY c.id, c.nome
+ORDER BY unidades_vendidas DESC, receita DESC
+    LIMIT 1;
+-- Categoria mais vendida ultimos 365 dias
+SELECT
+    c.id,
+    c.nome,
+    SUM(ip.quantidade)::int AS unidades_vendidas,
+    SUM(ip.quantidade * ip.preco_unitario) AS receita
+FROM itens_pedido ip
+         JOIN pedidos p
+              ON p.id = ip.pedido_id
+                  AND p.status = 'CONCLUIDO'
+         JOIN produtos pr
+              ON pr.id = ip.produto_id
+         JOIN categorias c
+              ON c.id = pr.categoria_id
+WHERE p.data_pedido >= NOW() - INTERVAL '365 days'
+GROUP BY c.id, c.nome
+ORDER BY unidades_vendidas DESC, receita DESC
+    LIMIT 1;
