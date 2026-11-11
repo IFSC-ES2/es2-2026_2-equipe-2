@@ -41,6 +41,8 @@ Sistema de apoio à gestão operacional de armazéns e centros de distribuição
 - **Arquitetura (modelo C4):** [ARQUITETURA.md](./docs/ARQUITETURA.md)
 - **Reengenharia do backend:** [REENGENHARIA.md](./docs/REENGENHARIA.md)
 - **ADR-0008 (backend monolítico modular):** [ADR-0008](./docs/adrs/ADR-0008-backend-monolitico-modular.md)
+- **Guia de Deploy e Staging:** [DEPLOY.md](./docs/DEPLOY.md)
+- **Planejamento Sprint 4:** [sprint-4.md](./docs/entregas/sprint-4.md)
 - **Registro de uso de IA (atualizado):** [USO-IA.md](./USO-IA.md)
 
 - **PRs desta etapa:**
@@ -163,34 +165,75 @@ Ter uma primeira versão funcionando que já mostre o começo do fluxo da opera�
 
 ## Como Rodar o Projeto
 
+Para a documentação completa de deploy, variáveis de ambiente, validação passo a passo e limitações conhecidas do ambiente de homologação, consulte o [Guia de Deploy (DEPLOY.md)](./docs/DEPLOY.md).
+
 ### Pré-requisitos
 
-- [Docker](https://docs.docker.com/get-docker/) e [Docker Compose](https://docs.docker.com/compose/install/) instalados;
-- Arquivo `.env.development` na raiz do projeto (copie de `.env.example`).
+- [Docker](https://docs.docker.com/get-docker/) (v24+) e [Docker Compose](https://docs.docker.com/compose/install/) (v2.20+) instalados;
+- [Make](https://www.gnu.org/software/make/) (opcional, para executar comandos simplificados via Makefile);
+- Arquivo `.env` na raiz do projeto (criado a partir de `.env.example`).
 
 ```bash
-cp .env.example .env.development
+cp .env.example .env
 ```
 
-### Subindo o ambiente de desenvolvimento
+### 1. Ambiente de Desenvolvimento (com Hot-Reload)
 
 ```bash
 make dev
 ```
 
-Esse comando usa `docker compose watch` internamente, sincronizando alterações do código-fonte automaticamente com os containers (hot-reload no frontend e na API).
+> Esse comando usa `docker compose watch` internamente, sincronizando alterações do código-fonte automaticamente com os containers (hot-reload no frontend e na API).
 
-Após subir, acesse:
-
-| Serviço        | Endereço                                                         |
-| -------------- | ---------------------------------------------------------------- |
-| **Frontend**   | [http://localhost:8080](http://localhost:8080)                   |
-| **Swagger UI** | [http://localhost:8080/api/docs](http://localhost:8080/api/docs) |
-
-### Encerrando os containers
+Para encerrar o ambiente de desenvolvimento:
 
 ```bash
-make down
+make down-dev
 ```
 
-> **Nota (Windows):** o `make` não vem instalado por padrão. Use o WSL, Git Bash, ou instale via Chocolatey (`choco install make`).
+### 2. Ambiente de Produção / Staging (Deploy Conteinerizado)
+
+Para subir a aplicação simulando o ambiente de produção/staging com bundles otimizados e multi-stage build:
+
+```bash
+make prod
+```
+
+Para acompanhar os logs:
+
+```bash
+make logs-prod
+```
+
+Para encerrar o ambiente de produção:
+
+```bash
+make down-prod
+```
+
+### Endereços de Acesso
+
+Após subir a aplicação (em dev ou prod), acesse:
+
+| Serviço | Endereço | Descrição |
+| :--- | :--- | :--- |
+| **Frontend Web** | [http://localhost:8080](http://localhost:8080) | Aplicação web via Nginx Proxy |
+| **API Healthcheck** | [http://localhost:8080/api/ping](http://localhost:8080/api/ping) | Verificação de status da API |
+| **Swagger UI** | [http://localhost:8080/api/docs](http://localhost:8080/api/docs) | Documentação interativa dos endpoints |
+
+### Executando Testes e Qualidade de Código
+
+Para rodar a suíte de testes automatizados e linters:
+
+```bash
+# Executar todos os testes automatizados (backend e frontend)
+make test
+
+# Executar checagem de estilo e linter (ESLint)
+make lint
+
+# Aplicar formatação automática de código (Prettier)
+make format
+```
+
+> **Nota (Windows):** o `make` não vem instalado por padrão no Windows. Utilize WSL2, Git Bash, instale via Chocolatey (`choco install make`) ou execute os comandos equivalentes com `docker compose` descritos no [DEPLOY.md](./docs/DEPLOY.md).

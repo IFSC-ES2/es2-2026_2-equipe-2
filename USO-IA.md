@@ -180,3 +180,21 @@
 - Uso: pesquisa de commits da branch `entrega-7` (commits de fix da Sprint 3) e execução dos testes para preencher as métricas M-03 e M-04
 - Artefato: `docs/metricas/M-03.md` `docs/metricas/M-04.md`
 - Validação: commits conferidos com `git log` na branch e contagem de testes conferida rodando `vitest run` no backend e no frontend
+
+- Data: 01/11/2026
+- Ferramenta: Claude
+- Uso: criação da base para o documento de planejamento da sprint 4
+- Artefato: `docs\entregas\sprint-4.md`
+- Validação: leitura integral e adaptação completa do que estava fora da linha para esse sprint 4.
+
+- Data: 09/11/2026
+- Ferramenta: Antigravity
+- Uso: elaboração da documentação técnica de deploy
+- Artefato: `docs/DEPLOY.md`, `README.md`
+- Validação: conferência dos arquivos de compose, template do Nginx, portas, rotas da API, Makefile e critérios de aceitação da Entrega 8
+
+- Data: 11/11/2026
+- Ferramenta: Antigravity
+- Uso: auxilio na criação do repository, service e do teste de Dashboard
+- Artefato: `api-estoque\test\services\cliente.service.test.ts`, `api-estoque\src\services\Dashboard.service.ts`, `api-estoque\src\repositories\Dashboard.repository.ts`
+- Validação: leitura dos códigos para verificar se está no padrão do projeto e validação por meio de testes
