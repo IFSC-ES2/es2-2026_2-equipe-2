@@ -186,3 +186,9 @@
 - Uso: elaboração da documentação técnica de deploy
 - Artefato: `docs/DEPLOY.md`, `README.md`
 - Validação: conferência dos arquivos de compose, template do Nginx, portas, rotas da API, Makefile e critérios de aceitação da Entrega 8
+
+- Data: 11/11/2026
+- Ferramenta: Antigravity
+- Uso: auxilio na criação do repository, service e do teste de Dashboard
+- Artefato: `api-estoque\test\services\cliente.service.test.ts`, `api-estoque\src\services\Dashboard.service.ts`, `api-estoque\src\repositories\Dashboard.repository.ts`
+- Validação: leitura dos códigos para verificar se está no padrão do projeto e validação por meio de testes
