@@ -206,7 +206,7 @@ export class PedidoRepository extends BaseRepository<Pedido> {
       itens,
     };
   }
-  
+
   private async baixarEstoque(
     client: PoolClient,
     produtoId: number,
