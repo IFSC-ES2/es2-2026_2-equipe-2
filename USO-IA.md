@@ -174,3 +174,9 @@
 - Uso: verificação e correção de código
 - Artefato: `api-estoque\src\repositories\Pedido.repository.ts`
 - Validação: leitura e verificação integral das correções feitas, estudo das modificações feitas para melhor entendimento
+
+- Data: 11/11/2026
+- Ferramenta: Claude
+- Uso: pesquisa de commits da branch `entrega-7` (commits de fix da Sprint 3) e execução dos testes para preencher as métricas M-03 e M-04
+- Artefato: `docs/metricas/M-03.md` `docs/metricas/M-04.md`
+- Validação: commits conferidos com `git log` na branch e contagem de testes conferida rodando `vitest run` no backend e no frontend
