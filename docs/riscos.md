@@ -113,7 +113,7 @@ dois juntos, maior a prioridade.
 | | Impacto Baixo | Impacto Médio | Impacto Alto |
 |---|---|---|---|
 | **Probabilidade Baixa** | — | — | R03 |
-| **Probabilidade Média** | — | R01, R04, R05 | R02 |
+| **Probabilidade Média** | R07 | R01, R04, R05 | R02 |
 | **Probabilidade Alta** | — | — | — |
 
 ### Riscos mais críticos agora
@@ -145,3 +145,25 @@ Na sprint 2 percebemos certos riscos que estavam com estimativas erradas, docume
 ficando sobrecarregado ao final da sprint por não estarmos prestando atenção
 
 - Risco 05 - A prioridade e a probabilidade foram diminuidas de média para baixa, acreditamos que os testes estão sendo feitos em um bom tempo e boa quantidade, eles não vem sendo uma dificuldade para as principais funcionalidades por hora.
+
+### Risco 06 - Divergência entre o ambiente local e o pipeline de CI
+
+| Campo | Descrição |
+|---|---|
+| **Natureza** | Qualidade/Processo |
+| **Descrição** | Cada integrante pode ter dependências desatualizadas ou ferramentas globais em versões diferentes das do projeto. Com isso, `make lint` e `make test` falham ou passam localmente de forma diferente do CI. |
+| **Causa** | Dependências instaladas com `npm install` em vez de `npm ci`, `node_modules` ausente ou desatualizado após trocar de branch, e uso de binários globais (como o `eslint` do sistema) no lugar dos locais. |
+| **Consequência / Impacto** | Tempo perdido investigando erros que não são do código, PRs reprovados pelo CI depois de passarem localmente, e métricas de testes e bugs coletadas de forma inconsistente. |
+| **Probabilidade** | Média |
+| **Impacto** | Baixo |
+| **Prioridade** | Baixa |
+| **Estratégia de mitigação** | Padronizar a instalação de dependências com `make ci` (`npm ci` no backend e no frontend) e manter as versões fixadas nos `package-lock.json`. |
+| **Ações preventivas** | - Documentar no README e no `DEPLOY.md` que o primeiro passo é rodar `make ci`.<br>- Rodar `make ci` ao trocar de branch ou depois de mudanças em `package.json`.<br>- Manter as ferramentas de lint e testes como dependências do projeto, sem depender de instalação global. |
+| **Ações caso o risco se concretize** | - Apagar `node_modules`, rodar `make ci` e repetir o comando que falhou.<br>- Se o erro continuar só no CI, comparar a versão do Node e das dependências com o workflow. |
+| **Acompanhamento da evolução** | Taxa de sucesso do pipeline de CI por sprint e relatos de falhas de ambiente nas reuniões semanais. |
+| **Responsável** | Victor Eduardo Peixer Munarim (Engenheiro de Qualidade/QA) |
+
+### Impacto de staging, pipeline e deploy na qualidade
+
+- O pipeline reduz o risco R05 ao bloquear merges com testes falhando. Quando o pipeline falha (R05), essa proteção se perde.
+- O deploy reprodutível por `make prod` reduz o risco R04, pois força o ambiente a subir a partir de um clone limpo.
