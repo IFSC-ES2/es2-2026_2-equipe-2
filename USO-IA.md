@@ -192,3 +192,9 @@
 - Uso: auxilio na criação do repository, service e do teste de Dashboard
 - Artefato: `api-estoque\test\services\cliente.service.test.ts`, `api-estoque\src\services\Dashboard.service.ts`, `api-estoque\src\repositories\Dashboard.repository.ts`
 - Validação: leitura dos códigos para verificar se está no padrão do projeto e validação por meio de testes
+
+- Data: 11/11/2026
+- Ferramenta: Antigravity
+- Uso: implementação da página de Dashboard no frontend, integração com a API de dashboard e testes unitários
+- Artefato: `frontend/src/pages/Dashboard/*`, `frontend/src/services/dashboard.service.ts`, `frontend/src/services/dashboard.service.test.ts`, `frontend/src/pages/Dashboard/index.test.tsx`, `frontend/README.md`
+- Validação: execução de testes unitários com Vitest (133 testes passando), validação de lint e build via container Docker e testes manuais da API
