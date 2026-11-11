@@ -143,14 +143,14 @@ Ter uma primeira versão funcionando que já mostre o começo do fluxo da opera�
 
 ### API de Estoque (`api-estoque`)
 
-| Recurso      | Endpoints disponíveis                                              |
-| ------------ | ------------------------------------------------------------------ |
-| Produtos     | `GET`, `POST /produtos` · `GET`, `PUT`, `DELETE /produtos/:id`     |
-| Categorias   | `GET`, `POST /categorias` · `GET`, `PUT`, `DELETE /categorias/:id` |
-| Fornecedores | `GET`                                                              |
-| Clientes     | `GET`, `POST /clientes` · `GET`, `PUT`, `DELETE /clientes/:id`     |
+| Recurso          | Endpoints disponíveis                                                                                       |
+| ---------------- | ----------------------------------------------------------------------------------------------------------- |
+| Produtos         | `GET`, `POST /produtos` · `GET`, `PUT`, `DELETE /produtos/:id`                                              |
+| Categorias       | `GET`, `POST /categorias` · `GET`, `PUT`, `DELETE /categorias/:id`                                          |
+| Fornecedores     | `GET`                                                                                                       |
+| Clientes         | `GET`, `POST /clientes` · `GET`, `PUT`, `DELETE /clientes/:id`                                              |
 | Pedidos (Vendas) | `GET`, `POST /pedidos` · `GET`, `PUT`, `DELETE /pedidos/:id` — criação e atualização com itens em transação |
-| Documentação | `GET /docs` — Swagger UI com todos os endpoints documentados       |
+| Documentação     | `GET /docs` — Swagger UI com todos os endpoints documentados                                                |
 
 ### Frontend
 
@@ -165,7 +165,7 @@ Ter uma primeira versão funcionando que já mostre o começo do fluxo da opera�
 
 ## Como Rodar o Projeto
 
-Para a documentação completa de deploy, variáveis de ambiente, validação passo a passo e limitações conhecidas do ambiente de homologação, consulte o [Guia de Deploy (DEPLOY.md)](./docs/DEPLOY.md).
+Para a documentação completa de deploy, variáveis de ambiente, validação passo a passo e limitações conhecidas do ambiente de homologação, consulte o [Guia de Deploy (DEPLOY.md)](./docs/DEPLOY.md)
 
 ### Pré-requisitos
 
@@ -215,11 +215,11 @@ make down-prod
 
 Após subir a aplicação (em dev ou prod), acesse:
 
-| Serviço | Endereço | Descrição |
-| :--- | :--- | :--- |
-| **Frontend Web** | [http://localhost:8080](http://localhost:8080) | Aplicação web via Nginx Proxy |
-| **API Healthcheck** | [http://localhost:8080/api/ping](http://localhost:8080/api/ping) | Verificação de status da API |
-| **Swagger UI** | [http://localhost:8080/api/docs](http://localhost:8080/api/docs) | Documentação interativa dos endpoints |
+| Serviço             | Endereço                                                         | Descrição                             |
+| :------------------ | :--------------------------------------------------------------- | :------------------------------------ |
+| **Frontend Web**    | [http://localhost:8080](http://localhost:8080)                   | Aplicação web via Nginx Proxy         |
+| **API Healthcheck** | [http://localhost:8080/api/ping](http://localhost:8080/api/ping) | Verificação de status da API          |
+| **Swagger UI**      | [http://localhost:8080/api/docs](http://localhost:8080/api/docs) | Documentação interativa dos endpoints |
 
 ### Executando Testes e Qualidade de Código
 
