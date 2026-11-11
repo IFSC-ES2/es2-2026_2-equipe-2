@@ -180,3 +180,9 @@
 - Uso: criação da base para o documento de planejamento da sprint 4
 - Artefato: `docs\entregas\sprint-4.md`
 - Validação: leitura integral e adaptação completa do que estava fora da linha para esse sprint 4.
+
+- Data: 09/11/2026
+- Ferramenta: Antigravity
+- Uso: elaboração da documentação técnica de deploy
+- Artefato: `docs/DEPLOY.md`, `README.md`
+- Validação: conferência dos arquivos de compose, template do Nginx, portas, rotas da API, Makefile e critérios de aceitação da Entrega 8
