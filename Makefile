@@ -2,7 +2,7 @@ COMPOSE      = docker compose -f docker-compose.yaml
 COMPOSE_DEV  = $(COMPOSE) -f docker-compose.dev.yaml
 COMPOSE_PROD = $(COMPOSE) -f docker-compose.prod.yaml
 
-.PHONY: lint format test dev dev-watch prod down down-dev down-prod build-dev build-prod logs-dev logs-prod
+.PHONY: ci lint format test dev dev-watch prod down down-dev down-prod build-dev build-prod logs-dev logs-prod
 
 dev:
 	$(COMPOSE_DEV) up --build --watch
@@ -29,6 +29,10 @@ down-prod:
 
 logs-prod:
 	$(COMPOSE_PROD) logs -f
+
+ci:
+	cd api-estoque && npm ci
+	cd frontend && npm ci
 
 lint:
 	cd api-estoque && npm run lint
