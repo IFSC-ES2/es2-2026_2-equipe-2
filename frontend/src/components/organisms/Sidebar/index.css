@@ -1,7 +1,12 @@
 .sidebar-container {
   width: 240px;
   min-width: 240px;
-  min-height: 100vh;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  z-index: 100;
+  overflow-y: auto;
   background-color: #122b4d;
   color: #ffffff;
   display: flex;
@@ -9,6 +14,21 @@
   padding: 1.5rem 0.75rem;
   box-sizing: border-box;
   flex-shrink: 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.sidebar-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-container::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.sidebar-container::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .sidebar-header {
@@ -78,4 +98,13 @@
 
 .sidebar-label {
   line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+  .sidebar-container {
+    width: 100%;
+    min-width: 100%;
+    height: auto;
+    position: static;
+  }
 }
