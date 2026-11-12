@@ -8,17 +8,17 @@ Este projeto é uma Single Page Application (SPA) desenvolvida em **React 19** c
 
 ## Tecnologias e Bibliotecas
 
-| Tecnologia | Versão | Função no Projeto |
-| :--- | :--- | :--- |
-| **React** | `19.2.x` | Biblioteca base para construção da interface de usuário declarativa e reativa |
-| **TypeScript** | `6.0.x` | Tipagem estática para maior robustez, manutenibilidade e segurança do código |
-| **Vite** | `8.2.x` | Ferramenta de build ágil e servidor de desenvolvimento com Hot Module Replacement (HMR) |
-| **React Router DOM** | `7.18.x` | Roteamento declarativo no lado do cliente (SPA) |
-| **Bootstrap & Bootstrap Icons** | `5.3.x` / `1.13.x` | Sistema de grid, utilitários visuais responsivos e iconografia |
-| **Material UI & Emotion** | `9.4.x` / `11.14.x` | Componentes avançados de UI e estilização baseada em temas |
-| **Vitest & Testing Library** | `5.0.x` / `16.3.x` | Framework de testes unitários/integração com ambiente `jsdom` |
-| **ESLint & Prettier** | `10.9.x` / `3.9.x` | Análise estática de código (Flat Config) e formatação padronizada |
-| **Docker** | Alpine (Node 24) | Conteinerização para ambientes de desenvolvimento e produção |
+| Tecnologia                      | Versão              | Função no Projeto                                                                       |
+| :------------------------------ | :------------------ | :-------------------------------------------------------------------------------------- |
+| **React**                       | `19.2.x`            | Biblioteca base para construção da interface de usuário declarativa e reativa           |
+| **TypeScript**                  | `6.0.x`             | Tipagem estática para maior robustez, manutenibilidade e segurança do código            |
+| **Vite**                        | `8.2.x`             | Ferramenta de build ágil e servidor de desenvolvimento com Hot Module Replacement (HMR) |
+| **React Router DOM**            | `7.18.x`            | Roteamento declarativo no lado do cliente (SPA)                                         |
+| **Bootstrap & Bootstrap Icons** | `5.3.x` / `1.13.x`  | Sistema de grid, utilitários visuais responsivos e iconografia                          |
+| **Material UI & Emotion**       | `9.4.x` / `11.14.x` | Componentes avançados de UI e estilização baseada em temas                              |
+| **Vitest & Testing Library**    | `5.0.x` / `16.3.x`  | Framework de testes unitários/integração com ambiente `jsdom`                           |
+| **ESLint & Prettier**           | `10.9.x` / `3.9.x`  | Análise estática de código (Flat Config) e formatação padronizada                       |
+| **Docker**                      | Alpine (Node 24)    | Conteinerização para ambientes de desenvolvimento e produção                            |
 
 ---
 
@@ -40,6 +40,7 @@ src/
 ```
 
 ### Principais Destaques Arquiteturais:
+
 - **Separação de Camadas (Services):** As chamadas HTTP (`fetch`) são isoladas na pasta `services/`, desacoplando a interface gráfica da lógica de integração com as APIs de backend.
 - **Tratamento Amigável de Erros:** Respostas de erro relacional (ex.: exclusão de clientes ou produtos com pedidos associados) são interceptadas e apresentadas em linguagem clara para o usuário.
 - **Layout Base Consistente:** `BaseLayout` unifica o cabeçalho superior (`Header`) e a barra de navegação lateral (`Sidebar`) em todas as rotas da aplicação.
@@ -50,22 +51,33 @@ src/
 ## Telas e Módulos Implementados
 
 ### 1. Gestão de Estoque (`/estoque`)
+
 - **Listagem de Produtos:** Tabela dinâmica com informações de SKU, nome, categoria, fornecedor, preço, estoque atual e estoque mínimo.
 - **Resolução de Relações:** Exibição amigável dos nomes de Categoria e Fornecedor na tabela.
 - **Cadastro e Edição:** Modal com formulário validado (`ProductCreateModal`) para inserção e atualização de produtos.
 - **Exclusão de Produtos:** Ação de remoção com proteção contra exclusão de itens referenciados.
 
 ### 2. Cadastro e Gestão de Clientes (`/clientes`)
+
 - **Listagem de Clientes:** Visualização de clientes com documento, e-mail, telefone e endereço.
 - **Cadastro e Edição:** Modal dinâmico (`ClientCreateModal`) para inclusão e alteração cadastral.
 - **Exclusão Segura:** Tratamento para impedir exclusão de clientes vinculados a pedidos de vendas.
 
 ### 3. Navegação e Identidade Visual (`BaseLayout`)
+
 - **Barra Lateral (`Sidebar`):** Menu lateral com rotas ativas (Dashboard, Vendas, Clientes e Estoque) e identificação da marca **AURA**.
 - **Cabeçalho Superior (`Header`):** Exibição do título da página ativa e dados do operador/usuário logado.
 
-### 4. Módulos em Desenvolvimento
-- **Dashboard (`/dashboard`):** Visão geral de indicadores operacionais e logísticos.
+### 4. Dashboard de Indicadores (`/dashboard`)
+
+- **Cards de KPI:** Faturamento total, total de produtos vendidos, categoria mais vendida e produto mais vendido.
+- **Gráfico de Vendas:** Gráfico de área interativo (`AreaChart`) com alternância dinâmica de períodos (1S, 1M, 3M, 1A).
+- **Vendas Recentes:** Tabela paginada (`DashboardTable`) com histórico de transações e formatação monetária.
+- **Gestão de Estoque:** Tabela com dados de inventário e gráfico donut (`DonutChart`) exibindo a distribuição percentual por categorias.
+- **Integração:** Comunicação com a rota `/api/dashboard` no backend com consolidação de dados analíticos.
+
+### 5. Módulos em Desenvolvimento
+
 - **Vendas (`/vendas`):** Módulo para acompanhamento de vendas e conferência de expedição.
 
 ---
@@ -80,11 +92,16 @@ frontend/
 │   │   ├── atoms/
 │   │   │   ├── Button/
 │   │   │   ├── Inputs/     # FormInput, FormSelect, FormTextarea
+│   │   │   ├── KpiCard/    # Cards de indicadores numéricos
+│   │   │   ├── Pagination/ # Controle de paginação
 │   │   │   └── Table/      # TableCell, TableHeaderCell
 │   │   ├── molecules/
 │   │   │   ├── ActionButtons/
+│   │   │   ├── Charts/     # AreaChart, DonutChart
+│   │   │   ├── DashboardTable/ # Tabela customizada para o dashboard
 │   │   │   └── Table/      # TableHeader, TableRow
 │   │   ├── organisms/
+│   │   │   ├── Dashboard/  # SalesSection, WarehouseSection
 │   │   │   ├── Form/       # FormCreateClient, FormCreateProduct
 │   │   │   ├── Header/
 │   │   │   ├── Modals/     # Modal, ClientCreateModal, ProductCreateModal
@@ -92,13 +109,13 @@ frontend/
 │   │   │   └── Table/
 │   │   └── templates/
 │   │       └── BaseLayout/
-│   ├── interfaces/         # Tipos: cliente, produto, usuario
+│   ├── interfaces/         # Tipos: cliente, dashboard, pedido, produto, usuario
 │   ├── pages/
 │   │   ├── Cliente/
 │   │   ├── Dashboard/
 │   │   ├── Estoque/
 │   │   └── Vendas/
-│   ├── services/           # cliente, produto, categoria, fornecedor, usuario
+│   ├── services/           # cliente, dashboard, produto, pedido, categoria, fornecedor, usuario
 │   ├── style/              # theme.css
 │   ├── App.tsx             # Configuração de rotas e providers
 │   ├── main.tsx            # Ponto de entrada React
@@ -122,11 +139,13 @@ O frontend faz parte da infraestrutura integrada do monorepo, gerenciada via Doc
 Na raiz do repositório:
 
 1. Configure as variáveis de ambiente (copiando do exemplo):
+
    ```bash
    cp .env.example .env.development
    ```
 
 2. Inicie todos os serviços com suporte a sincronização e hot-reload:
+
    ```bash
    make dev
    # ou: docker compose -f docker-compose.yaml -f docker-compose.dev.yaml up --build --watch
@@ -158,14 +177,14 @@ Caso queira rodar o frontend de forma isolada na sua máquina local:
 
 Todos os comandos devem ser executados a partir da pasta `frontend/`:
 
-| Comando | Descrição |
-| :--- | :--- |
-| `npm run dev` | Inicia o servidor local do Vite em modo de desenvolvimento com HMR ativo |
-| `npm run build` | Valida as tipagens (`tsc -b`) e compila o código para produção na pasta `dist/` |
-| `npm run preview` | Executa um servidor local para inspecionar o pacote de produção gerado |
-| `npm test` | Executa os testes automatizados via **Vitest** com o ambiente `jsdom` |
-| `npm run lint` | Executa a verificação de qualidade e padrões de código com o **ESLint** |
-| `npm run format` | Aplica as regras de formatação automática em todos os arquivos com o **Prettier** |
+| Comando           | Descrição                                                                         |
+| :---------------- | :-------------------------------------------------------------------------------- |
+| `npm run dev`     | Inicia o servidor local do Vite em modo de desenvolvimento com HMR ativo          |
+| `npm run build`   | Valida as tipagens (`tsc -b`) e compila o código para produção na pasta `dist/`   |
+| `npm run preview` | Executa um servidor local para inspecionar o pacote de produção gerado            |
+| `npm test`        | Executa os testes automatizados via **Vitest** com o ambiente `jsdom`             |
+| `npm run lint`    | Executa a verificação de qualidade e padrões de código com o **ESLint**           |
+| `npm run format`  | Aplica as regras de formatação automática em todos os arquivos com o **Prettier** |
 
 ---
 
@@ -178,11 +197,13 @@ A suíte de testes unitários e de integração utiliza **Vitest** e **React Tes
 - **Páginas:** Testes com mock de serviços (`vi.mock`), cobrindo estados de carregamento, sucesso com tabelas populadas e exibição de mensagens de erro.
 
 Para executar os testes com Vitest em modo execução única (CI/CLI):
+
 ```bash
 npm test -- --run
 ```
 
 Para executar em modo watch (interativo durante o desenvolvimento):
+
 ```bash
 npm test
 ```

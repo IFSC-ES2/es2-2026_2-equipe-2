@@ -168,3 +168,51 @@
 - Uso: modificações e embelezamento do arquivo da sprint-3
 - Artefato: `docs/entregas/sprint-3.md`
 - Validação: leitura total do arquivo e modificações em partes que houve erro
+
+- Data: 30/10/2026
+- Ferramenta: Antigravity
+- Uso: verificação e correção de código
+- Artefato: `api-estoque\src\repositories\Pedido.repository.ts`
+- Validação: leitura e verificação integral das correções feitas, estudo das modificações feitas para melhor entendimento
+
+- Data: 11/11/2026
+- Ferramenta: Claude
+- Uso: pesquisa de commits da branch `entrega-7` (commits de fix da Sprint 3) e execução dos testes para preencher as métricas M-03 e M-04
+- Artefato: `docs/metricas/M-03.md` `docs/metricas/M-04.md`
+- Validação: commits conferidos com `git log` na branch e contagem de testes conferida rodando `vitest run` no backend e no frontend
+
+- Data: 01/11/2026
+- Ferramenta: Claude
+- Uso: criação da base para o documento de planejamento da sprint 4
+- Artefato: `docs\entregas\sprint-4.md`
+- Validação: leitura integral e adaptação completa do que estava fora da linha para esse sprint 4.
+
+- Data: 09/11/2026
+- Ferramenta: Antigravity
+- Uso: elaboração da documentação técnica de deploy
+- Artefato: `docs/DEPLOY.md`, `README.md`
+- Validação: conferência dos arquivos de compose, template do Nginx, portas, rotas da API, Makefile e critérios de aceitação da Entrega 8
+
+- Data: 11/11/2026
+- Ferramenta: Antigravity
+- Uso: auxilio na criação do repository, service e do teste de Dashboard
+- Artefato: `api-estoque\test\services\cliente.service.test.ts`, `api-estoque\src\services\Dashboard.service.ts`, `api-estoque\src\repositories\Dashboard.repository.ts`
+- Validação: leitura dos códigos para verificar se está no padrão do projeto e validação por meio de testes
+
+- Data: 11/11/2026
+- Ferramenta: Antigravity
+- Uso: implementação da página de Dashboard no frontend, integração com a API de dashboard e testes unitários
+- Artefato: `frontend/src/pages/Dashboard/*`, `frontend/src/services/dashboard.service.ts`, `frontend/src/services/dashboard.service.test.ts`, `frontend/src/pages/Dashboard/index.test.tsx`, `frontend/README.md`
+- Validação: execução de testes unitários com Vitest (133 testes passando), validação de lint e build via container Docker e testes manuais da API
+
+- Data: 11/11/2026
+- Ferramenta: Antigravity
+- Uso: atualização do README.md para o estado atual do projeto
+- Artefato: `README.md`
+- Validação: leitura integral das modificações e validação das novas informações
+
+- Data: 11/11/2026
+- Ferramenta: Antigravity
+- Uso: desenvolver o swagger para o dashboard
+- Artefato: `api-estoque/src/docs/dashboard/dashboard.docs.ts`, `api-estoque/src/docs/schemas/dashboard.schema.ts`
+- Validação: verificação do retorno dos endpoint dentro do swagger

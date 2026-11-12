@@ -3,3 +3,4 @@ export * from "./Fornecedor";
 export * from "./Produto";
 export * from "./Cliente";
 export * from "./Pedido";
+export * from "./Dashboard";

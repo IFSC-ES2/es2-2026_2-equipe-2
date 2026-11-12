@@ -1,0 +1,50 @@
+.sales-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.dashboard-section-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--bs-secondary, #12315c);
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.01em;
+}
+
+.sales-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.sales-content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.dashboard-card {
+  background-color: #ffffff;
+  border-radius: var(--bs-border-radius-lg, 1.2rem);
+  padding: 1.5rem;
+  border: 1px solid rgba(47, 155, 214, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 992px) {
+  .sales-kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .sales-content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .sales-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+}

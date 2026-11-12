@@ -4,8 +4,8 @@
 
 | Nome                          | Função                                      | Matrícula    |
 | ----------------------------- | ------------------------------------------- | ------------ |
-| Bernardo Amaral Lisboa        | Database Administrator (DBA) e Scrum Master | 202510703703 |
-| Daniel Luiz da Rocha Cordeiro | Arquiteto de Software                       | 202510703715 |
+| Bernardo Amaral Lisboa        | Database Administrator (DBA)                | 202510703703 |
+| Daniel Luiz da Rocha Cordeiro | Arquiteto de Software e Scrum Master        | 202510703715 |
 | Isac Lehmkuhl dos Santos      | DevOps/Infra                                | 202510703633 |
 | Monica Cancellier             | UI/UX Designer                              | 202320003698 |
 | Victor Eduardo Peixer Munarim | Engenheiro de Qualidade (QA)                | 202510703662 |
@@ -27,7 +27,7 @@ Sistema de apoio à gestão operacional de armazéns e centros de distribuição
 - **Uso de Inteligência Artificial:** [USO-IA.md](./USO-IA.md);
 - **Estimativas:** [ESTIMATIVAS.md](./docs/ESTIMATIVAS.md)
 - **BaseLine:** [BASELINE.md](./docs/BASELINE.md)
-- **Métricas:** [METRICAS.md;](./docs/METRICAS.md)
+- **Métricas:** [METRICAS.md](./docs/METRICAS.md)
 - **Registro de riscos:** [riscos.md](./docs/riscos.md)
 - **Fluxo de trabalho:** [FLUXO-DE-TRABALHO.md](./docs/FLUXO-DE-TRABALHO.md)
 - **CI mínimo:** [CI.md](./docs/CI.md)
@@ -37,24 +37,26 @@ Sistema de apoio à gestão operacional de armazéns e centros de distribuição
 - **Contribuições Sprint 1:** [CONTRIBUICOES.md](./docs/CONTRIBUICOES.md)
 - **Planejamento Sprint 2:** [planejamento-S2.md](./docs/planejamento-S2.md)
 - **Contribuições Sprint 2:** [CONTRIBUICOES-S2.md](./docs/CONTRIBUICOES-S2.md)
+- **Planejamento Sprint 3:** [sprint-3.md](./docs/entregas/sprint-3.md)
+- **Contribuições Sprint 3:** [CONTRIBUICOES-S3.md](./docs/CONTRIBUICOES-S3.md)
+- **Planejamento Sprint 4:** [sprint-4.md](./docs/entregas/sprint-4.md)
+- **Protótipo do Dashboard:** [prototipo-dashboard.md](./docs/prototipo-dashboard.md)
 - **Swagger de Pedidos:** [src/docs/pedido](./api-estoque/src/docs/pedido) (disponível em `/api/docs`)
+- **Swagger do Dashboard:** [src/docs/dashboard](./api-estoque/src/docs/dashboard) (disponível em `/api/docs`)
 - **Arquitetura (modelo C4):** [ARQUITETURA.md](./docs/ARQUITETURA.md)
 - **Reengenharia do backend:** [REENGENHARIA.md](./docs/REENGENHARIA.md)
 - **ADR-0008 (backend monolítico modular):** [ADR-0008](./docs/adrs/ADR-0008-backend-monolitico-modular.md)
-- **Registro de uso de IA (atualizado):** [USO-IA.md](./USO-IA.md)
+- **Guia de Deploy e Staging:** [DEPLOY.md](./docs/DEPLOY.md)
 
 - **PRs desta etapa:**
-  - [#91 - docs/swagger api estoque ](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/91)
-  - [#96 - feat: Adicionado exibição do nome do fornecedor e da categoria](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/96)
-  - [#104 - Style/estilizacao](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/104)
-  - [#105 - Feat/barra lateral e base layout](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/105)
-  - [#106 - feat: Adicionado delete de produtos e rodado format](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/106)
-  - [#107 - Feat/crud clientes](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/107)
-  - [#108 - feat/add editar em produtos](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/108)
-  - [#112 - Docs/swagger clientes](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/112)
-  - [#116 - docs: update readme](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/116)
-  - [#117 - docs: Criação da ADR-0007](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/117)
-  - [#118 - Feat/pagina clientes](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/118)
+  - [#173 - feat: Baixa no estoque automática quando pedido é criado](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/173)
+  - [#175 - docs: Planejamento da Sprint 4 e métricas da Sprint 3](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/175)
+  - [#176 - docs: Criação do Guia de Deploy e Staging (DEPLOY.md)](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/176)
+  - [#177 - feat: Consultas agregadas e API do Dashboard](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/177)
+  - [#178 - docs: Atualização das métricas para a Sprint 3](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/178)
+  - [#179 - docs: Registro e mitigação do Risco 06 (divergência entre local e CI)](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/179)
+  - [#181 - feat: Tela de Dashboard com cards de KPIs, gráficos e tabelas analíticas](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/181)
+  - [#182 - docs: Protótipo e especificação do Dashboard](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/182)
 
 ## 1. Visão do Produto
 
@@ -141,56 +143,107 @@ Ter uma primeira versão funcionando que já mostre o começo do fluxo da opera�
 
 ### API de Estoque (`api-estoque`)
 
-| Recurso      | Endpoints disponíveis                                              |
-| ------------ | ------------------------------------------------------------------ |
-| Produtos     | `GET`, `POST /produtos` · `GET`, `PUT`, `DELETE /produtos/:id`     |
-| Categorias   | `GET`, `POST /categorias` · `GET`, `PUT`, `DELETE /categorias/:id` |
-| Fornecedores | `GET`                                                              |
-| Clientes     | `GET`, `POST /clientes` · `GET`, `PUT`, `DELETE /clientes/:id`     |
-| Pedidos (Vendas) | `GET`, `POST /pedidos` · `GET`, `PUT`, `DELETE /pedidos/:id` — criação e atualização com itens em transação |
-| Documentação | `GET /docs` — Swagger UI com todos os endpoints documentados       |
+| Recurso          | Endpoints disponíveis                                                                                                                          |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Produtos         | `GET`, `POST /produtos` · `GET`, `PUT`, `DELETE /produtos/:id`                                                                                 |
+| Categorias       | `GET`, `POST /categorias` · `GET`, `PUT`, `DELETE /categorias/:id`                                                                             |
+| Fornecedores     | `GET /fornecedores`                                                                                                                            |
+| Clientes         | `GET`, `POST /clientes` · `GET`, `PUT`, `DELETE /clientes/:id`                                                                                 |
+| Pedidos (Vendas) | `GET`, `POST /pedidos` · `GET`, `PUT`, `DELETE /pedidos/:id` — criação e atualização em transação, com baixa e estorno automático no estoque   |
+| Dashboard        | `GET /dashboard` — resumo analítico com KPIs de vendas, ticket médio, produtos top vendas, clientes e estoque (suporta `?periodo=1W\|1M\|3M\|1Y`) |
+| Documentação     | `GET /docs` — Swagger UI com todos os endpoints documentados                                                                                   |
 
 ### Frontend
 
-- Barra lateral (Sidebar) com navegação entre Dashboard, Vendas, Finanças e Estoque;
-- Layout base compartilhado por todas as páginas;
-- Página de Estoque com listagem, criação, edição e exclusão de produtos via modais;
-- Exibição do nome do fornecedor e da categoria na tabela de produtos;
-- Ícones de ação (editar/excluir) com estilização Bootstrap;
-- Página de Vendas com listagem de pedidos e modal/formulário para criação de venda (service `pedido.service.ts`);
-- Seed do banco de dados ampliada para apoiar vendas e pedidos;
-- Backend padronizado e com lint corrigido (ESLint + Prettier) no backend e no frontend.
+- **Barra lateral (`Sidebar`):** navegação entre Dashboard, Vendas, Clientes e Estoque com layout base compartilhado (`BaseLayout`) e cabeçalho unificado (`Header`);
+- **Página de Dashboard (`/dashboard`):**
+  - **Cards de KPIs (`KpiCard`):** Faturamento Total, Total de Pedidos Concluídos e Ticket Médio;
+  - **Gráfico de Vendas (`AreaChart`):** evolução temporal do faturamento com filtro interativo de períodos (1 Semana, 1 Mês, 3 Meses e 1 Ano);
+  - **Tabelas Analíticas Paginadas (`DashboardTable` e `Pagination`):** Ranking dos Produtos Mais Vendidos e Melhores Clientes por volume de compras;
+  - **Gestão do Armazém:** Indicador visual de Produtos com Estoque Baixo/Crítico e Gráfico Donut (`DonutChart`) com distribuição percentual por categoria;
+  - Feedback visual de carregamento (*loading skeletons*) e integração com `/api/dashboard`;
+- **Página de Vendas (`/vendas`):** listagem de pedidos e criação de vendas via modal com itens dinâmicos, validação de desconto comercial máximo de 15% e baixa automática de estoque;
+- **Página de Estoque (`/estoque`):** listagem, criação, edição e exclusão de produtos via modais (`ProductCreateModal`) com exibição de fornecedor e categoria;
+- **Página de Clientes (`/clientes`):** listagem, inclusão, edição e exclusão protegida contra clientes associados a pedidos;
+- **Qualidade e Testes:** ampla suíte de testes com Vitest e Testing Library cobrindo componentes atômicos, moleculares, serviços e páginas no frontend, e testes unitários de serviços no backend;
+- Padronização e formatação de código com ESLint e Prettier no frontend e no backend.
 
 ## Como Rodar o Projeto
 
+Para a documentação completa de deploy, variáveis de ambiente, validação passo a passo e limitações conhecidas do ambiente de homologação, consulte o [Guia de Deploy (DEPLOY.md)](./docs/DEPLOY.md).
+
 ### Pré-requisitos
 
-- [Docker](https://docs.docker.com/get-docker/) e [Docker Compose](https://docs.docker.com/compose/install/) instalados;
-- Arquivo `.env.development` na raiz do projeto (copie de `.env.example`).
+- [Docker](https://docs.docker.com/get-docker/) (v24+) e [Docker Compose](https://docs.docker.com/compose/install/) (v2.20+) instalados;
+- [Make](https://www.gnu.org/software/make/) (opcional, para executar comandos simplificados via Makefile);
+- Arquivo `.env` na raiz do projeto (criado a partir de `.env.example`).
 
 ```bash
-cp .env.example .env.development
+cp .env.example .env
 ```
 
-### Subindo o ambiente de desenvolvimento
+### 1. Ambiente de Desenvolvimento (com Hot-Reload)
 
 ```bash
 make dev
 ```
 
-Esse comando usa `docker compose watch` internamente, sincronizando alterações do código-fonte automaticamente com os containers (hot-reload no frontend e na API).
+> Esse comando usa `docker compose watch` internamente, sincronizando alterações do código-fonte automaticamente com os containers (hot-reload no frontend e na API).
 
-Após subir, acesse:
-
-| Serviço        | Endereço                                                         |
-| -------------- | ---------------------------------------------------------------- |
-| **Frontend**   | [http://localhost:8080](http://localhost:8080)                   |
-| **Swagger UI** | [http://localhost:8080/api/docs](http://localhost:8080/api/docs) |
-
-### Encerrando os containers
+Para encerrar o ambiente de desenvolvimento:
 
 ```bash
-make down
+make down-dev
+# ou: make down
 ```
 
-> **Nota (Windows):** o `make` não vem instalado por padrão. Use o WSL, Git Bash, ou instale via Chocolatey (`choco install make`).
+### 2. Ambiente de Produção / Staging (Deploy Conteinerizado)
+
+Para subir a aplicação simulando o ambiente de produção/staging com bundles otimizados e multi-stage build:
+
+```bash
+make prod
+```
+
+Para acompanhar os logs:
+
+```bash
+make logs-prod
+```
+
+Para encerrar o ambiente de produção:
+
+```bash
+make down-prod
+```
+
+### Endereços de Acesso
+
+Após subir a aplicação (em dev ou prod), acesse:
+
+| Serviço             | Endereço                                                                                         | Descrição                             |
+| :------------------ | :----------------------------------------------------------------------------------------------- | :------------------------------------ |
+| **Frontend Web**    | [http://localhost:8080](http://localhost:8080) (ou [/dashboard](http://localhost:8080/dashboard)) | Aplicação web via Nginx Proxy         |
+| **API Healthcheck** | [http://localhost:8080/api/ping](http://localhost:8080/api/ping)                                  | Verificação de status da API          |
+| **API Dashboard**   | [http://localhost:8080/api/dashboard](http://localhost:8080/api/dashboard)                        | Endpoint de dados do Dashboard        |
+| **Swagger UI**      | [http://localhost:8080/api/docs/#/](http://localhost:8080/api/docs/#/)                            | Documentação interativa dos endpoints |
+
+### Executando Testes e Qualidade de Código
+
+Para instalar as dependências exatas fixadas, rodar a suíte de testes automatizados e linters:
+
+```bash
+# Instalar dependências fixadas no backend e frontend via npm ci (mitigação do Risco 06)
+make ci
+
+# Executar todos os testes automatizados (backend e frontend)
+make test
+
+# Executar checagem de estilo e linter (ESLint)
+make lint
+
+# Aplicar formatação automática de código (Prettier)
+make format
+```
+
+> **Nota (Windows):** o `make` não vem instalado por padrão no Windows. Utilize WSL2, Git Bash, instale via Chocolatey (`choco install make`) ou execute os comandos equivalentes com `docker compose` descritos no [DEPLOY.md](./docs/DEPLOY.md).
