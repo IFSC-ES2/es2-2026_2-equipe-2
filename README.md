@@ -226,7 +226,7 @@ Após subir a aplicação (em dev ou prod), acesse:
 | **Frontend Web**    | [http://localhost:8080](http://localhost:8080) (ou [/dashboard](http://localhost:8080/dashboard)) | Aplicação web via Nginx Proxy         |
 | **API Healthcheck** | [http://localhost:8080/api/ping](http://localhost:8080/api/ping)                                  | Verificação de status da API          |
 | **API Dashboard**   | [http://localhost:8080/api/dashboard](http://localhost:8080/api/dashboard)                        | Endpoint de dados do Dashboard        |
-| **Swagger UI**      | [http://localhost:8080/api/docs](http://localhost:8080/api/docs)                                  | Documentação interativa dos endpoints |
+| **Swagger UI**      | [http://localhost:8080/api/docs/#/](http://localhost:8080/api/docs/#/)                            | Documentação interativa dos endpoints |
 
 ### Executando Testes e Qualidade de Código
 
