@@ -204,3 +204,9 @@
 - Uso: implementação da página de Dashboard no frontend, integração com a API de dashboard e testes unitários
 - Artefato: `frontend/src/pages/Dashboard/*`, `frontend/src/services/dashboard.service.ts`, `frontend/src/services/dashboard.service.test.ts`, `frontend/src/pages/Dashboard/index.test.tsx`, `frontend/README.md`
 - Validação: execução de testes unitários com Vitest (133 testes passando), validação de lint e build via container Docker e testes manuais da API
+
+- Data: 11/11/2026
+- Ferramenta: Antigravity
+- Uso: atualização do README.md para o estado atual do projeto
+- Artefato: `README.md`
+- Validação: leitura integral das modificações e validação das novas informações
