@@ -4,8 +4,8 @@
 
 | Nome                          | Função                                      | Matrícula    |
 | ----------------------------- | ------------------------------------------- | ------------ |
-| Bernardo Amaral Lisboa        | Database Administrator (DBA) e Scrum Master | 202510703703 |
-| Daniel Luiz da Rocha Cordeiro | Arquiteto de Software                       | 202510703715 |
+| Bernardo Amaral Lisboa        | Database Administrator (DBA)                | 202510703703 |
+| Daniel Luiz da Rocha Cordeiro | Arquiteto de Software e Scrum Master        | 202510703715 |
 | Isac Lehmkuhl dos Santos      | DevOps/Infra                                | 202510703633 |
 | Monica Cancellier             | UI/UX Designer                              | 202320003698 |
 | Victor Eduardo Peixer Munarim | Engenheiro de Qualidade (QA)                | 202510703662 |
@@ -42,6 +42,7 @@ Sistema de apoio à gestão operacional de armazéns e centros de distribuição
 - **Planejamento Sprint 4:** [sprint-4.md](./docs/entregas/sprint-4.md)
 - **Protótipo do Dashboard:** [prototipo-dashboard.md](./docs/prototipo-dashboard.md)
 - **Swagger de Pedidos:** [src/docs/pedido](./api-estoque/src/docs/pedido) (disponível em `/api/docs`)
+- **Swagger do Dashboard:** [src/docs/dashboard](./api-estoque/src/docs/dashboard) (disponível em `/api/docs`)
 - **Arquitetura (modelo C4):** [ARQUITETURA.md](./docs/ARQUITETURA.md)
 - **Reengenharia do backend:** [REENGENHARIA.md](./docs/REENGENHARIA.md)
 - **ADR-0008 (backend monolítico modular):** [ADR-0008](./docs/adrs/ADR-0008-backend-monolitico-modular.md)
@@ -225,7 +226,7 @@ Após subir a aplicação (em dev ou prod), acesse:
 | **Frontend Web**    | [http://localhost:8080](http://localhost:8080) (ou [/dashboard](http://localhost:8080/dashboard)) | Aplicação web via Nginx Proxy         |
 | **API Healthcheck** | [http://localhost:8080/api/ping](http://localhost:8080/api/ping)                                  | Verificação de status da API          |
 | **API Dashboard**   | [http://localhost:8080/api/dashboard](http://localhost:8080/api/dashboard)                        | Endpoint de dados do Dashboard        |
-| **Swagger UI**      | [http://localhost:8080/api/docs](http://localhost:8080/api/docs)                                  | Documentação interativa dos endpoints |
+| **Swagger UI**      | [http://localhost:8080/api/docs/#/](http://localhost:8080/api/docs/#/)                            | Documentação interativa dos endpoints |
 
 ### Executando Testes e Qualidade de Código
 

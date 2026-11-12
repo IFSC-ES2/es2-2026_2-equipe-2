@@ -210,3 +210,9 @@
 - Uso: atualização do README.md para o estado atual do projeto
 - Artefato: `README.md`
 - Validação: leitura integral das modificações e validação das novas informações
+
+- Data: 11/11/2026
+- Ferramenta: Antigravity
+- Uso: desenvolver o swagger para o dashboard
+- Artefato: `api-estoque/src/docs/dashboard/dashboard.docs.ts`, `api-estoque/src/docs/schemas/dashboard.schema.ts`
+- Validação: verificação do retorno dos endpoint dentro do swagger

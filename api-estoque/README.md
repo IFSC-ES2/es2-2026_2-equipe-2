@@ -47,6 +47,9 @@ Documentação interativa com schemas e testes em [http://localhost:8080/api/doc
 | **Categorias**   |     `GET`, `POST`      | `/categorias`     | Listagem e criação de categorias              |
 |                  | `GET`, `PUT`, `DELETE` | `/categorias/:id` | Consulta, edição e exclusão de categoria      |
 | **Fornecedores** |         `GET`          | `/fornecedores`   | Listagem para seleção em formulários          |
+| **Pedidos**      |     `GET`, `POST`      | `/pedidos`        | Listagem e criação de pedidos com baixa no estoque |
+|                  | `GET`, `PUT`, `DELETE` | `/pedidos/:id`    | Consulta, atualização e cancelamento com estorno de estoque |
+| **Dashboard**    |         `GET`          | `/dashboard`      | Resumo analítico e KPIs de vendas e estoque (`?periodo=30\|90\|365`) |
 | **Documentação** |         `GET`          | `/docs`           | Swagger UI interativo                         |
 
 ---
