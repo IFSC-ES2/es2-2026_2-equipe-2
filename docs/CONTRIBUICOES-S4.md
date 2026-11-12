@@ -16,6 +16,8 @@ Registro de quem trabalhou em qual issue da entrega-8 no repositório. Cada item
 - #164 - [Docs]: Atualizar métricas ao final da Sprint 4 
 - #166 - [Docs]: Atualizar README para estado da Sprint 4 
 - #167 - [Chore]: Publicar release v0.4.0 
+- #186 - [Feature]: Barra lateral fixa
+- #184 - [Docs]: Criação do swagger de dashboard
 
 ## Isac Lehmkuhl dos Santos — DevOps/Infra
 
