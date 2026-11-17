@@ -222,3 +222,9 @@
 - Uso: auxílio na elaboração da retrospectiva consolidada do projeto sobre processo, colaboração, riscos, qualidade e previsibilidade, reunindo as métricas (M-01 a M-06) e a evolução dos riscos ao longo das Sprints 1 a 4
 - Artefato: `docs/RETROSPECTIVA.md`
 - Validação: conferência dos dados e valores das métricas com os históricos das sprints
+
+- Data: 17/11/2026
+- Ferramenta: Antigravity
+- Uso: padronização visual das tabelas no componente `Table` e remoção do `DashboardTable`
+- Artefato: `frontend/src/components/organisms/Table/`, `frontend/src/components/molecules/Table/`, `frontend/src/components/atoms/Table/`, `frontend/src/components/organisms/Dashboard/`
+- Validação: execução de testes unitários com Vitest e build de produção

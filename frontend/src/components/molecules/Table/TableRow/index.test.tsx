@@ -70,4 +70,42 @@ describe('TableRow', () => {
     // id, name (vazio), ações
     expect(cells[1].textContent).toBe('');
   });
+
+  it('não deve renderizar a célula de ActionButtons quando showActions for falso', () => {
+    render(
+      <table>
+        <tbody>
+          <TableRow columns={mockColumns} row={mockRow} showActions={false} />
+        </tbody>
+      </table>,
+    );
+
+    expect(screen.queryByTestId('mock-action-buttons')).toBeNull();
+    const cells = screen.getAllByRole('cell');
+    expect(cells).toHaveLength(mockColumns.length);
+  });
+
+  it('deve utilizar a função render customizada da coluna quando fornecida', () => {
+    const columnsWithRender: Column[] = [
+      {
+        key: 'id',
+        label: 'ID',
+        render: (val) => <span data-testid="custom-val">#{String(val)}</span>,
+      },
+    ];
+
+    render(
+      <table>
+        <tbody>
+          <TableRow
+            columns={columnsWithRender}
+            row={mockRow}
+            showActions={false}
+          />
+        </tbody>
+      </table>,
+    );
+
+    expect(screen.getByTestId('custom-val').textContent).toBe('#1');
+  });
 });

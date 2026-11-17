@@ -1,3 +1,42 @@
 .app-table-row {
-  background-color: var(--bs-body-bg);
+  background-color: transparent;
+  transition: background-color 0.15s ease;
+}
+
+.app-table-row.striped {
+  background-color: #eaf3fa;
+}
+
+.app-table-row:hover {
+  background-color: #e2edf5;
+}
+
+.app-table-row:first-child .app-table-cell:first-child {
+  border-top-left-radius: 8px;
+}
+.app-table-row:first-child .app-table-cell:last-child {
+  border-top-right-radius: 8px;
+}
+.app-table-row:last-child .app-table-cell:first-child {
+  border-bottom-left-radius: 8px;
+}
+.app-table-row:last-child .app-table-cell:last-child {
+  border-bottom-right-radius: 8px;
+}
+
+.app-table-row.striped .app-table-cell:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+.app-table-row.striped .app-table-cell:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+/* Compatibilidade com classes de linha customizadas como table-danger */
+.app-table-row.table-danger {
+  background-color: #f8d7da !important;
+}
+.app-table-row.table-danger .app-table-cell {
+  color: #842029;
 }
