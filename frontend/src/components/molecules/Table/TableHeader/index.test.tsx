@@ -52,4 +52,16 @@ describe('TableHeader', () => {
     expect(headerCells).toHaveLength(1);
     expect(headerCells[0].textContent).toBe('Ações');
   });
+
+  it('não deve renderizar a coluna "Ações" quando showActions for falso', () => {
+    render(
+      <table>
+        <TableHeader columns={mockColumns} showActions={false} />
+      </table>,
+    );
+
+    expect(screen.queryByText('Ações')).toBeNull();
+    const headerCells = screen.getAllByRole('columnheader');
+    expect(headerCells).toHaveLength(mockColumns.length);
+  });
 });

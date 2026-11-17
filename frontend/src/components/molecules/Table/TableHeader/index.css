@@ -1,3 +1,4 @@
 .app-table-header-row {
-  border-bottom: 2px solid var(--bs-body-bg);
+  border-bottom: 1px solid #eef3f7;
 }
+

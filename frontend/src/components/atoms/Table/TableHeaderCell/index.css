@@ -1,8 +1,13 @@
 .app-table-header-cell {
-  color: var(--app-text-muted);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  font-weight: 600;
-  border: none !important;
+  color: var(--app-text-muted, #5c7a94);
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #eef3f7;
+  letter-spacing: 0.03em;
+  border-top: none;
+  border-left: none;
+  border-right: none;
 }
+

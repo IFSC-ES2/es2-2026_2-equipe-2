@@ -62,4 +62,35 @@ describe('Organismo Table', () => {
     expect(screen.getByText('Item A')).toBeDefined();
     expect(screen.getByText('Item B')).toBeDefined();
   });
+
+  it('deve exibir mensagem customizada quando fornecida para tabela vazia', () => {
+    render(
+      <Table
+        columns={mockColumns}
+        data={[]}
+        emptyMessage="Nenhum item na lista."
+      />,
+    );
+    expect(screen.getByText('Nenhum item na lista.')).toBeDefined();
+  });
+
+  it('deve suportar props em português e paginação quando configurada', () => {
+    const manyData = Array.from({ length: 12 }, (_, i) => ({
+      id: i + 1,
+      name: `Item ${i + 1}`,
+    }));
+
+    render(
+      <Table
+        colunas={mockColumns}
+        dados={manyData}
+        tamanhoPaginaInicial={5}
+        exibirSeletorTamanho={true}
+      />,
+    );
+
+    const rows = screen.getAllByTestId('mock-table-row');
+    expect(rows.length).toBe(5);
+    expect(screen.getByLabelText('Paginação')).toBeDefined();
+  });
 });
