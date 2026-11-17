@@ -217,6 +217,12 @@
 - Artefato: `api-estoque/src/docs/dashboard/dashboard.docs.ts`, `api-estoque/src/docs/schemas/dashboard.schema.ts`
 - Validação: verificação do retorno dos endpoint dentro do swagger
 
+- Data: 16/11/2026
+- Ferramenta: Antigravity
+- Uso: auxílio na elaboração da retrospectiva consolidada do projeto sobre processo, colaboração, riscos, qualidade e previsibilidade, reunindo as métricas (M-01 a M-06) e a evolução dos riscos ao longo das Sprints 1 a 4
+- Artefato: `docs/RETROSPECTIVA.md`
+- Validação: conferência dos dados e valores das métricas com os históricos das sprints
+
 - Data: 17/11/2026
 - Ferramenta: Antigravity
 - Uso: padronização visual das tabelas no componente `Table` e remoção do `DashboardTable`
