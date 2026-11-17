@@ -216,3 +216,9 @@
 - Uso: desenvolver o swagger para o dashboard
 - Artefato: `api-estoque/src/docs/dashboard/dashboard.docs.ts`, `api-estoque/src/docs/schemas/dashboard.schema.ts`
 - Validação: verificação do retorno dos endpoint dentro do swagger
+
+- Data: 17/11/2026
+- Ferramenta: Antigravity
+- Uso: padronização visual das tabelas no componente `Table` e remoção do `DashboardTable`
+- Artefato: `frontend/src/components/organisms/Table/`, `frontend/src/components/molecules/Table/`, `frontend/src/components/atoms/Table/`, `frontend/src/components/organisms/Dashboard/`
+- Validação: execução de testes unitários com Vitest e build de produção
