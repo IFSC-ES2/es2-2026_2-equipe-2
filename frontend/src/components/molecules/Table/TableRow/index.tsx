@@ -34,11 +34,7 @@ const TableRow: React.FC<TableRowProps> = ({
   isStriped = false,
   className,
 }) => {
-  const rowClasses = [
-    'app-table-row',
-    isStriped ? 'striped' : '',
-    className,
-  ]
+  const rowClasses = ['app-table-row', isStriped ? 'striped' : '', className]
     .filter(Boolean)
     .join(' ');
 

@@ -12,7 +12,11 @@ import type { Produto } from '../../interfaces/produto.interface';
 const isEstoqueBaixo = (row: TableDataRow): boolean => {
   const quantidade = Number(row.quantidade);
   const minimo = Number(row.estoque_minimo);
-  return Number.isFinite(quantidade) && Number.isFinite(minimo) && quantidade <= minimo;
+  return (
+    Number.isFinite(quantidade) &&
+    Number.isFinite(minimo) &&
+    quantidade <= minimo
+  );
 };
 
 const Estoque: React.FC = () => {
@@ -118,12 +122,12 @@ const Estoque: React.FC = () => {
         )}
 
         {!loading && !error && produtosEstoqueBaixo.length > 0 && (
-        <div className="alert alert-warning" role="alert">
-          <strong>Atenção:</strong> {produtosEstoqueBaixo.length} produto(s)
-          com estoque no mínimo ou abaixo:{' '}
-          {produtosEstoqueBaixo.map((row) => String(row.nome)).join(', ')}.
-        </div>
-      )}
+          <div className="alert alert-warning" role="alert">
+            <strong>Atenção:</strong> {produtosEstoqueBaixo.length} produto(s)
+            com estoque no mínimo ou abaixo:{' '}
+            {produtosEstoqueBaixo.map((row) => String(row.nome)).join(', ')}.
+          </div>
+        )}
 
         {!loading && !error && (
           <Table
@@ -132,8 +136,8 @@ const Estoque: React.FC = () => {
             onEdit={handleEdit}
             onDelete={handleDelete}
             rowClassName={(row) =>
-            isEstoqueBaixo(row) ? 'table-danger' : undefined
-          }
+              isEstoqueBaixo(row) ? 'table-danger' : undefined
+            }
           />
         )}
       </div>
