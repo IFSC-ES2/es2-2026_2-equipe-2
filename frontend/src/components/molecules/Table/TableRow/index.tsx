@@ -4,7 +4,7 @@ import ActionButtons from '../../ActionButtons';
 import './index.css';
 
 export interface Column {
-  key?: string;
+  key: string;
   label?: string;
   chave?: string;
   rotulo?: string;
