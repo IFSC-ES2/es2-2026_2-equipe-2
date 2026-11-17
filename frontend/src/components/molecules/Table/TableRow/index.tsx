@@ -15,6 +15,7 @@ interface TableRowProps {
   row: TableDataRow;
   onEdit?: (row: TableDataRow) => void;
   onDelete?: (row: TableDataRow) => void;
+  className?: string;
 }
 
 const TableRow: React.FC<TableRowProps> = ({
@@ -22,9 +23,10 @@ const TableRow: React.FC<TableRowProps> = ({
   row,
   onEdit,
   onDelete,
+  className,
 }) => {
   return (
-    <tr className="app-table-row">
+    <tr className={['app-table-row', className].filter(Boolean).join(' ')}>
       {columns.map((column, index) => (
         <TableCell key={`${index}-${column.key}`}>{row[column.key]}</TableCell>
       ))}
