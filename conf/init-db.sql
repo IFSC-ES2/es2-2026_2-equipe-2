@@ -246,3 +246,42 @@ WHERE p.data_pedido >= NOW() - INTERVAL '365 days'
 GROUP BY pr.id, pr.sku, pr.nome
 ORDER BY unidades_vendidas DESC, receita DESC, pr.id;
 
+-- Categoria da mais vendida a menos ultimos 30 dias
+CREATE OR REPLACE VIEW vw_categorias_vendidas_30d AS
+SELECT c.id, c.nome,
+       SUM(ip.quantidade)::int                        AS unidades_vendidas,
+    SUM(ip.quantidade * ip.preco_unitario)::float8 AS receita
+FROM itens_pedido ip
+         JOIN pedidos    p  ON p.id  = ip.pedido_id AND p.status = 'CONCLUIDO'
+         JOIN produtos   pr ON pr.id = ip.produto_id
+         JOIN categorias c  ON c.id  = pr.categoria_id
+WHERE p.data_pedido >= NOW() - INTERVAL '30 days'
+GROUP BY c.id, c.nome
+ORDER BY unidades_vendidas DESC, receita DESC, c.id;
+
+-- Categoria da mais vendida a menos 90 dias
+CREATE OR REPLACE VIEW vw_categorias_vendidas_90d AS
+SELECT c.id, c.nome,
+       SUM(ip.quantidade)::int                        AS unidades_vendidas,
+    SUM(ip.quantidade * ip.preco_unitario)::float8 AS receita
+FROM itens_pedido ip
+         JOIN pedidos    p  ON p.id  = ip.pedido_id AND p.status = 'CONCLUIDO'
+         JOIN produtos   pr ON pr.id = ip.produto_id
+         JOIN categorias c  ON c.id  = pr.categoria_id
+WHERE p.data_pedido >= NOW() - INTERVAL '90 days'
+GROUP BY c.id, c.nome
+ORDER BY unidades_vendidas DESC, receita DESC, c.id;
+
+-- Categoria da mais vendida a menos 365 dias
+CREATE OR REPLACE VIEW vw_categorias_vendidas_365d AS
+SELECT c.id, c.nome,
+       SUM(ip.quantidade)::int                        AS unidades_vendidas,
+    SUM(ip.quantidade * ip.preco_unitario)::float8 AS receita
+FROM itens_pedido ip
+         JOIN pedidos    p  ON p.id  = ip.pedido_id AND p.status = 'CONCLUIDO'
+         JOIN produtos   pr ON pr.id = ip.produto_id
+         JOIN categorias c  ON c.id  = pr.categoria_id
+WHERE p.data_pedido >= NOW() - INTERVAL '365 days'
+GROUP BY c.id, c.nome
+ORDER BY unidades_vendidas DESC, receita DESC, c.id;
+
