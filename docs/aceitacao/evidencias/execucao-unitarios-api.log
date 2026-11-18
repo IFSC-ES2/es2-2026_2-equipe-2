@@ -1,0 +1,8 @@
+ RUN  v5.0.5 /home/victor/Documentos/es2-2026_2-equipe-2/api-estoque
+
+
+ Test Files  6 passed (6)
+      Tests  154 passed (154)
+   Start at  20:10:07
+   Duration  961ms (import 47%, tests 36%, transform 14%, worker 3%)
+
