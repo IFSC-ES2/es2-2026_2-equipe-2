@@ -71,7 +71,59 @@ A capacidade da equipe de estimar, planejar e cumprir o que foi acordado evoluiu
 
 ---
 
-## 3. Síntese Final
+## 3. Escopo do MVP: Planejado vs. Entregue
+
+Esta seção compara o escopo definido na Definição do MVP (Clientes, Estoque e Conferência) com o que foi entregue em `v0.4.0`.
+
+### 3.1. Planejado vs. entregue
+
+| Funcionalidade planejada | O que foi entregue | Status |
+|---|---|---|
+| Cadastro, edição, consulta e exclusão de clientes | CRUD de clientes e página de clientes. A exclusão é bloqueada se o cliente tiver pedidos | Concluída |
+| Dados básicos do cliente (nome/razão social, documento, contato, endereço) | Todos os campos de acordo com o planejamento | Concluída |
+| Histórico de pedidos por cliente | O vínculo pedido–cliente existe e alimenta o ranking de melhores clientes, mas não há tela de histórico por cliente | Pendente |
+| Entrada e saída de itens | Baixa automática na venda, com bloqueio acima do saldo. | Concluída |
+| Saldo por produto e por depósito | Saldo por produto. Depósito não implementado | Parcial |
+| Alertas de nível mínimo | Indicador de estoque baixo/crítico no dashboard | Concluída |
+| Histórico de movimentações por item | Adiado: a baixa não grava em `movimentacoes_estoque` | Pendente |
+| Conferência (recebimento, expedição, divergências e status por pedido) | Retirada do escopo do semestre na Sprint 3 | Removida |
+
+**Resumo:** 4 concluídas, 1 parcial, 2 pendentes e 1 removida (módulo de Conferência, que tinha 4 itens).
+
+### 3.2. Entregue fora do plano original
+
+- **Pedidos (vendas):** CRUD transacional com itens dinâmicos, desconto máximo de 15% por item e baixa/estorno automático de estoque.
+- **Dashboard analítico:** KPIs de vendas, produtos mais vendidos, melhores clientes, estoque baixo e distribuição por categoria.
+- **Categorias:** CRUD de categorias.
+- **Fornecedores:** apenas consulta (`GET`), usada no cadastro de produtos.
+- **Deploy reprodutível:** `make prod`, documentado em [DEPLOY.md](./DEPLOY.md).
+
+### 3.3. Mudanças de escopo
+
+| Sprint | Mudança | Motivo |
+|---|---|---|
+| S1 | Sequelize substituído por `pg` com `BaseRepository` ([ADR-0006](./adrs/ADR-0006-tipagem-backend-e-cliente-proprio-bd.md)) | Reduzir duplicação de código |
+| S1 → S2 | Edição de produto adiada para a Sprint 2 | Fora do prazo da sprint |
+| S3 | Pedidos e Vendas passam a ser o módulo central | Conectar Clientes e Produtos no primeiro fluxo operacional |
+| S3 | Conferência de mercadorias retirada do semestre | Inviável no prazo; sem pedidos e estoque consolidados não há o que conferir |
+| S3 | Fornecedores mantidos só com consulta (`GET`) | Fora do caminho crítico do MVP |
+| S3 | Microsserviços substituídos por monólito modular ([ADR-0008](./adrs/ADR-0008-backend-monolitico-modular.md)) | Simplificar operação e deploy e permitir transações atômicas no banco |
+| S3 → S4 | Baixa de estoque adiada para a Sprint 4 | Evitar acoplamento prematuro com o histórico de movimentações |
+| S4 | Baixa de estoque feita de forma simples, dentro da transação do pedido ([#147](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/issues/147)) | A inconsistência de dados precisava de correção sem depender do histórico |
+| S4 | Histórico de movimentações adiado | Não é necessário para o fluxo atual |
+| S4 | Cancelamento de pedido registrado como melhoria futura | Fora do prazo da sprint |
+| S4 | Dashboard incluído no MVP | Usa dados existentes, sem CRUD |
+| S4 | Deploy via `make prod` no lugar de staging e deploy automatizado | Não há servidor hospedado para receber o deploy |
+
+### 3.4. Análise
+
+- **Mudança de foco:** o MVP começou como Clientes + Estoque + Conferência e terminou como Clientes + Produtos + Pedidos + Estoque + Dashboard.
+- **Valor entregue:** o fluxo principal (Clientes → Produtos → Pedidos → Estoque → Dashboard) ficou completo e testado. As perdas se concentraram em rastreabilidade (histórico de movimentações, depósitos) e na Conferência.
+- **Backlog para o futuro:** histórico de movimentações, histórico de pedidos por cliente, inativação de clientes, saldo por depósito, cancelamento de pedido e Conferência.
+
+---
+
+## 4. Síntese Final
 
 ### O que funcionou muito bem
 1. **Pipeline de CI e cultura de testes automatizados:** O bloqueio estrito de merges para testes falhando ou quebras de lint protegeu o projeto contra regressões ao longo de todo o semestre.
