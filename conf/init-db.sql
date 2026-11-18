@@ -285,3 +285,32 @@ WHERE p.data_pedido >= NOW() - INTERVAL '365 days'
 GROUP BY c.id, c.nome
 ORDER BY unidades_vendidas DESC, receita DESC, c.id;
 
+-- Total de produtos e ganho ultimos 30 dias
+CREATE OR REPLACE VIEW vw_resumo_vendas_30d AS
+SELECT COALESCE(SUM(ip.quantidade), 0)::int                        AS total_produtos_vendidos,
+    COALESCE(SUM(ip.quantidade * ip.preco_unitario), 0)::float8 AS ganhos_totais,
+    COUNT(DISTINCT p.id)::int                                   AS total_vendas
+FROM pedidos p
+         LEFT JOIN itens_pedido ip ON ip.pedido_id = p.id
+WHERE p.status = 'CONCLUIDO'
+  AND p.data_pedido >= NOW() - INTERVAL '30 days';
+
+-- Total de produtos e ganho ultimos 90 dias
+CREATE OR REPLACE VIEW vw_resumo_vendas_90d AS
+SELECT COALESCE(SUM(ip.quantidade), 0)::int                        AS total_produtos_vendidos,
+    COALESCE(SUM(ip.quantidade * ip.preco_unitario), 0)::float8 AS ganhos_totais,
+    COUNT(DISTINCT p.id)::int                                   AS total_vendas
+FROM pedidos p
+         LEFT JOIN itens_pedido ip ON ip.pedido_id = p.id
+WHERE p.status = 'CONCLUIDO'
+  AND p.data_pedido >= NOW() - INTERVAL '90 days';
+
+-- Total de produtos e ganho ultimos 365 dias
+CREATE OR REPLACE VIEW vw_resumo_vendas_365d AS
+SELECT COALESCE(SUM(ip.quantidade), 0)::int                        AS total_produtos_vendidos,
+    COALESCE(SUM(ip.quantidade * ip.preco_unitario), 0)::float8 AS ganhos_totais,
+    COUNT(DISTINCT p.id)::int                                   AS total_vendas
+FROM pedidos p
+         LEFT JOIN itens_pedido ip ON ip.pedido_id = p.id
+WHERE p.status = 'CONCLUIDO'
+  AND p.data_pedido >= NOW() - INTERVAL '365 days';
