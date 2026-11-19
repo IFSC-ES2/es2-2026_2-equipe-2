@@ -48,6 +48,7 @@ Sistema de apoio à gestão operacional de armazéns e centros de distribuição
 - **ADR-0008 (backend monolítico modular):** [ADR-0008](./docs/adrs/ADR-0008-backend-monolitico-modular.md)
 - **Guia de Deploy e Staging:** [DEPLOY.md](./docs/DEPLOY.md)
 - **Testes de Aceitação:** [ACEITACAO.md](./docs/ACEITACAO.md)
+- **Preparação da Apresentação Final:** [APRESENTACAO.md](./docs/APRESENTACAO.md)
 
 - **PRs desta etapa:**
   - [#173 - feat: Baixa no estoque automática quando pedido é criado](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/173)
