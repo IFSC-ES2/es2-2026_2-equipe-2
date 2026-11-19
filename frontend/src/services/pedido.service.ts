@@ -5,7 +5,13 @@ import type {
   PedidoUpdate,
 } from '../interfaces/pedido.interface';
 
-const PEDIDOS_API_URL = 'http://localhost:8080/api/pedidos';
+const API_BASE_URL = (
+  import.meta.env.VITE_API_BASE_URL ||
+  import.meta.env.VITE_API_URL ||
+  'http://localhost:8080'
+).replace(/\/+$/, '');
+
+const PEDIDOS_API_URL = `${API_BASE_URL}/api/pedidos`;
 
 export async function getPedidos(): Promise<PedidoComRelacionamentos[]> {
   const response = await fetch(PEDIDOS_API_URL);
