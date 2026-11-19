@@ -1,6 +1,12 @@
 import type { Usuario } from '../interfaces/usuario.interface';
 
-const USUARIOS_API_URL = 'http://localhost:8080/api/usuarios';
+const API_BASE_URL = (
+  import.meta.env.VITE_API_BASE_URL ||
+  import.meta.env.VITE_API_URL ||
+  'http://localhost:8080'
+).replace(/\/+$/, '');
+
+const USUARIOS_API_URL = `${API_BASE_URL}/api/usuarios`;
 
 const MOCK_USUARIO_PADRAO: Usuario = {
   id: 1,
