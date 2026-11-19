@@ -3,6 +3,9 @@ ARG NODE_VERSION=24.14.0-alpine
 
 # Stage 1: Build the React (Vite) Application
 FROM node:${NODE_VERSION} AS builder
+
+ARG VITE_API_BASE_URL=http://localhost:8080
+ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
  
 WORKDIR /app
  
