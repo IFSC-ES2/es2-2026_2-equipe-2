@@ -142,7 +142,14 @@ O projeto disponibiliza um `Makefile` na raiz com atalhos para os fluxos operaci
 
 ## 5. Processo de Deploy Passo a Passo (Staging Reprodutível)
 
-Como o projeto não utiliza um provedor de nuvem contratado no contexto acadêmico, o **ambiente de staging** é implementado como uma **réplica de produção local conteinerizada e totalmente reprodutível**.
+O **ambiente de staging** está implantado em uma **VM na Google Cloud Platform (GCP)** e acessível pelo endereço:
+
+> **http://35.194.2.82/clientes**
+
+> [!WARNING]
+> **Restrição de acesso por firewall:** O acesso ao ambiente de staging é permitido **exclusivamente dentro da rede do IFSC**. Conexões originadas fora da rede institucional são bloqueadas por regra de firewall configurada diretamente na VM da GCP.
+
+O ambiente também pode ser reproduzido localmente de forma conteinerizada seguindo o roteiro abaixo.
 
 Siga o roteiro abaixo para realizar o deploy completo a partir de um checkout limpo:
 
@@ -220,9 +227,23 @@ es2-2026_2-equipe-2-nginx-1           Up (healthy)              0.0.0.0:8080->80
 
 ### 6.2. Matriz de Validação de Endpoints e URLs
 
-Abra o navegador ou use utilitários como `curl` para validar as seguintes rotas:
+#### Ambiente de Staging (GCP — acessível apenas na rede IFSC)
 
-| Serviço                     | URL de Acesso                                                            | Método HTTP | Status Esperado | O que deve ser exibido / validado                                                                  |
+| Serviço                     | URL de Acesso (Staging GCP)                                        | Método HTTP | Status Esperado | O que deve ser exibido / validado                                                                  |
+| --------------------------- | ------------------------------------------------------------------ | :---------: | :-------------: | -------------------------------------------------------------------------------------------------- |
+| **Frontend Web**            | [http://35.194.2.82/clientes](http://35.194.2.82/clientes)         |    `GET`    |    `200 OK`     | Interface gráfica do AURA ERP carregada com Sidebar, cabeçalho e páginas acessíveis.               |
+| **Healthcheck API**         | [http://35.194.2.82/api/ping](http://35.194.2.82/api/ping)         |    `GET`    |    `200 OK`     | Resposta textual `pong`, indicando que a API Express está viva e roteada pelo Nginx.               |
+| **Documentação Swagger**    | [http://35.194.2.82/api/docs](http://35.194.2.82/api/docs)         |    `GET`    |    `200 OK`     | Interface interativa Swagger UI listando os endpoints de produtos, clientes, categorias e pedidos. |
+| **API - Listagem Produtos** | [http://35.194.2.82/api/produtos](http://35.194.2.82/api/produtos) |    `GET`    |    `200 OK`     | JSON contendo a lista inicial de produtos carregados pelo seed SQL.                                |
+| **API - Listagem Clientes** | [http://35.194.2.82/api/clientes](http://35.194.2.82/api/clientes) |    `GET`    |    `200 OK`     | JSON contendo a lista inicial de clientes cadastrados.                                             |
+| **API - Listagem Pedidos**  | [http://35.194.2.82/api/pedidos](http://35.194.2.82/api/pedidos)   |    `GET`    |    `200 OK`     | JSON com a lista de pedidos e itens associados.                                                    |
+
+> [!IMPORTANT]
+> As URLs acima só funcionam quando conectado à **rede do IFSC** (ou via VPN institucional). Fora dessa rede, as conexões serão recusadas pela regra de firewall da VM na GCP.
+
+#### Ambiente Local
+
+| Serviço                     | URL de Acesso (Local)                                                    | Método HTTP | Status Esperado | O que deve ser exibido / validado                                                                  |
 | --------------------------- | ------------------------------------------------------------------------ | :---------: | :-------------: | -------------------------------------------------------------------------------------------------- |
 | **Frontend Web**            | [http://localhost:8080](http://localhost:8080)                           |    `GET`    |    `200 OK`     | Interface gráfica do AURA ERP carregada com Sidebar, cabeçalho e páginas acessíveis.               |
 | **Healthcheck API**         | [http://localhost:8080/api/ping](http://localhost:8080/api/ping)         |    `GET`    |    `200 OK`     | Resposta textual `pong`, indicando que a API Express está viva e roteada pelo Nginx.               |
@@ -234,13 +255,13 @@ Abra o navegador ou use utilitários como `curl` para validar as seguintes rotas
 #### Validação Rápida via Linha de Comando (cURL):
 
 ```bash
-# Validar API através do proxy Nginx
+# === Staging (GCP — apenas na rede IFSC) ===
+curl -i http://35.194.2.82/api/ping
+curl -s http://35.194.2.82/api/produtos | grep -q "Smartphone" && echo "API de produtos OK"
+
+# === Ambiente Local ===
 curl -i http://localhost:8080/api/ping
-
-# Validar Frontend através do proxy Nginx
 curl -i http://localhost:8080/
-
-# Validar resposta JSON de produtos
 curl -s http://localhost:8080/api/produtos | grep -q "Smartphone" && echo "API de produtos OK"
 ```
 
@@ -248,7 +269,7 @@ curl -s http://localhost:8080/api/produtos | grep -q "Smartphone" && echo "API d
 
 Para validar o fluxo funcional de ponta a ponta na interface gráfica:
 
-1. **Acessar a Aplicação:** Abra `http://localhost:8080` no navegador.
+1. **Acessar a Aplicação:** Abra `http://35.194.2.82/clientes` (staging na rede IFSC) ou `http://localhost:8080` (local) no navegador.
 2. **Navegar para a Tela de Estoque (`/estoque`):**
    - Verifique se a tabela exibe os produtos vindos do seed (ex.: _Smartphone XPTO_, _Notebook Ultra_).
    - Clique em **"Cadastrar Produto"**, preencha os dados (nome, SKU único, categoria, fornecedor, quantidade e preço) e salve.
@@ -322,8 +343,8 @@ Caso necessite rodar os serviços diretamente na máquina para depuração espec
 
 De acordo com o planejamento e o escopo acordado da Sprint 4 (Entrega 8), o ambiente de homologação/staging possui as seguintes características e limitações conhecidas:
 
-1. **Infraestrutura Local Conteinerizada vs. Nuvem Dedicada:**
-   O projeto não possui provisionamento em servidores de nuvem paga (AWS, Azure ou GCP) devido ao escopo estritamente acadêmico da disciplina. O ambiente de staging é, portanto, uma réplica conteinerizada isolada executável localmente via `make prod`.
+1. **Infraestrutura em VM na GCP com Restrição de Rede:**
+   O ambiente de staging está implantado em uma **VM na Google Cloud Platform (GCP)**, acessível pelo endereço `http://35.194.2.82/clientes`. O acesso é restrito **exclusivamente à rede do IFSC** por regra de firewall configurada na VM — conexões externas são bloqueadas. Essa restrição reflete o contexto acadêmico do projeto e a política de segurança adotada.
 2. **Certificados TLS/SSL:**
    O proxy Nginx mapeia a porta `4443`, porém opera com configuração padrão HTTP sobre a porta `8080`, não possuindo certificados criptográficos assinados por autoridade certificadora (CA) válida.
 3. **Ausência de Módulo de Autenticação/Autorização (RBAC):**
@@ -333,7 +354,7 @@ De acordo com o planejamento e o escopo acordado da Sprint 4 (Entrega 8), o ambi
 5. **Persistência de Dados e Ciclo de Vida do Volume:**
    Os dados do banco residem no volume Docker nomeado `db-data`. As alterações persistem normalmente entre comandos `make down-prod` e `make prod`. Entretanto, se for executado `docker compose down -v` (com remoção de volumes), os dados acumulados serão apagados e o banco será reiniciado com a semente original do `conf/init-db.sql`.
 6. **Pipeline de CD (Continuous Deployment) Não Automatizado:**
-   O repositório possui integração contínua (CI via GitHub Actions) para verificação de branches, linter, builds e testes, mas não realiza deploy contínuo automatizado em servidor externo devido à ausência de infraestrutura remota contratada.
+   O repositório possui integração contínua (CI via GitHub Actions) para verificação de branches, linter, builds e testes, mas o deploy na VM da GCP é realizado manualmente. Não há pipeline de CD automatizado para publicação no servidor remoto.
 
 ---
 
