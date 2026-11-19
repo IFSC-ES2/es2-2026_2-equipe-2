@@ -48,6 +48,7 @@ Sistema de apoio à gestão operacional de armazéns e centros de distribuição
 - **Arquitetura (modelo C4):** [ARQUITETURA.md](./docs/ARQUITETURA.md)
 - **Reengenharia do backend:** [REENGENHARIA.md](./docs/REENGENHARIA.md)
 - **Guia de Deploy e Staging:** [DEPLOY.md](./docs/DEPLOY.md)
+- **Preparação da Apresentação Final:** [APRESENTACAO.md](./docs/APRESENTACAO.md)
 - **Testes de aceitação:** [ACEITACAO.md](./docs/ACEITACAO.md)
 - **Retrospectiva:** [RETROSPECTIVA.md](./docs/RETROSPECTIVA.md)
 - **Evidências de execução:** [docs/aceitacao/evidencias](./docs/aceitacao/evidencias)
