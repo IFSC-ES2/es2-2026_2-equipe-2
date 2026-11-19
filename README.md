@@ -224,14 +224,25 @@ make down-prod
 
 ### Endereços de Acesso
 
-Após subir a aplicação (em dev ou prod), acesse:
+#### Ambiente de Homologação (Staging — GCP)
 
-| Serviço             | Endereço                                                                                         | Descrição                             |
-| :------------------ | :----------------------------------------------------------------------------------------------- | :------------------------------------ |
-| **Frontend Web**    | [http://localhost:8080](http://localhost:8080) (ou [/dashboard](http://localhost:8080/dashboard)) | Aplicação web via Nginx Proxy         |
-| **API Healthcheck** | [http://localhost:8080/api/ping](http://localhost:8080/api/ping)                                  | Verificação de status da API          |
-| **API Dashboard**   | [http://localhost:8080/api/dashboard](http://localhost:8080/api/dashboard)                        | Endpoint de dados do Dashboard        |
-| **Swagger UI**      | [http://localhost:8080/api/docs/#/](http://localhost:8080/api/docs/#/)                            | Documentação interativa dos endpoints |
+A aplicação está implantada em uma VM na **Google Cloud Platform (GCP)** e disponível no endereço:
+
+> **http://35.194.2.82/clientes**
+
+> [!WARNING]
+> **Restrição de rede:** O acesso ao ambiente de homologação é permitido **somente dentro da rede do IFSC**. Conexões externas são bloqueadas por regra de firewall configurada na VM da GCP. Para acessar fora do campus, é necessário estar conectado à VPN institucional do IFSC (se disponível).
+
+#### Ambiente Local (Dev / Prod)
+
+Após subir a aplicação localmente (em dev ou prod), acesse:
+
+| Serviço             | Endereço Local                                                                                   | Endereço Staging (GCP)                                                                             | Descrição                             |
+| :------------------ | :----------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------- | :------------------------------------ |
+| **Frontend Web**    | [http://localhost:8080](http://localhost:8080) (ou [/dashboard](http://localhost:8080/dashboard)) | [http://35.194.2.82/clientes](http://35.194.2.82/clientes)                                         | Aplicação web via Nginx Proxy         |
+| **API Healthcheck** | [http://localhost:8080/api/ping](http://localhost:8080/api/ping)                                  | [http://35.194.2.82/api/ping](http://35.194.2.82/api/ping)                                         | Verificação de status da API          |
+| **API Dashboard**   | [http://localhost:8080/api/dashboard](http://localhost:8080/api/dashboard)                        | [http://35.194.2.82/api/dashboard](http://35.194.2.82/api/dashboard)                               | Endpoint de dados do Dashboard        |
+| **Swagger UI**      | [http://localhost:8080/api/docs/#/](http://localhost:8080/api/docs/#/)                            | [http://35.194.2.82/api/docs/#/](http://35.194.2.82/api/docs/#/)                                   | Documentação interativa dos endpoints |
 
 ### Executando Testes e Qualidade de Código
 

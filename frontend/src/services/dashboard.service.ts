@@ -13,7 +13,13 @@ import type {
 
 export * from '../interfaces/dashboard.interface';
 
-export const DASHBOARD_API_URL = 'http://localhost:8080/api/dashboard';
+const API_BASE_URL = (
+  import.meta.env.VITE_API_BASE_URL ||
+  import.meta.env.VITE_API_URL ||
+  'http://localhost:8080'
+).replace(/\/+$/, '');
+
+export const DASHBOARD_API_URL = `${API_BASE_URL}/api/dashboard`;
 
 const CORES_PALETA = [
   '#f97316',
