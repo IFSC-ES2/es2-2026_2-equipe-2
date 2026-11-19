@@ -228,3 +228,9 @@
 - Uso: padronização visual das tabelas no componente `Table` e remoção do `DashboardTable`
 - Artefato: `frontend/src/components/organisms/Table/`, `frontend/src/components/molecules/Table/`, `frontend/src/components/atoms/Table/`, `frontend/src/components/organisms/Dashboard/`
 - Validação: execução de testes unitários com Vitest e build de produção
+
+- Data: 17/11/2026
+- Ferramenta: Claude
+- Uso: rastrear cada qual issue resolvia qual problema para os critérios de aceitação
+- Artefato: docs/ACEITACAO.md
+- Validação: execução de testes e validação dos critérios

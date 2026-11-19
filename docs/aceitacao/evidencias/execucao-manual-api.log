@@ -1,0 +1,132 @@
+Execução manual (curl) em 18/11/2026 20:10 — API http://localhost:5000
+
+=== CT-01.1 cadastrar cliente
+{"success":true,"status":201,"title":"Client created","data":{"id":27,"nome":"Cliente AT","email":"at1795043405@t.com","telefone":null,"documento":"AT1795043405","endereco":null,"criado_em":"2026-11-18T23:10:05.078Z"}}
+[HTTP 201]
+
+=== CT-01.2 consultar cliente 27
+{"success":true,"status":200,"title":"Client retrieved","data":{"id":27,"nome":"Cliente AT","email":"at1795043405@t.com","telefone":null,"documento":"AT1795043405","endereco":null,"criado_em":"2026-11-18T23:10:05.078Z"}}
+[HTTP 200]
+
+=== CT-01.3 editar cliente
+{"success":true,"status":200,"title":"Client updated","data":{"id":27,"nome":"Cliente Editado","email":"at1795043405@t.com","telefone":null,"documento":"AT1795043405","endereco":null,"criado_em":"2026-11-18T23:10:05.078Z"}}
+[HTTP 200]
+{"success":true,"status":200,"title":"Client retrieved","data":{"id":27,"nome":"Cliente Editado","email":"at1795043405@t.com","telefone":null,"documento":"AT1795043405","endereco":null,"criado_em":"2026-11-18T23:10:05.078Z"}}
+[HTTP 200]
+
+=== CT-01.4 sem email
+{"success":false,"status":400,"title":"The cliente email is required","data":{"name":"ValidationError","statusCode":400}}
+[HTTP 400]
+
+=== CT-01.5 inexistente / id inválido
+{"success":false,"status":404,"title":"The cliente passed on the id wasn't found","data":{"name":"EntityNotFound","statusCode":404}}
+[HTTP 404]
+{"success":false,"status":400,"title":"ID inválido","data":{"name":"ValidationError","statusCode":400}}
+[HTTP 400]
+
+=== CT-02.1 cadastrar produto saldo 10
+{"success":true,"status":201,"title":"Product created","data":{"id":32,"sku":"AT-1795043405","nome":"Prod AT","descricao":null,"categoria_id":null,"fornecedor_id":null,"preco":"100.00","quantidade":10,"estoque_minimo":3,"criado_em":"2026-11-18T23:10:05.265Z","
+[HTTP 201]
+
+=== CT-02.2 saldo produto 32
+{"success":true,"status":200,"title":"Product retrieved","data":{"id":32,"sku":"AT-1795043405","nome":"Prod AT","descricao":null,"categoria_id":null,"fornecedor_id":null,"preco":"100.00","quantidade":10,"estoque_minimo":3,"criado_em":"2026-11-18T23:10:05.265Z"
+[HTTP 200]
+
+=== CT-02.3 editar produto
+{"success":true,"status":200,"title":"Product updated","data":{"id":32,"sku":"AT-1795043405","nome":"Prod AT","descricao":null,"categoria_id":null,"fornecedor_id":null,"preco":"120.00","quantidade":10,"estoque_minimo":4,"criado_em":"2026-11-18T23:10:05.265Z","
+[HTTP 200]
+
+=== CT-02.4 preço negativo / sem sku
+{"success":false,"status":400,"title":"O preco do produto não pode ser negativo","data":{"name":"ValidationError","statusCode":400}}
+[HTTP 400]
+{"success":false,"status":400,"title":"The produto sku is required","data":{"name":"ValidationError","statusCode":400}}
+[HTTP 400]
+
+=== CT-02.5 SKU duplicado
+{"success":false,"status":500,"title":"Internal error","data":{"length":203,"name":"error","severity":"ERROR","code":"23505","detail":"Key (sku)=(ELE-0001) already exists.","schema":"public","table":"produtos","constraint":"produtos_sku_key","file":"nbtinsert.
+[HTTP 500]
+
+=== CT-02.6 categorias/fornecedores
+[HTTP 200]
+[HTTP 200]
+
+=== CT-03.1 pedido 4 un (saldo 10→6)
+{"success":true,"status":201,"title":"Order created","data":{"id":33,"cliente_id":27,"status":"PENDENTE","data_pedido":"2026-11-18T23:10:05.483Z","valor_total":"480.00"}}
+[HTTP 201]
+saldo:
+6
+
+=== CT-03.2 pedido 33 com cliente e itens
+{"success":true,"status":200,"title":"Order retrieved","data":{"id":33,"cliente_id":27,"status":"PENDENTE","data_pedido":"2026-11-18T23:10:05.483Z","valor_total":"480.00","cliente":{"id":27,"nome":"Cliente Editado","email":"at1795043405@t.com"},"itens":[{"id":
+[HTTP 200]
+
+=== CT-03.3 venda acima do saldo
+{"success":false,"status":400,"title":"Estoque insuficiente para \"Prod AT\". Disponível: 6","data":{"name":"ValidationError","statusCode":400}}
+[HTTP 400]
+saldo:
+6
+
+=== CT-03.4 desconto 15% (102) e 16% (100,8)
+{"success":true,"status":201,"title":"Order created","data":{"id":35,"cliente_id":27,"status":"PENDENTE","data_pedido":"2026-11-18T23:10:05.717Z","valor_total":"102.00"}}
+[HTTP 201]
+{"success":false,"status":400,"title":"O desconto passou da margem máxima de 15%!","data":{"name":"ValidationError","statusCode":400}}
+[HTTP 400]
+
+=== CT-03.5 preço acima / vazio / cliente inexistente
+{"success":false,"status":400,"title":"O valor do item não pode ser maior que o preço registrado do produto","data":{"name":"ValidationError","statusCode":400}}
+[HTTP 400]
+{"success":false,"status":400,"title":"O pedido deve conter ao menos um item","data":{"name":"ValidationError","statusCode":400}}
+[HTTP 400]
+{"success":false,"status":400,"title":"Cliente informado não existe","data":{"name":"ValidationError","statusCode":400}}
+[HTTP 400]
+
+=== CT-03.6 editar pedido 4→2 (saldo +2)
+{"success":true,"status":200,"title":"Order updated","data":{"id":33,"cliente_id":27,"status":"PENDENTE","data_pedido":"2026-11-18T23:10:05.483Z","valor_total":"240.00"}}
+[HTTP 200]
+saldo:
+7
+
+=== CT-04.1 excluir cliente com pedido
+{"success":false,"status":500,"title":"Internal error","data":{"length":281,"name":"error","severity":"ERROR","code":"23503","detail":"Key (id)=(27) is still referenced from table \"pedidos\".","schema":"public","table":"pedidos","constraint":"pedidos_cliente_
+[HTTP 500]
+[HTTP 200]
+
+=== CT-04.2 excluir produto com pedido
+{"success":false,"status":400,"title":"Key (id)=(32) is still referenced from table \"itens_pedido\".","data":{"name":"ForeignKeyViolationError","statusCode":400}}
+[HTTP 400]
+
+=== CT-03.7 excluir pedidos (estorno)
+[HTTP 200]
+[HTTP 200]
+saldo final (esperado 10):
+10
+
+=== CT-04.3 excluir cliente sem pedidos
+[HTTP 200]
+[HTTP 404]
+
+=== CT-05.3 alerta estoque baixo
+[HTTP 200]
+no alerta: True
+[HTTP 204]
+
+=== CT-05.1/05.2 dashboard
+{"success":true,"status":200,"title":"Dashboard summary retrieved","data":{"periodo":30,"vendas":{"ganhos_totais":3277.7,"total_vendas":3,"total_produtos_vendidos":8},"produtos_mais_vendidos":[{"id":5,"sku":"MOV-0001","nome":"Cadeira de Escritório Ergonômica","unidades_vendidas":3,"receita":2247},{"
+periodo=30
+[HTTP 200]
+periodo=90
+[HTTP 200]
+periodo=365
+[HTTP 200]
+periodo=1W
+[HTTP 400]
+
+=== CT-06 ping/docs/404
+{"pong":true}
+[HTTP 200]
+docs [HTTP 200]
+inexistente [HTTP 404]
+
+=== CT-07 lacunas
+movimentacoes [HTTP 404]
+conferencias [HTTP 404]
