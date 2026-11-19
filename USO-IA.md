@@ -216,3 +216,21 @@
 - Uso: desenvolver o swagger para o dashboard
 - Artefato: `api-estoque/src/docs/dashboard/dashboard.docs.ts`, `api-estoque/src/docs/schemas/dashboard.schema.ts`
 - Validação: verificação do retorno dos endpoint dentro do swagger
+
+- Data: 16/11/2026
+- Ferramenta: Antigravity
+- Uso: auxílio na elaboração da retrospectiva consolidada do projeto sobre processo, colaboração, riscos, qualidade e previsibilidade, reunindo as métricas (M-01 a M-06) e a evolução dos riscos ao longo das Sprints 1 a 4
+- Artefato: `docs/RETROSPECTIVA.md`
+- Validação: conferência dos dados e valores das métricas com os históricos das sprints
+
+- Data: 17/11/2026
+- Ferramenta: Antigravity
+- Uso: padronização visual das tabelas no componente `Table` e remoção do `DashboardTable`
+- Artefato: `frontend/src/components/organisms/Table/`, `frontend/src/components/molecules/Table/`, `frontend/src/components/atoms/Table/`, `frontend/src/components/organisms/Dashboard/`
+- Validação: execução de testes unitários com Vitest e build de produção
+
+- Data: 17/11/2026
+- Ferramenta: Claude
+- Uso: rastrear cada qual issue resolvia qual problema para os critérios de aceitação
+- Artefato: docs/ACEITACAO.md
+- Validação: execução de testes e validação dos critérios

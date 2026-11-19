@@ -5,8 +5,8 @@
 | Nome                          | Função                                      | Matrícula    |
 | ----------------------------- | ------------------------------------------- | ------------ |
 | Bernardo Amaral Lisboa        | Database Administrator (DBA)                | 202510703703 |
-| Daniel Luiz da Rocha Cordeiro | Arquiteto de Software e Scrum Master        | 202510703715 |
-| Isac Lehmkuhl dos Santos      | DevOps/Infra                                | 202510703633 |
+| Daniel Luiz da Rocha Cordeiro | Arquiteto de Software                       | 202510703715 |
+| Isac Lehmkuhl dos Santos      | DevOps/Infra e Scrum Master                 | 202510703633 |
 | Monica Cancellier             | UI/UX Designer                              | 202320003698 |
 | Victor Eduardo Peixer Munarim | Engenheiro de Qualidade (QA)                | 202510703662 |
 
@@ -40,23 +40,29 @@ Sistema de apoio à gestão operacional de armazéns e centros de distribuição
 - **Planejamento Sprint 3:** [sprint-3.md](./docs/entregas/sprint-3.md)
 - **Contribuições Sprint 3:** [CONTRIBUICOES-S3.md](./docs/CONTRIBUICOES-S3.md)
 - **Planejamento Sprint 4:** [sprint-4.md](./docs/entregas/sprint-4.md)
+- **Contribuições Sprint 4:** [CONTRIBUICOES-S4.md](./docs/CONTRIBUICOES-S4.md)
+- **Contribuições Sprint 5:** [CONTRIBUICOES-S5.md](./docs/CONTRIBUICOES-S5.md)
 - **Protótipo do Dashboard:** [prototipo-dashboard.md](./docs/prototipo-dashboard.md)
 - **Swagger de Pedidos:** [src/docs/pedido](./api-estoque/src/docs/pedido) (disponível em `/api/docs`)
 - **Swagger do Dashboard:** [src/docs/dashboard](./api-estoque/src/docs/dashboard) (disponível em `/api/docs`)
 - **Arquitetura (modelo C4):** [ARQUITETURA.md](./docs/ARQUITETURA.md)
 - **Reengenharia do backend:** [REENGENHARIA.md](./docs/REENGENHARIA.md)
-- **ADR-0008 (backend monolítico modular):** [ADR-0008](./docs/adrs/ADR-0008-backend-monolitico-modular.md)
 - **Guia de Deploy e Staging:** [DEPLOY.md](./docs/DEPLOY.md)
+- **Preparação da Apresentação Final:** [APRESENTACAO.md](./docs/APRESENTACAO.md)
+- **Testes de aceitação:** [ACEITACAO.md](./docs/ACEITACAO.md)
+- **Retrospectiva:** [RETROSPECTIVA.md](./docs/RETROSPECTIVA.md)
+- **Evidências de execução:** [docs/aceitacao/evidencias](./docs/aceitacao/evidencias)
 
 - **PRs desta etapa:**
-  - [#173 - feat: Baixa no estoque automática quando pedido é criado](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/173)
-  - [#175 - docs: Planejamento da Sprint 4 e métricas da Sprint 3](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/175)
-  - [#176 - docs: Criação do Guia de Deploy e Staging (DEPLOY.md)](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/176)
-  - [#177 - feat: Consultas agregadas e API do Dashboard](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/177)
-  - [#178 - docs: Atualização das métricas para a Sprint 3](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/178)
-  - [#179 - docs: Registro e mitigação do Risco 06 (divergência entre local e CI)](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/179)
-  - [#181 - feat: Tela de Dashboard com cards de KPIs, gráficos e tabelas analíticas](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/181)
-  - [#182 - docs: Protótipo e especificação do Dashboard](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/182)
+  - [#202 - feat: adicionando alerta e cor diferente para quando produto passar estoque mínimo](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/202)
+  - [#205 - fix/workflows: adiciona o padrão de avaliação](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/205)
+  - [#206 - docs: retrospectiva](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/206)
+  - [#207 - fix: padroniza tabelas](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/207)
+  - [#208 - docs: atualizacao do RETROSPECTIVA.md para revisao final do MVP](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/208)
+  - [#209 - docs: critérios e conclusões de aceitação](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/209)
+  - [#210 - docs: contribuicoes da Sprint 5](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/210)
+  - [#211 - docs: metricas](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/211)
+  - [#212 - docs: roteiro de apresentação](https://github.com/IFSC-ES2/es2-2026_2-equipe-2/pull/212)
 
 ## 1. Visão do Produto
 
@@ -219,14 +225,25 @@ make down-prod
 
 ### Endereços de Acesso
 
-Após subir a aplicação (em dev ou prod), acesse:
+#### Ambiente de Homologação (Staging — GCP)
 
-| Serviço             | Endereço                                                                                         | Descrição                             |
-| :------------------ | :----------------------------------------------------------------------------------------------- | :------------------------------------ |
-| **Frontend Web**    | [http://localhost:8080](http://localhost:8080) (ou [/dashboard](http://localhost:8080/dashboard)) | Aplicação web via Nginx Proxy         |
-| **API Healthcheck** | [http://localhost:8080/api/ping](http://localhost:8080/api/ping)                                  | Verificação de status da API          |
-| **API Dashboard**   | [http://localhost:8080/api/dashboard](http://localhost:8080/api/dashboard)                        | Endpoint de dados do Dashboard        |
-| **Swagger UI**      | [http://localhost:8080/api/docs/#/](http://localhost:8080/api/docs/#/)                            | Documentação interativa dos endpoints |
+A aplicação está implantada em uma VM na **Google Cloud Platform (GCP)** e disponível no endereço:
+
+> **http://35.194.2.82/clientes**
+
+> [!WARNING]
+> **Restrição de rede:** O acesso ao ambiente de homologação é permitido **somente dentro da rede do IFSC**. Conexões externas são bloqueadas por regra de firewall configurada na VM da GCP. Para acessar fora do campus, é necessário estar conectado à VPN institucional do IFSC (se disponível).
+
+#### Ambiente Local (Dev / Prod)
+
+Após subir a aplicação localmente (em dev ou prod), acesse:
+
+| Serviço             | Endereço Local                                                                                   | Endereço Staging (GCP)                                                                             | Descrição                             |
+| :------------------ | :----------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------- | :------------------------------------ |
+| **Frontend Web**    | [http://localhost:8080](http://localhost:8080) (ou [/dashboard](http://localhost:8080/dashboard)) | [http://35.194.2.82/clientes](http://35.194.2.82/clientes)                                         | Aplicação web via Nginx Proxy         |
+| **API Healthcheck** | [http://localhost:8080/api/ping](http://localhost:8080/api/ping)                                  | [http://35.194.2.82/api/ping](http://35.194.2.82/api/ping)                                         | Verificação de status da API          |
+| **API Dashboard**   | [http://localhost:8080/api/dashboard](http://localhost:8080/api/dashboard)                        | [http://35.194.2.82/api/dashboard](http://35.194.2.82/api/dashboard)                               | Endpoint de dados do Dashboard        |
+| **Swagger UI**      | [http://localhost:8080/api/docs/#/](http://localhost:8080/api/docs/#/)                            | [http://35.194.2.82/api/docs/#/](http://35.194.2.82/api/docs/#/)                                   | Documentação interativa dos endpoints |
 
 ### Executando Testes e Qualidade de Código
 

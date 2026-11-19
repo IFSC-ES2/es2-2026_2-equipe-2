@@ -9,6 +9,16 @@ import BaseLayout from '../../components/templates/BaseLayout';
 import { getProdutos, deleteProduto } from '../../services/produto.service';
 import type { Produto } from '../../interfaces/produto.interface';
 
+const isEstoqueBaixo = (row: TableDataRow): boolean => {
+  const quantidade = Number(row.quantidade);
+  const minimo = Number(row.estoque_minimo);
+  return (
+    Number.isFinite(quantidade) &&
+    Number.isFinite(minimo) &&
+    quantidade <= minimo
+  );
+};
+
 const Estoque: React.FC = () => {
   const [columns, setColumns] = useState<Column[]>([]);
   const [data, setData] = useState<TableDataRow[]>([]);
@@ -18,6 +28,7 @@ const Estoque: React.FC = () => {
     undefined,
   );
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const produtosEstoqueBaixo = data.filter(isEstoqueBaixo);
 
   const applyResult = (result: Awaited<ReturnType<typeof getProdutos>>) => {
     setColumns(result.columns);
@@ -110,12 +121,23 @@ const Estoque: React.FC = () => {
           </div>
         )}
 
+        {!loading && !error && produtosEstoqueBaixo.length > 0 && (
+          <div className="alert alert-warning" role="alert">
+            <strong>Atenção:</strong> {produtosEstoqueBaixo.length} produto(s)
+            com estoque no mínimo ou abaixo:{' '}
+            {produtosEstoqueBaixo.map((row) => String(row.nome)).join(', ')}.
+          </div>
+        )}
+
         {!loading && !error && (
           <Table
             columns={columns}
             data={data}
             onEdit={handleEdit}
             onDelete={handleDelete}
+            rowClassName={(row) =>
+              isEstoqueBaixo(row) ? 'table-danger' : undefined
+            }
           />
         )}
       </div>

@@ -37,20 +37,20 @@ A aplicação adota separação estrita em camadas e padrões OO documentados na
 
 Documentação interativa com schemas e testes em [http://localhost:8080/api/docs](http://localhost:8080/api/docs) ou `http://localhost:5000/docs`.
 
-| Recurso          |         Método         | Endpoint          | Descrição                                     |
-| :--------------- | :--------------------: | :---------------- | :-------------------------------------------- |
-| **Healthcheck**  |         `GET`          | `/ping`           | Status e disponibilidade da API               |
-| **Produtos**     |     `GET`, `POST`      | `/produtos`       | Listagem (com fornecedor/categoria) e criação |
-|                  | `GET`, `PUT`, `DELETE` | `/produtos/:id`   | Consulta, atualização e remoção (protegida)   |
-| **Clientes**     |     `GET`, `POST`      | `/clientes`       | Listagem e cadastro com validação de dados    |
-|                  | `GET`, `PUT`, `DELETE` | `/clientes/:id`   | Consulta, atualização e exclusão (protegida)  |
-| **Categorias**   |     `GET`, `POST`      | `/categorias`     | Listagem e criação de categorias              |
-|                  | `GET`, `PUT`, `DELETE` | `/categorias/:id` | Consulta, edição e exclusão de categoria      |
-| **Fornecedores** |         `GET`          | `/fornecedores`   | Listagem para seleção em formulários          |
-| **Pedidos**      |     `GET`, `POST`      | `/pedidos`        | Listagem e criação de pedidos com baixa no estoque |
-|                  | `GET`, `PUT`, `DELETE` | `/pedidos/:id`    | Consulta, atualização e cancelamento com estorno de estoque |
+| Recurso          |         Método         | Endpoint          | Descrição                                                            |
+| :--------------- | :--------------------: | :---------------- | :------------------------------------------------------------------- |
+| **Healthcheck**  |         `GET`          | `/ping`           | Status e disponibilidade da API                                      |
+| **Produtos**     |     `GET`, `POST`      | `/produtos`       | Listagem (com fornecedor/categoria) e criação                        |
+|                  | `GET`, `PUT`, `DELETE` | `/produtos/:id`   | Consulta, atualização e remoção (protegida)                          |
+| **Clientes**     |     `GET`, `POST`      | `/clientes`       | Listagem e cadastro com validação de dados                           |
+|                  | `GET`, `PUT`, `DELETE` | `/clientes/:id`   | Consulta, atualização e exclusão (protegida)                         |
+| **Categorias**   |     `GET`, `POST`      | `/categorias`     | Listagem e criação de categorias                                     |
+|                  | `GET`, `PUT`, `DELETE` | `/categorias/:id` | Consulta, edição e exclusão de categoria                             |
+| **Fornecedores** |         `GET`          | `/fornecedores`   | Listagem para seleção em formulários                                 |
+| **Pedidos**      |     `GET`, `POST`      | `/pedidos`        | Listagem e criação de pedidos com baixa no estoque                   |
+|                  | `GET`, `PUT`, `DELETE` | `/pedidos/:id`    | Consulta, atualização e cancelamento com estorno de estoque          |
 | **Dashboard**    |         `GET`          | `/dashboard`      | Resumo analítico e KPIs de vendas e estoque (`?periodo=30\|90\|365`) |
-| **Documentação** |         `GET`          | `/docs`           | Swagger UI interativo                         |
+| **Documentação** |         `GET`          | `/docs`           | Swagger UI interativo                                                |
 
 ---
 

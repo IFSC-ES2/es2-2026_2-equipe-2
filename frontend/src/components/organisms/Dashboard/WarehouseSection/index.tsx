@@ -1,8 +1,6 @@
 import React from 'react';
 import DonutChart from '../../../molecules/Charts/DonutChart';
-import DashboardTable, {
-  type ColunaTabelaDashboard,
-} from '../../../molecules/DashboardTable';
+import Table, { type Column } from '../../Table';
 import type {
   ItemProdutoEstoque,
   ItemDistribuicaoCategoria,
@@ -15,14 +13,14 @@ export interface WarehouseSectionProps {
   className?: string;
 }
 
-const colunasEstoque: ColunaTabelaDashboard[] = [
-  { chave: 'nomeProduto', rotulo: 'PRODUTO', alinhamento: 'left' },
-  { chave: 'codigoProduto', rotulo: 'CÓDIGO', alinhamento: 'left' },
-  { chave: 'quantidade', rotulo: 'QUANTIDADE', alinhamento: 'center' },
+const colunasEstoque: Column[] = [
+  { key: 'nomeProduto', label: 'PRODUTO', align: 'left' },
+  { key: 'codigoProduto', label: 'CÓDIGO', align: 'left' },
+  { key: 'quantidade', label: 'QUANTIDADE', align: 'center' },
   {
-    chave: 'historicoEntrada',
-    rotulo: 'DATA DE CADASTRO',
-    alinhamento: 'right',
+    key: 'historicoEntrada',
+    label: 'DATA DE CADASTRO',
+    align: 'right',
   },
 ];
 
@@ -37,12 +35,13 @@ const WarehouseSection: React.FC<WarehouseSectionProps> = ({
 
       <div className="warehouse-content-grid">
         <div className="dashboard-card warehouse-table-card shadow-sm">
-          <DashboardTable
+          <Table
             colunas={colunasEstoque}
             dados={produtos as unknown as Record<string, unknown>[]}
             tamanhoPaginaInicial={5}
             exibirSeletorTamanho={true}
             mensagemVazio="Nenhum produto em estoque."
+            showActions={false}
           />
         </div>
 

@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import KpiCard from '../../../atoms/KpiCard';
 import AreaChart from '../../../molecules/Charts/AreaChart';
-import DashboardTable, {
-  type ColunaTabelaDashboard,
-} from '../../../molecules/DashboardTable';
+import Table, { type Column } from '../../Table';
 import type {
   MetricasKpi,
   ItemVendaRecente,
@@ -19,13 +17,13 @@ export interface SalesSectionProps {
   className?: string;
 }
 
-const colunasVendas: ColunaTabelaDashboard[] = [
-  { chave: 'nomeProduto', rotulo: 'PRODUTO', alinhamento: 'left' },
-  { chave: 'quantidade', rotulo: 'QUANTIDADE', alinhamento: 'center' },
+const colunasVendas: Column[] = [
+  { key: 'nomeProduto', label: 'PRODUTO', align: 'left' },
+  { key: 'quantidade', label: 'QUANTIDADE', align: 'center' },
   {
-    chave: 'preco',
-    rotulo: 'PREÇO',
-    alinhamento: 'right',
+    key: 'preco',
+    label: 'PREÇO',
+    align: 'right',
     render: (val) => {
       const num = Number(val || 0);
       return num.toLocaleString('pt-BR', {
@@ -34,7 +32,7 @@ const colunasVendas: ColunaTabelaDashboard[] = [
       });
     },
   },
-  { chave: 'data', rotulo: 'DATA', alinhamento: 'right' },
+  { key: 'data', label: 'DATA', align: 'right' },
 ];
 
 const SalesSection: React.FC<SalesSectionProps> = ({
@@ -90,11 +88,12 @@ const SalesSection: React.FC<SalesSectionProps> = ({
       {/* Grid: Tabela de Vendas e Gráfico de Área */}
       <div className="sales-content-grid">
         <div className="dashboard-card sales-table-card shadow-sm">
-          <DashboardTable
+          <Table
             colunas={colunasVendas}
             dados={vendasRecentes as unknown as Record<string, unknown>[]}
             tamanhoPaginaInicial={5}
             mensagemVazio="Nenhuma venda registrada no período."
+            showActions={false}
           />
         </div>
 

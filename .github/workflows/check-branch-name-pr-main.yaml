@@ -12,7 +12,7 @@ jobs:
         env:
           BRANCH_NAME: ${{ github.head_ref }}
         run: |
-          PATTERN="^entrega-[0-9]+$"
+          PATTERN="^(entrega|avaliacao)-[0-9]+$"
 
           echo "Validando branch: $BRANCH_NAME"
 
