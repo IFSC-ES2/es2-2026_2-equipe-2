@@ -41,20 +41,4 @@
 
 ---
 
-## 1. Sistema Visual e Cores
-
-* **Fundo da Aplicação:** Tone azul/cinza claro suave. Proporciona contraste adequado sem causar fadiga visual, destacando a área de trabalho central.
-* **Containers e Cards:** Fundo branco (`#FFFFFF`) com bordas suavemente arredondadas e elevação sutil (sombra), aplicando o princípio de **Fechamento e Região Comum (Gestalt)** para isolar módulos de dados visualmente.
-* **Cor Primária / Ação:** Azul vibrante reservado para botões e ações primárias (*Call to Action*), como a navegação ou registro de pedidos.
-* **Cor Secundária / Seleção:** Tons escuros de azul e grafite aplicados aos rótulos principais e aos estados ativos de seletores (botões de filtro temporal).
-* **Elementos Gráficos:** Uso de barras horizontais e representações visuais em tons harmônicos para indicar volumes e proporções sem gerar poluição visual.
-
----
-
-##  2. Hierarquia Tipográfica e Leitura Rápida
-
-* **Títulos Principais:** Tipografia sem-serifa em negrito e tamanho ostensivo no topo superior esquerdo da página, estabelecendo contexto imediato.
-* **Destaques Numéricos (KPIs):** Valores numéricos estratégicos apresentados com peso de fonte elevado e tamanho ampliado para facilitar o *scanning* visual.
-* **Rótulos e Subtítulos:** Textos descritivos em tons levemente atenuados posicionados logo abaixo dos valores principais, garantindo suporte contextual sem disputar a atenção visual.
-
 ---
