@@ -43,7 +43,7 @@ export class DashboardService {
         this.repository.getProdutosMaisVendidos(dias, LIMITE_LISTAS),
         this.repository.getCategoriaMaisVendida(dias),
         this.repository.getProdutosEstoqueBaixo(),
-        this.repository.getMaioresEstoques(LIMITE_LISTAS),
+        this.repository.getMaioresEstoques(),
         this.repository.getTotalProdutos(),
       ]);
 

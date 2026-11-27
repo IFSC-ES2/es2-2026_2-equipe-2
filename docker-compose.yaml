@@ -40,7 +40,28 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-
+  db-views:
+    image: postgres:17-alpine
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PGPASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ./conf/views.sql:/views.sql:ro
+    command:
+      [
+        "psql",
+        "-v", "ON_ERROR_STOP=1",
+        "--single-transaction",
+        "-h", "db",
+        "-U", "${DB_USER}",
+        "-d", "${DB_NAME}",
+        "-f", "/views.sql",
+      ]
+    networks:
+      - backend
+    restart: "no"
   web:
     build:
       context: ./frontend
@@ -73,6 +94,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      db-views:
+        condition: service_completed_successfully
     healthcheck:
       test:
         [
